@@ -5,6 +5,8 @@
 #include "LTexture.h"
 #include "LTarget.h"
 #include "OpenBlank.h"
+#include "Sound.h"
+
 //Screen dimension constants
 
 //Button constants
@@ -26,12 +28,6 @@ SDL_Window* gWindow = NULL;
 //The window renderer
 SDL_Renderer* gRenderer = NULL;
 
-//Mouse button sprites
-//SDL_Rect gSpriteClips[ BUTTON_SPRITE_TOTAL ];
-//LTexture gButtonSpriteSheetTexture;
-//Buttons objects
-
-
 void render_crosshair ()
 {
 	int x, y;
@@ -46,27 +42,18 @@ void render_crosshair ()
 
 bool bounds_check (int x, int y, int w, int h)
 {
-	fprintf (stdout, "x=%i,y=%i,w=%i,h=%i\n", x, y, w, h);
+	//fprintf (stdout, "x=%i,y=%i,w=%i,h=%i\n", x, y, w, h);
 	if (x - w > SCREEN_WIDTH)
 	{
 		fprintf (stdout, "Offscreen + x\n");
 		return false;
 	}
 	else if (x + w < 0)
-	{
-		fprintf (stdout, "Offscreen - x\n");
 		return false;
-	}
 	else if (y < 0)
-	{
-		fprintf (stdout, "Offscreen - y\n");
 		return false;
-	}
 	else if (y + h > SCREEN_HEIGHT)
-	{
-		fprintf (stdout, "Offscreen + y\n");
 		return false;
-	}
 	else
 		return true;
 }
@@ -77,9 +64,13 @@ bool init()
 	bool success = true;
 
 	//Initialize SDL
-	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
+	if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0 )
 	{
 		printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
+		success = false;
+	}
+	else if (sound_init() != true)
+	{
 		success = false;
 	}
 	else
@@ -196,6 +187,7 @@ void close()
 	gRenderer = NULL;
 
 	//Quit SDL subsystems
+	sound_quit();
 	IMG_Quit();
 	SDL_Quit();
 }

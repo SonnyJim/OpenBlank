@@ -1,6 +1,7 @@
 #include "LTarget.h"
 #include "LTexture.h"
 #include "OpenBlank.h"
+#include "Sound.h"
 
 LTarget gTargets[ MAX_TARGETS ]; 
 
@@ -32,7 +33,9 @@ LTargetType LTarget::getType ()
 }
 
 void LTarget::handleEvent( SDL_Event* e )
-{
+{	
+	if ( e->type == SDL_MOUSEBUTTONDOWN)
+		Mix_PlayChannel (-1, gGunshot, 0);
 	//If mouse event happened
 	if( e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP )
 	{
