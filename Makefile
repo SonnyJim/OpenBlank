@@ -1,5 +1,5 @@
 #OBJS specifies which files to compile as part of the project
-OBJS = main.cpp
+OBJS = OpenBlank.cpp LTexture.cpp LTarget.cpp
 
 #CC specifies which compiler we're using
 CC = g++
