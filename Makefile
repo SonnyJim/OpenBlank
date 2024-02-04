@@ -17,3 +17,8 @@ OBJ_NAME = OpenBlank
 #This is the target that compiles our executable
 all : $(OBJS)
 	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
+clean:
+	@echo "[Removing object files]"
+	@find . -name '*.o' -delete
+	@echo "[Removing binaries]"
+	@rm -f $(OBJ_NAME)
