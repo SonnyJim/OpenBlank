@@ -19,3 +19,5 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 const int SCALE_X = 2; //Because my arcade cab has double X resolution because reasons
+
+extern SDL_Renderer* gRenderer;

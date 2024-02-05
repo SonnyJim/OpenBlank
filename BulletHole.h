@@ -16,6 +16,7 @@
  * =====================================================================================
  */
 #include <SDL2/SDL.h>
+
 class BulletHole
 {
 	public:
@@ -23,6 +24,7 @@ class BulletHole
 		void add();
 		void render();
 		void update();
+		bool isActive();
 	private:
 		bool	mActive;
 		SDL_Point mPosition;
@@ -30,5 +32,5 @@ class BulletHole
 };
 const int MAX_BULLETHOLES = 16;
 extern BulletHole gBulletHoles[MAX_BULLETHOLES];
-
+extern void bullet_add ();
 

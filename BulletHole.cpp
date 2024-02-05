@@ -17,7 +17,7 @@
  */
 
 #include "BulletHole.h"
-
+#include "OpenBlank.h"
 BulletHole gBulletHoles[MAX_BULLETHOLES];
 
 BulletHole::BulletHole()
@@ -27,30 +27,55 @@ BulletHole::BulletHole()
 	mPosition = {0,0};
 }
 
-void BulletHole::add()
+void bullet_add()
 {
 	for (int i = 0; i < MAX_BULLETHOLES;i++)
 	{
-		if (gBulletHoles[i].mActive == false)
+		if (gBulletHoles[i].isActive() == false)
 		{
-			gBulletHoles[i].mActive = true;
-			gBulletHoles[i].mTicks = SDL_GetTicks();
-			SDL_GetMouseState (&gBulletHoles[i].mPosition.x, &gBulletHoles[i].mPosition.y);
-			break;
+			gBulletHoles[i].add();
+			return;
 		}
 	}
 	//TODO Handle if we don't find an empty spot
 }
 
+
+bool BulletHole::isActive()
+{
+	return mActive;
+}
+
+void BulletHole::add()
+{
+	mActive = true;
+	mTicks = SDL_GetTicks();
+	SDL_GetMouseState (&mPosition.x, &mPosition.y);
+}
+
 void BulletHole::render()
 {
+	if (mActive == false)
+		return;
+	SDL_Rect t;
+	const int bullethole_size = 4;
 
+	t.x = mPosition.x - (bullethole_size / 2);
+	t.y = mPosition.y - (bullethole_size / 2);
+	t.w = bullethole_size * SCALE_X; //FIXME do dynamically
+	t.h = bullethole_size;
+	
+	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0xFF, 0xFF );
+	SDL_RenderFillRect (gRenderer, &t);
+		
 }
 
 #define BULLET_LIFETIME 2000
 void BulletHole::update()
 {
-	if (mTicks + BULLET_LIFETIME < SDL_GetTicks())
+	if (mActive == false)
+		return;
+	else if (mTicks + BULLET_LIFETIME < SDL_GetTicks())
 	{
 		mActive = false;
 		mTicks = 0;

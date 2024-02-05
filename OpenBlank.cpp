@@ -5,6 +5,7 @@
 #include "LTexture.h"
 #include "LTarget.h"
 #include "OpenBlank.h"
+#include "BulletHole.h"
 #include "Sound.h"
 
 //Screen dimension constants
@@ -207,6 +208,11 @@ void sdl_render ()
 	{
 		gTargets[ i ].render();
 	}
+
+	for (int i = 0; i < MAX_BULLETHOLES; i++)
+	{
+		gBulletHoles[i].render();
+	}
 	render_crosshair();
 	//Update screen
 	SDL_RenderPresent( gRenderer );
@@ -222,6 +228,12 @@ void movement_all ()
 			gTargets[i].movement();
 		}
 	}
+
+	for (int i = 0; i < MAX_BULLETHOLES; i++)
+	{
+		gBulletHoles[i].update();
+	}
+
 }
 
 int main( int argc, char* args[] )

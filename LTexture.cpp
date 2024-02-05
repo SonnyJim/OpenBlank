@@ -1,9 +1,9 @@
 #include "LTexture.h"
+#include "OpenBlank.h"
 
 LTexture gRedTargetTexture;
 LTexture gBlueTargetTexture;
 LTexture gCrosshairTexture;
-extern SDL_Renderer* gRenderer;
 
 LTexture::LTexture()
 {
