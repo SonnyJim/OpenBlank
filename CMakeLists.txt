@@ -16,14 +16,18 @@ endif()
 # Find the SDL2 package
 find_package(SDL2 REQUIRED)
 
+include(FindPkgConfig)
+pkg_check_modules(SDL2_Mixer REQUIRED IMPORTED_TARGET SDL2_mixer)
+pkg_check_modules(SDL2_Image REQUIRED IMPORTED_TARGET SDL2_image)
+
 # Include directories (if you have header files in a separate directory)
-include_directories(${SDL2_INCLUDE_DIRS})  # Include SDL2 headers
-include_directories(.)
+include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_Mixer_INCLUDE_DIRS} ${SDL2_Image_INCLUDE_DIRS})  # Include SDL2 and SDL2_mixer headers
 
 message(${SDL2_INCLUDE_DIRS})
 
 # Add executable with all source files
-add_executable(OpenBlank 
+add_executable(OpenBlank
+    BulletHole.cpp
     LTarget.cpp
     LTexture.cpp
     OpenBlank.cpp
@@ -31,4 +35,5 @@ add_executable(OpenBlank
 )
 
 # Specify libraries to link
-target_link_libraries(OpenBlank ${SDL2_LIBRARIES})
+target_link_libraries(OpenBlank ${SDL2_LIBRARIES} PkgConfig::SDL2_Mixer PkgConfig::SDL2_Image)
+
