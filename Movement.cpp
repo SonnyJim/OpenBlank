@@ -40,7 +40,8 @@ bool bounds_check (int x, int y, int w, int h)
 
 void movement_all ()
 {
-	for (int i = 0; i < MAX_TARGETS; ++i)
+	int i;
+	for (i = 0; i < MAX_TARGETS; ++i)
 	{
 		if (gTargets[i].getType() != TARGET_NONE )
 		{
@@ -48,7 +49,7 @@ void movement_all ()
 		}
 	}
 
-	for (int i = 0; i < MAX_BULLETHOLES; i++)
+	for (i = 0; i < MAX_BULLETHOLES; i++)
 	{
 		gBulletHoles[i].update();
 	}

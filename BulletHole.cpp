@@ -18,6 +18,7 @@
 
 #include "BulletHole.h"
 #include "OpenBlank.h"
+#include "Player.h"
 #include "SDL.h"
 
 BulletHole gBulletHoles[MAX_BULLETHOLES];
@@ -52,7 +53,11 @@ void BulletHole::add()
 {
 	mActive = true;
 	mTicks = SDL_GetTicks();
-	SDL_GetMouseState (&mPosition.x, &mPosition.y);
+	SDL_Point r = players[0].getPosition();
+	mPosition.x = r.x;
+	mPosition.y = r.y;
+
+	//SDL_GetMouseState (&mPosition.x, &mPosition.y);
 }
 
 void BulletHole::render()

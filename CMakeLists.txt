@@ -38,6 +38,7 @@ add_executable(OpenBlank
     Hud.cpp
     Game.cpp
     Event.cpp
+    Detect.cpp
 )
 
 # Specify libraries to link

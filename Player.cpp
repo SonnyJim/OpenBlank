@@ -18,6 +18,7 @@
 #include "Player.h"
 #include "BulletHole.h"
 #include "Sound.h"
+#include "Detect.h"
 #include <stdio.h>
 
 Player players[MAX_PLAYERS];
@@ -59,12 +60,11 @@ void Player::shoot ()
 {
 	fprintf (stdout, "Pew! ");
 	sound.playSFX (SFX_GUNSHOT);
-//	Mix_PlayChannel (-1, gGunshot, 0); //TODO Make a 'trigger pulled' function
-	bullet_add ();
 	SDL_Point pos;
 	SDL_GetMouseState (&pos.x, &pos.y);
 	setPosition (pos);
-			//bullet_add();
+	detect_shot ();
+	bullet_add ();
 }
 
 int Player::getLives ()
