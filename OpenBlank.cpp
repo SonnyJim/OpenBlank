@@ -9,25 +9,18 @@ bool quit = false;
 int main( int argc, char* args[] )
 {
 	//Start up SDL and create window
-	if( !sdl_init() )
+	if( !sdl_init() || !media_init() )
 	{
-		printf( "Failed to initialize SDL!\n" );
+		printf( "Failed to initialize!\n" );
 	}
 	else
 	{
-		//Load media
-		if( !media_load() )
+		while (!quit)
 		{
-			printf( "Failed to load media!\n" );
-		}
-		else
-		{	
-			while (!quit)
-				game.update();
+			game.update();
 		}
 	}
 	//Free resources and close SDL
 	sdl_close();
-
 	return 0;
 }

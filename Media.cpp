@@ -40,7 +40,7 @@ static bool font_load ()
 	}
 	return success;
 }
-bool media_load()
+bool media_init()
 {
 	//Loading success flag
 	bool success = true;
