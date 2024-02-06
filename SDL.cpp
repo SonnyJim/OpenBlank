@@ -19,12 +19,28 @@
 #include "SDL.h"
 #include "OpenBlank.h"
 #include "Sound.h"
+#include "LTexture.h"
+#include "LTarget.h"
+#include "BulletHole.h"
 
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
 
 //The window renderer
 SDL_Renderer* gRenderer = NULL;
+
+static void render_crosshair ()
+{
+	int x, y;
+	SDL_Rect t;
+	t.x = 0;
+	t.y = 0;
+	t.w = 40 * SCALE_X; //FIXME do dynamically
+	t.h = 40;
+	SDL_GetMouseState( &x, &y );
+	gCrosshairTexture.render (x - (t.w/2), y - (t.h/2), &t);
+}
+
 
 bool sdl_init()
 {
@@ -82,4 +98,48 @@ bool sdl_init()
 	}
 	SDL_ShowCursor (0);
 	return success;
+}
+
+void sdl_close()
+{
+	//Free loaded images
+	gRedTargetTexture.free();
+	gBlueTargetTexture.free();
+	gCrosshairTexture.free();
+	//Destroy window	
+	SDL_DestroyRenderer( gRenderer );
+	SDL_DestroyWindow( gWindow );
+	gWindow = NULL;
+	gRenderer = NULL;
+
+	//Quit SDL subsystems
+	sound_quit();
+	IMG_Quit();
+	SDL_Quit();
+}
+
+void sdl_handleevent ()
+{
+}
+
+void sdl_render ()
+{
+	//Clear screen
+	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+	SDL_RenderClear( gRenderer );
+
+	//Render buttons
+	for( int i = 0; i < MAX_TARGETS; ++i )
+	{
+		gTargets[ i ].render();
+	}
+
+	for (int i = 0; i < MAX_BULLETHOLES; i++)
+	{
+		gBulletHoles[i].render();
+	}
+	render_crosshair();
+	//Update screen
+	SDL_RenderPresent( gRenderer );
+
 }

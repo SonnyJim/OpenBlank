@@ -6,35 +6,12 @@
 #include "LTarget.h"
 #include "OpenBlank.h"
 #include "BulletHole.h"
-#include "Sound.h"
+//#include "Sound.h"
 #include "SDL.h"
-
-//Screen dimension constants
-
-//Button constants
-//const int BUTTON_WIDTH = 300;
-//const int BUTTON_HEIGHT = 200;
-
-//Starts up SDL and creates window
-bool init();
+#include "Media.h"
 
 //Loads media
 bool loadMedia();
-
-//Frees media and shuts down SDL
-void close();
-
-void render_crosshair ()
-{
-	int x, y;
-	SDL_Rect t;
-	t.x = 0;
-	t.y = 0;
-	t.w = 40 * SCALE_X; //FIXME do dynamically
-	t.h = 40;
-	SDL_GetMouseState( &x, &y );
-	gCrosshairTexture.render (x - (t.w/2), y - (t.h/2), &t);
-}
 
 bool bounds_check (int x, int y, int w, int h)
 {
@@ -52,108 +29,6 @@ bool bounds_check (int x, int y, int w, int h)
 		return false;
 	else
 		return true;
-}
-
-bool loadMedia()
-{
-	//Loading success flag
-	bool success = true;
-	
-	if ( !gRedTargetTexture.loadFromFile ("./data/png/RedTarget.png"))
-	{
-		success = false;
-	}
-	else if ( !gBlueTargetTexture.loadFromFile ("./data/png/BlueTarget.png"))
-	{
-		success = false;
-	}
-	else if ( !gCrosshairTexture.loadFromFile ("./data/png/crosshairs.png"))
-		success = false;
-	else
-	{
-		gTargets[0].setPosition (0, 0);
-		gTargets[1].setPosition (0, 40);
-		gTargets[0].setType (TARGET_RED);
-		gTargets[1].setType (TARGET_BLUE);
-		gTargets[0].mHeight = 40;
-		gTargets[0].mWidth = 40 * SCALE_X;
-		gTargets[1].mHeight = 40;
-		gTargets[1].mWidth = 40 * SCALE_X;
-	}
-	
-/*		
-	}
-	//Load sprites
-	if( !gButtonSpriteSheetTexture.loadFromFile( "./button.png" ) )
-	{
-		printf( "Failed to load button sprite texture!\n" );
-		success = false;
-	}
-	else
-	{
-		//Set sprites
-		for( int i = 0; i < BUTTON_SPRITE_TOTAL; ++i )
-		{
-			gSpriteClips[ i ].x = 0;
-			gSpriteClips[ i ].y = i * 200;
-			gSpriteClips[ i ].w = BUTTON_WIDTH;
-			gSpriteClips[ i ].h = BUTTON_HEIGHT;
-		}
-
-		//Set buttons in corners
-		gTargets[ 0 ].setPosition( 0, 0 );
-		gTargets[ 1 ].setPosition( SCREEN_WIDTH - BUTTON_WIDTH, 0 );
-		gTargets[ 2 ].setPosition( 0, SCREEN_HEIGHT - BUTTON_HEIGHT );
-		gTargets[ 3 ].setPosition( SCREEN_WIDTH - BUTTON_WIDTH, SCREEN_HEIGHT - BUTTON_HEIGHT );
-	}
-*/
-	if (!success)
-		fprintf (stderr, "Failed to load textures\n");
-	return success;
-}
-
-void close()
-{
-	//Free loaded images
-	gRedTargetTexture.free();
-	gBlueTargetTexture.free();
-	gCrosshairTexture.free();
-	//Destroy window	
-	SDL_DestroyRenderer( gRenderer );
-	SDL_DestroyWindow( gWindow );
-	gWindow = NULL;
-	gRenderer = NULL;
-
-	//Quit SDL subsystems
-	sound_quit();
-	IMG_Quit();
-	SDL_Quit();
-}
-
-void sdl_handleevent ()
-{
-}
-
-void sdl_render ()
-{
-	//Clear screen
-	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-	SDL_RenderClear( gRenderer );
-
-	//Render buttons
-	for( int i = 0; i < MAX_TARGETS; ++i )
-	{
-		gTargets[ i ].render();
-	}
-
-	for (int i = 0; i < MAX_BULLETHOLES; i++)
-	{
-		gBulletHoles[i].render();
-	}
-	render_crosshair();
-	//Update screen
-	SDL_RenderPresent( gRenderer );
-
 }
 
 void movement_all ()
@@ -183,7 +58,7 @@ int main( int argc, char* args[] )
 	else
 	{
 		//Load media
-		if( !loadMedia() )
+		if( !media_load() )
 		{
 			printf( "Failed to load media!\n" );
 		}
@@ -220,7 +95,7 @@ int main( int argc, char* args[] )
 	}
 
 	//Free resources and close SDL
-	close();
+	sdl_close();
 
 	return 0;
 }

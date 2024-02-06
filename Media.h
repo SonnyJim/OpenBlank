@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  SDL.h
+ *       Filename:  Media.h
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  02/06/2024 12:06:04 PM
+ *        Created:  02/06/2024 12:40:29 PM
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -15,13 +15,5 @@
  *
  * =====================================================================================
  */
-#include <SDL2/SDL.h>
-//The window we'll be rendering to
-extern SDL_Window* gWindow;
 
-//The window renderer
-extern SDL_Renderer* gRenderer;
-
-extern bool sdl_init ();
-extern void sdl_close ();
-extern void sdl_render ();
+extern bool media_load ();

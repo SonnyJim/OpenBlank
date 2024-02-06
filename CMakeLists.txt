@@ -31,6 +31,7 @@ add_executable(OpenBlank
     OpenBlank.cpp
     Sound.cpp
     SDL.cpp
+    Media.cpp
 )
 
 # Specify libraries to link
