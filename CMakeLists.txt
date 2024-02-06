@@ -33,6 +33,7 @@ add_executable(OpenBlank
     SDL.cpp
     Media.cpp
     Movement.cpp
+    Player.cpp
 )
 
 # Specify libraries to link
