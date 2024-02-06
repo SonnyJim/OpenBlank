@@ -47,16 +47,19 @@ bool media_init()
 	
 	if ( !gRedTargetTexture.loadFromFile ("./data/png/RedTarget.png"))
 	{
+		fprintf (stderr, "Error loading texture! %s\n", SDL_GetError ());
 		success = false;
 	}
 	else if ( !gBlueTargetTexture.loadFromFile ("./data/png/BlueTarget.png"))
 	{
+		fprintf (stderr, "Error loading texture! %s\n", SDL_GetError ());
 		success = false;
 	}
 	else if ( !gCrosshairTexture.loadFromFile ("./data/png/crosshairs.png"))
 		success = false;
 	else if (font_load () == false)
 		success = false;
+	/*
 	else
 	{
 		gTargets[0].setPosition (0, 0);
@@ -68,33 +71,7 @@ bool media_init()
 		gTargets[1].mHeight = 40;
 		gTargets[1].mWidth = 40 * SCALE_X;
 	}
-	
-/*		
-	}
-	//Load sprites
-	if( !gButtonSpriteSheetTexture.loadFromFile( "./button.png" ) )
-	{
-		printf( "Failed to load button sprite texture!\n" );
-		success = false;
-	}
-	else
-	{
-		//Set sprites
-		for( int i = 0; i < BUTTON_SPRITE_TOTAL; ++i )
-		{
-			gSpriteClips[ i ].x = 0;
-			gSpriteClips[ i ].y = i * 200;
-			gSpriteClips[ i ].w = BUTTON_WIDTH;
-			gSpriteClips[ i ].h = BUTTON_HEIGHT;
-		}
-
-		//Set buttons in corners
-		gTargets[ 0 ].setPosition( 0, 0 );
-		gTargets[ 1 ].setPosition( SCREEN_WIDTH - BUTTON_WIDTH, 0 );
-		gTargets[ 2 ].setPosition( 0, SCREEN_HEIGHT - BUTTON_HEIGHT );
-		gTargets[ 3 ].setPosition( SCREEN_WIDTH - BUTTON_WIDTH, SCREEN_HEIGHT - BUTTON_HEIGHT );
-	}
-*/
+	*/
 	if (!success)
 		fprintf (stderr, "Failed to load textures\n");
 	return success;

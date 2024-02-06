@@ -15,6 +15,7 @@ class LTarget
 
 		//Sets top left position
 		void setPosition( int x, int y );
+		SDL_Rect getRect ();
 		//Handles mouse event
 		//void handleEvent( SDL_Event* e );
 		void setType (LTargetType type);
@@ -22,6 +23,7 @@ class LTarget
 		//Shows button sprite
 		void render();
 		void movement();
+		void hit();
 		int mWidth;
 		int mHeight;
 

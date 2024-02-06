@@ -24,7 +24,8 @@ bool detect_shot ()
 		if (check_target(i) == true)
 		{
 			gTargets[i].hit();
-			printf ("HIT\n");
+			players[0].addHit (1);
+			fprintf (stdout, "HIT %i\n", players[0].getHits());
 			return true;
 			//FIXME What if we hit two overlapping targets?
 		}

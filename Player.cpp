@@ -85,3 +85,34 @@ void Player::setBullets (int amount)
 {
 	bullets = amount;
 }
+
+void Player::addHit (int value)
+{
+	hits += value;
+	//TODO probably some bounds checking
+}
+void Player::addMiss (int value)
+{
+	misses += value;
+}
+
+int Player::getHits()
+{
+	return hits;
+}
+
+int Player::getMisses()
+{
+	return misses;
+}
+
+void Player::setMisses(int value)
+{
+	misses = value;
+}
+
+void Player::setHits(int value)
+{
+	hits = value;
+}
+

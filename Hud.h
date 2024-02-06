@@ -1,8 +1,8 @@
 
-class Hud:
+class Hud
 {
 	public:
-		draw ();
+		void draw ();
 	private:
 };
 

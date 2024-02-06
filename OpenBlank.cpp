@@ -16,6 +16,7 @@ int main( int argc, char* args[] )
 	}
 	else
 	{
+		game.start();
 		while (!quit)
 		{
 			game.update();

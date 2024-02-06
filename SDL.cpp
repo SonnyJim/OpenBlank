@@ -120,10 +120,6 @@ void sdl_close()
 	SDL_Quit();
 }
 
-void sdl_handleevent ()
-{
-}
-
 void sdl_render ()
 {
 	//Clear screen

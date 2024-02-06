@@ -30,10 +30,18 @@ class Player {
 		void setBullets (int amount);
 		SDL_Point getPosition();
 		void setPosition (SDL_Point pos);
+		void addHit(int hits);
+		void addMiss(int hits);
+		int getHits();
+		int getMisses();
+		void setMisses(int value);
+		void setHits (int value);
 	private:
 		int bullets;
 		int score;
 		int lives;
+		int hits;
+		int misses;
 		SDL_Point position;
 };
 

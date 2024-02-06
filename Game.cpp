@@ -2,6 +2,7 @@
 #include "Movement.h"
 #include "LTarget.h"
 #include "SDL.h"
+#include "Round.h"
 
 Game game;
 
@@ -14,9 +15,10 @@ void Game::setState(GameState s)
 {
 	state = s;
 }
+
 void Game::start()
 {
-	round = 1;
+	rnd.start();
 }
 
 void Game::end()
@@ -27,6 +29,7 @@ extern void event_handler ();
 void Game::update()
 {
 	event_handler ();
+	rnd.update();
 	movement_all ();
 	sdl_render ();
 }

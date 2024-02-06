@@ -39,6 +39,7 @@ add_executable(OpenBlank
     Game.cpp
     Event.cpp
     Detect.cpp
+    Round.cpp
 )
 
 # Specify libraries to link
