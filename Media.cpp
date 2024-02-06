@@ -15,10 +15,31 @@
  *
  * =====================================================================================
  */
+#include "Media.h"
 #include "OpenBlank.h"
 #include "LTexture.h"
 #include "LTarget.h"
 
+TTF_Font* fontTitle = NULL;
+#define FONT_TITLE_SIZE 60
+
+static bool font_load ()
+{
+	bool success = true;
+	
+	if (TTF_Init() != 0)
+	{
+		fprintf(stderr, "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+		success = false;
+	}
+	fontTitle = TTF_OpenFont ( FONT_TITLE_PATH, FONT_TITLE_SIZE);
+	if (fontTitle == NULL)
+	{
+		fprintf(stderr, "Failed to load %s SDL_ttf Error: %s\n", FONT_TITLE_PATH, TTF_GetError() );
+		success = false;
+	}
+	return success;
+}
 bool media_load()
 {
 	//Loading success flag
@@ -33,6 +54,8 @@ bool media_load()
 		success = false;
 	}
 	else if ( !gCrosshairTexture.loadFromFile ("./data/png/crosshairs.png"))
+		success = false;
+	else if (font_load () == false)
 		success = false;
 	else
 	{

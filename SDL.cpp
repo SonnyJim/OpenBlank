@@ -16,6 +16,7 @@
  * =====================================================================================
  */
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include "SDL.h"
 #include "OpenBlank.h"
 #include "Sound.h"
@@ -115,6 +116,7 @@ void sdl_close()
 	//Quit SDL subsystems
 	sound_quit();
 	IMG_Quit();
+	TTF_Quit();
 	SDL_Quit();
 }
 

@@ -1,8 +1,7 @@
 ## Quick start
 
 ```
-apt install libsdl2-mixer-dev
-apt-get install libsdl2-image-dev
+apt install libsdl2-mixer-dev libsdl2-image-dev libsdl2-ttf-dev
 ```
 
 ```
