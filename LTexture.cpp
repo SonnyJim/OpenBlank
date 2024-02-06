@@ -1,5 +1,6 @@
 #include "LTexture.h"
 #include "OpenBlank.h"
+#include "SDL.h"
 
 LTexture gRedTargetTexture;
 LTexture gBlueTargetTexture;

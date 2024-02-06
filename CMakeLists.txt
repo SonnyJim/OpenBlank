@@ -30,6 +30,7 @@ add_executable(OpenBlank
     LTexture.cpp
     OpenBlank.cpp
     Sound.cpp
+    SDL.cpp
 )
 
 # Specify libraries to link

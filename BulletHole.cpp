@@ -18,6 +18,8 @@
 
 #include "BulletHole.h"
 #include "OpenBlank.h"
+#include "SDL.h"
+
 BulletHole gBulletHoles[MAX_BULLETHOLES];
 
 BulletHole::BulletHole()

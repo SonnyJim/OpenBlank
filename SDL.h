@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  OpenBlank.h
+ *       Filename:  SDL.h
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  02/04/2024 09:32:31 PM
+ *        Created:  02/06/2024 12:06:04 PM
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -15,7 +15,11 @@
  *
  * =====================================================================================
  */
+#include <SDL2/SDL.h>
+//The window we'll be rendering to
+extern SDL_Window* gWindow;
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-const int SCALE_X = 2; //Because my arcade cab has double X resolution because reasons
+//The window renderer
+extern SDL_Renderer* gRenderer;
+
+extern bool sdl_init ();
