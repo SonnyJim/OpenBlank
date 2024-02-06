@@ -18,11 +18,22 @@ void Game::setState(GameState s)
 
 void Game::start()
 {
+	round = 0;
 	rnd.start();
 }
 
 void Game::end()
 {
+}
+
+int Game::getRound ()
+{
+	return round;
+}
+
+void Game::setRound (int value)
+{
+	round = value;
 }
 
 extern void event_handler ();

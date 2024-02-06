@@ -116,3 +116,8 @@ void Player::setHits(int value)
 	hits = value;
 }
 
+void Player::endRound ()
+{
+	hits = 0;
+	misses = 0;
+}

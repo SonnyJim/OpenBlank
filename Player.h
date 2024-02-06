@@ -36,6 +36,7 @@ class Player {
 		int getMisses();
 		void setMisses(int value);
 		void setHits (int value);
+		void endRound ();
 	private:
 		int bullets;
 		int score;

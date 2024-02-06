@@ -14,6 +14,8 @@ class Game
 		void update();
 		GameState getState();
 		void setState(GameState s);
+		int getRound();
+		void setRound(int value);
 	private:
 		GameState state;
 		int round; //Which round are we on

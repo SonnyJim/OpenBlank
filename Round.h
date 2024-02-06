@@ -9,6 +9,8 @@ class Round
 		void end();
 		void update();
 		bool isActive();
+		void setTarget(int value);
+		int getTarget();
 		typedef void (*FunctionPointer)();
 		typedef bool (*FunctionPointerB)();
 
@@ -41,6 +43,7 @@ class Round
 		FunctionPointer roundStart;
 		FunctionPointer roundEnd;
 		FunctionPointerB roundUpdate;
+		int target;
 };
 
 extern Round rnd;
