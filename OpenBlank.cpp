@@ -5,8 +5,12 @@
 #include "OpenBlank.h"
 #include "SDL.h"
 #include "Media.h"
+#include "Game.h"
+/*
 #include "Movement.h"
 #include "LTarget.h"
+*/
+bool quit = false;
 
 int main( int argc, char* args[] )
 {
@@ -24,8 +28,10 @@ int main( int argc, char* args[] )
 		}
 		else
 		{	
+			while (!quit)
+				game.update();
+			/*
 			//Main loop flag
-			bool quit = false;
 
 			//Event handler
 			SDL_Event e;
@@ -51,6 +57,7 @@ int main( int argc, char* args[] )
 				movement_all ();
 				sdl_render ();
 			}
+			*/
 		}
 	}
 

@@ -19,9 +19,10 @@ find_package(SDL2 REQUIRED)
 include(FindPkgConfig)
 pkg_check_modules(SDL2_Mixer REQUIRED IMPORTED_TARGET SDL2_mixer)
 pkg_check_modules(SDL2_Image REQUIRED IMPORTED_TARGET SDL2_image)
+pkg_check_modules(SDL2_Ttf REQUIRED IMPORTED_TARGET SDL2_ttf)
 
 # Include directories (if you have header files in a separate directory)
-include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_Mixer_INCLUDE_DIRS} ${SDL2_Image_INCLUDE_DIRS})  # Include SDL2 and SDL2_mixer headers
+include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_Mixer_INCLUDE_DIRS} ${SDL2_Image_INCLUDE_DIRS} ${SDL2_Ttf_INCLUDE_DIRS})  # Include SDL2 and SDL2_mixer headers
 
 # Add executable with all source files
 add_executable(OpenBlank
@@ -39,6 +40,6 @@ add_executable(OpenBlank
 )
 
 # Specify libraries to link
-target_link_libraries(OpenBlank ${SDL2_LIBRARIES} PkgConfig::SDL2_Mixer PkgConfig::SDL2_Image)
+target_link_libraries(OpenBlank ${SDL2_LIBRARIES} PkgConfig::SDL2_Mixer PkgConfig::SDL2_Image PkgConfig::SDL2_Ttf)
 
 file(COPY ${CMAKE_BINARY_DIR}/../data DESTINATION ${CMAKE_BINARY_DIR}/)

@@ -18,3 +18,5 @@ class Game
 		GameState state;
 		int round; //Which round are we on
 };
+
+extern Game game;

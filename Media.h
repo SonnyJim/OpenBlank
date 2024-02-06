@@ -16,4 +16,9 @@
  * =====================================================================================
  */
 
+#include <SDL2/SDL_ttf.h>
+
 extern bool media_load ();
+
+#define FONT_TITLE_PATH "./data/ttf/Christmas Graffiti.ttf"
+extern TTF_Font* fontTitle;
