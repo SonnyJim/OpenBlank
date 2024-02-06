@@ -8,10 +8,11 @@ bool quit = false;
 
 int main( int argc, char* args[] )
 {
-	//Start up SDL and create window
 	if( !sdl_init() || !media_init() )
 	{
-		printf( "Failed to initialize!\n" );
+		fprintf(stderr, "Failed to initialize!\n" );
+		sdl_close();
+		return -1;
 	}
 	else
 	{
@@ -20,7 +21,6 @@ int main( int argc, char* args[] )
 			game.update();
 		}
 	}
-	//Free resources and close SDL
 	sdl_close();
 	return 0;
 }

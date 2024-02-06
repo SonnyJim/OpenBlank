@@ -16,13 +16,28 @@
  * =====================================================================================
  */
 #include "Player.h"
+#include "BulletHole.h"
+#include "Sound.h"
 #include <stdio.h>
+
+Player players[MAX_PLAYERS];
 
 Player::Player()
 {
 	setLives (3);
 	setScore (0);
 	setBullets (6);
+	setPosition (SDL_Point {0,0});
+}
+
+void Player::setPosition (SDL_Point pos)
+{
+	position = pos;
+}
+
+SDL_Point Player::getPosition ()
+{
+	return position;
 }
 
 void Player::addScore (int amount)
@@ -43,6 +58,13 @@ int Player::getScore ()
 void Player::shoot ()
 {
 	fprintf (stdout, "Pew! ");
+	sound.playSFX (SFX_GUNSHOT);
+//	Mix_PlayChannel (-1, gGunshot, 0); //TODO Make a 'trigger pulled' function
+	bullet_add ();
+	SDL_Point pos;
+	SDL_GetMouseState (&pos.x, &pos.y);
+	setPosition (pos);
+			//bullet_add();
 }
 
 int Player::getLives ()

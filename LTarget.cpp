@@ -1,8 +1,6 @@
 #include "LTarget.h"
 #include "LTexture.h"
 #include "OpenBlank.h"
-#include "BulletHole.h"
-#include "Sound.h"
 
 LTarget gTargets[ MAX_TARGETS ]; 
 
@@ -32,7 +30,7 @@ LTargetType LTarget::getType ()
 {
 	return mType;
 }
-
+/*
 void LTarget::handleEvent( SDL_Event* e )
 {	
 	if ( e->type == SDL_MOUSEBUTTONDOWN)
@@ -96,6 +94,7 @@ void LTarget::handleEvent( SDL_Event* e )
 	}
 }
 
+*/
 
 void LTarget::render()
 {

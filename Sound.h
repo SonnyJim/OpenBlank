@@ -15,9 +15,28 @@
  *
  * =====================================================================================
  */
-#include <SDL2/SDL_mixer.h>
-
 #define SND_GUNSHOT_PATH "./data/sfx/cg1.wav"
+#define MAX_SOUNDS 1
+
+enum sfx_t
+{
+	SFX_GUNSHOT,
+};
+
+extern const char* soundpaths[];
+
+class Sound
+{
+	public:
+		bool init();
+		void quit();
+		void playSFX (sfx_t sfx);
+	private:
+};
+//extern Mix_Chunk* gGunshot;
+extern Sound sound;
+/*
 extern Mix_Chunk* gGunshot;
 extern bool sound_init ();
 extern void sound_quit ();
+*/

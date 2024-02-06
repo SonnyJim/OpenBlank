@@ -54,7 +54,7 @@ bool sdl_init()
 		printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
 		success = false;
 	}
-	else if (sound_init() != true)
+	else if (sound.init() != true)
 	{
 		success = false;
 	}
@@ -114,7 +114,7 @@ void sdl_close()
 	gRenderer = NULL;
 
 	//Quit SDL subsystems
-	sound_quit();
+	sound.quit();
 	IMG_Quit();
 	TTF_Quit();
 	SDL_Quit();

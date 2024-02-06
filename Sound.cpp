@@ -16,21 +16,33 @@
  * =====================================================================================
  */
 #include "Sound.h"
+#include <SDL2/SDL_mixer.h>
 
-Mix_Chunk* gGunshot = NULL;
+//Mix_Chunk* gGunshot = NULL;
+Mix_Chunk* sounds[MAX_SOUNDS];
 
-bool sound_load_media ()
+const char* soundpaths[] = 
 {
-	gGunshot = Mix_LoadWAV(SND_GUNSHOT_PATH);
-	if (gGunshot == NULL)
-	{
-		fprintf (stderr, "Failed to load %s\nSDL_mixer error: %s\n", SND_GUNSHOT_PATH, Mix_GetError());
-		return false;
-	}
+	"./data/sfx/cg1.wav",
+};
 
+
+Sound sound;
+static bool sound_load_media ()
+{
+	for (int i = 0; i < MAX_SOUNDS; i++)
+	{
+		sounds[i] = Mix_LoadWAV(soundpaths[i]);
+		if (sounds[i] == NULL)
+		{
+			fprintf (stderr, "Failed to load %s\nSDL_mixer error: %s\n", soundpaths[i], Mix_GetError());
+			return false;
+		}
+	}
 	return true;
 }
-bool sound_init ()
+
+bool Sound::init ()
 {
 	if (Mix_OpenAudio (44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 	{
@@ -43,8 +55,14 @@ bool sound_init ()
 		return true;
 }
 
-void sound_quit ()
+void Sound::quit ()
 {
-	Mix_FreeChunk (gGunshot);
+	for (int i = 0; i < MAX_SOUNDS; i++)
+		Mix_FreeChunk (sounds[i]);
 	Mix_Quit();
+}
+
+void Sound::playSFX (sfx_t sfx)
+{
+	Mix_PlayChannel (-1, sounds[sfx], 0);
 }

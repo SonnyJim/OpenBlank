@@ -16,6 +16,7 @@
  * =====================================================================================
  */
 
+#include <SDL2/SDL.h>
 class Player {
 	public:
 		Player();
@@ -27,9 +28,14 @@ class Player {
 		void setLives (int lives);
 		int getBullets ();
 		void setBullets (int amount);
+		SDL_Point getPosition();
+		void setPosition (SDL_Point pos);
 	private:
 		int bullets;
 		int score;
 		int lives;
+		SDL_Point position;
 };
 
+#define MAX_PLAYERS 1
+extern Player players[MAX_PLAYERS];
