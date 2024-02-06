@@ -34,6 +34,8 @@ add_executable(OpenBlank
     Media.cpp
     Movement.cpp
     Player.cpp
+    Hud.cpp
+    Game.cpp
 )
 
 # Specify libraries to link
