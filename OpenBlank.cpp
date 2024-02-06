@@ -1,52 +1,12 @@
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+//#include <SDL2/SDL.h>
+//#include <SDL2/SDL_image.h>
 #include <stdio.h>
 #include <string>
-#include "LTexture.h"
-#include "LTarget.h"
 #include "OpenBlank.h"
-#include "BulletHole.h"
-//#include "Sound.h"
 #include "SDL.h"
 #include "Media.h"
-
-//Loads media
-bool loadMedia();
-
-bool bounds_check (int x, int y, int w, int h)
-{
-	//fprintf (stdout, "x=%i,y=%i,w=%i,h=%i\n", x, y, w, h);
-	if (x - w > SCREEN_WIDTH)
-	{
-		fprintf (stdout, "Offscreen + x\n");
-		return false;
-	}
-	else if (x + w < 0)
-		return false;
-	else if (y < 0)
-		return false;
-	else if (y + h > SCREEN_HEIGHT)
-		return false;
-	else
-		return true;
-}
-
-void movement_all ()
-{
-	for (int i = 0; i < MAX_TARGETS; ++i)
-	{
-		if (gTargets[i].getType() != TARGET_NONE )
-		{
-			gTargets[i].movement();
-		}
-	}
-
-	for (int i = 0; i < MAX_BULLETHOLES; i++)
-	{
-		gBulletHoles[i].update();
-	}
-
-}
+#include "Movement.h"
+#include "LTarget.h"
 
 int main( int argc, char* args[] )
 {
