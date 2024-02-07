@@ -27,8 +27,8 @@ include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_Mixer_INCLUDE_DIRS} ${SDL2_Image
 # Add executable with all source files
 add_executable(OpenBlank
     BulletHole.cpp
-    LTarget.cpp
     LTexture.cpp
+    LTarget.cpp
     OpenBlank.cpp
     Sound.cpp
     SDL.cpp
@@ -40,6 +40,7 @@ add_executable(OpenBlank
     Event.cpp
     Detect.cpp
     Round.cpp
+    Title.cpp
 )
 
 # Specify libraries to link

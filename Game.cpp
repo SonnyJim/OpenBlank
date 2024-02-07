@@ -3,6 +3,7 @@
 #include "LTarget.h"
 #include "SDL.h"
 #include "Round.h"
+#include "Title.h"
 
 Game game;
 
@@ -40,7 +41,14 @@ extern void event_handler ();
 void Game::update()
 {
 	event_handler ();
-	rnd.update();
-	movement_all ();
+	if (game.getState() == STATE_TITLESCREEN)
+	{
+		titlescreen.render ();
+	}
+	else
+	{
+		rnd.update();
+		movement_all ();
+	}
 	sdl_render ();
 }

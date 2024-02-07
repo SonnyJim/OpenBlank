@@ -23,6 +23,8 @@
 #include "LTexture.h"
 #include "LTarget.h"
 #include "BulletHole.h"
+#include "Title.h"
+#include "Game.h"
 
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
@@ -125,6 +127,8 @@ void sdl_render ()
 	//Clear screen
 	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 	SDL_RenderClear( gRenderer );
+	if (game.getState () == STATE_TITLESCREEN)
+		titlescreen.render();
 
 	//Render buttons
 	for( int i = 0; i < MAX_TARGETS; ++i )

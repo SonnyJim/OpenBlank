@@ -46,6 +46,10 @@ class LTexture
 		int mHeight;
 };
 
+#define MAX_TEXTURES 10
+
+extern LTexture textures[MAX_TEXTURES];
 extern LTexture gRedTargetTexture;
 extern LTexture gBlueTargetTexture;
 extern LTexture gCrosshairTexture;
+extern LTexture gTitlescreen;

@@ -16,6 +16,7 @@ void (*round_p[NUM_ROUNDS]) () =
 	round1_start, round2_start
 };
 
+
 Round::Round()
 {
 	rnd.setRoundStart(round1_start);
@@ -68,6 +69,18 @@ int Round::getTarget ()
 
 static void round1_start ()
 {
+	if (!gTargets[0].loadFromFile ("./data/png/RedTarget.png"))
+	{
+		fprintf (stderr, "Error loading texture RedTarget\n");
+		quit = true;
+	}
+	
+	if (!gTargets[1].loadFromFile ("./data/png/BlueTarget.png"))
+	{
+		fprintf (stderr, "Error loading texture BlueTarget\n");
+		quit = true;
+	}
+
 	gTargets[0].setPosition (0, 0);
 	gTargets[1].setPosition (0, 40);
 	gTargets[0].setType (TARGET_RED);

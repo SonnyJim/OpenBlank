@@ -2,6 +2,7 @@
 #include "OpenBlank.h"
 #include "SDL.h"
 
+LTexture textures[MAX_TEXTURES];
 LTexture gRedTargetTexture;
 LTexture gBlueTargetTexture;
 LTexture gCrosshairTexture;

@@ -3,6 +3,7 @@
 #include "SDL.h"
 #include "Media.h"
 #include "Game.h"
+#include "Title.h"
 
 bool quit = false;
 
@@ -16,7 +17,8 @@ int main( int argc, char* args[] )
 	}
 	else
 	{
-		game.start();
+		titlescreen.start();
+		//game.start();
 		while (!quit)
 		{
 			game.update();

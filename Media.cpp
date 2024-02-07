@@ -19,6 +19,7 @@
 #include "OpenBlank.h"
 #include "LTexture.h"
 #include "LTarget.h"
+#include "Title.h"
 
 TTF_Font* fontTitle = NULL;
 #define FONT_TITLE_SIZE 60
@@ -59,6 +60,13 @@ bool media_init()
 		success = false;
 	else if (font_load () == false)
 		success = false;
+	/*
+	else if ( !gTitlescreen.loadFromFile ("./data/png/menu_background.png"))
+	{
+		fprintf (stderr, "Error loading texture! %s\n", SDL_GetError ());
+		success = false;
+	}
+*/
 	/*
 	else
 	{
