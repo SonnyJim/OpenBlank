@@ -116,8 +116,9 @@ void Player::setHits(int value)
 	hits = value;
 }
 
-void Player::endRound ()
+void Player::roundStart ()
 {
+	fprintf (stdout, "Clearing player values\n");
 	hits = 0;
 	misses = 0;
 }

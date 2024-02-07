@@ -2,6 +2,7 @@
 #include "LTarget.h"
 #include "LTexture.h"
 #include "OpenBlank.h"
+#include "Player.h"
 #include "SDL.h"
 
 LTarget gTargets[ MAX_TARGETS ]; 
@@ -20,8 +21,14 @@ LTarget::LTarget()
 void LTarget::hit()
 {
 	//Target was hit, do some stuff
+	if (mType != TARGET_BUTTON)
+	{
+		players[0].addHit (1);
+		fprintf (stdout, "HIT %i\n", players[0].getHits());
+	}
 	mType = TARGET_NONE;
 	callDeathFunc();
+
 }
 
 void LTarget::setPosition( int x, int y )
@@ -127,12 +134,14 @@ void LTarget::free()
 	if( mTexture != NULL )
 	{
 		SDL_DestroyTexture( mTexture );
-		mTexture = NULL;
-		mWidth = 0;
-		mHeight = 0;
-		mType = TARGET_NONE;
-		mAngle = 0;
 	}
+	mTexture = NULL;
+	mWidth = 0;
+	mHeight = 0;
+	mType = TARGET_NONE;
+	mAngle = 0;
+	setDeathFunc (NULL);
+
 }
 
 //void LTarget::render( int x, int y, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip )

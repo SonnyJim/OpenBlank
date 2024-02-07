@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "OpenBlank.h"
+#include "Round.h"
 
 Title titlescreen;
 LTexture gTitlescreen;
@@ -13,6 +14,7 @@ extern bool quit;
 void button_start_hit ()
 {
 	fprintf (stdout, "HIT BUTTON\n");
+	titlescreen.stop();
 }
 
 void Title::start()
@@ -38,11 +40,14 @@ void Title::start()
 	*/
 
 }
+
 void Title::stop()
 {
 	gTitlescreen.free();
 	gTargets[0].free();
 	game.setState (STATE_ROUND_START);
+	game.setRound (0);
+	rnd.start();
 }
 void Title::render()
 {

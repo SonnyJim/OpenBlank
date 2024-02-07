@@ -24,6 +24,7 @@ Round::Round()
 
 void Round::start ()
 {
+	players[0].roundStart();
 	int r = game.getRound();
 	fprintf (stdout, "Starting round #%i\n", r);
 	if (r > NUM_ROUNDS - 1)
@@ -41,7 +42,7 @@ void Round::end ()
 	int r = game.getRound();
 	fprintf (stdout, "Ending round #%i\n", r);
 	game.setRound(r + 1);
-	players[0].endRound();
+	fprintf (stdout, "Should be round #%i\n", r);
 	start();
 	//round_next ();
 	//quit = true;
@@ -69,6 +70,7 @@ int Round::getTarget ()
 
 static void round1_start ()
 {
+	fprintf (stdout, "Roooound 1.....FIGHT\n");
 	if (!gTargets[0].loadFromFile ("./data/png/RedTarget.png"))
 	{
 		fprintf (stderr, "Error loading texture RedTarget\n");
