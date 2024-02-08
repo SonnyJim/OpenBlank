@@ -3,6 +3,7 @@
 #include "OpenBlank.h"
 #include "Player.h"
 #include "LTexture.h"
+#include "Movement.h"
 #include "Game.h"
 
 Round rnd; //I get around
@@ -92,12 +93,16 @@ static void round1_start ()
 	gTargets[1].mHeight = 40;
 	gTargets[1].mWidth = 40 * SCALE_X;
 */	
-	textures[0].loadFromFile (TEXTURE_REDTARGET_PATH);
-	textures[1].loadFromFile (TEXTURE_BLUETARGET_PATH);
+	textures[0].loadFromFile ("./data/png/bg1.png");
+	textures[1].loadFromFile (TEXTURE_REDTARGET_PATH);
+	textures[2].loadFromFile (TEXTURE_BLUETARGET_PATH);
 
-	add_target (0,0, TARGET_RED, 40 * SCALE_X, 40, 0);
+	add_target (0,0, TARGET_IMAGE, 640 * SCALE_X, 480, 0);
+	add_target (0,0, TARGET_RED, 40 * SCALE_X, 40, 1);
 	fprintf (stdout, "Back in Round it's now become %i \n", gTargets[0].getType());
-	add_target (0,40, TARGET_BLUE, 40 * SCALE_X, 40, 1);
+	add_target (0,40, TARGET_BLUE, 40 * SCALE_X, 40, 2);
+
+	gTargets[1].setMoveFunc (move_right);
 	rnd.setTarget(2);
 	rnd.setRoundUpdate(round1_update);
 }
@@ -113,8 +118,8 @@ static bool round1_update ()
 
 static void round2_start ()
 {
-	gTargets[0].setPosition (0, 40);
-	gTargets[1].setPosition (0, 0);
+	gTargets[0].setPosition (SDL_Point {0, 40});
+	gTargets[1].setPosition (SDL_Point {0, 0});
 	gTargets[0].setType (TARGET_RED);
 	gTargets[1].setType (TARGET_BLUE);
 	gTargets[0].mHeight = 40;

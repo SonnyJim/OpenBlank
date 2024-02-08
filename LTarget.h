@@ -17,7 +17,8 @@ class LTarget
 		LTarget();
 
 		//Sets top left position
-		void setPosition( int x, int y );
+		void setPosition(SDL_Point p);
+		SDL_Point getPosition();
 		void setAngle(double degrees);
 		void setCenter (SDL_Point point);
 		void setFlip (SDL_RendererFlip type);
@@ -37,19 +38,29 @@ class LTarget
 		void free();
 		
 		typedef void (*FunctionPointer)();
+		typedef SDL_Point (*fpMove)(SDL_Point);
 		void setDeathFunc(FunctionPointer ptr) //Function to run when target is destroyed
 		{
-			fprintf (stdout, "Adding death func\n");
 			funcDeath = ptr;
 		}
 
 		void callDeathFunc() 
 		{
-			fprintf (stdout, "Calling death func\n");
 			if (funcDeath != nullptr) 
 				funcDeath();
+		}
+
+		void setMoveFunc(fpMove mPtr) //Function to move the target
+		{
+			funcMove = mPtr;
+		}
+
+		SDL_Point callMoveFunc(SDL_Point p) 
+		{
+			if (funcMove != nullptr) 
+				return funcMove(p);
 			else
-				fprintf (stderr, "callDeathFunc() called but no function definted\n");
+				return p;
 		}
 
 
@@ -62,6 +73,7 @@ class LTarget
 		SDL_Point mCenter;
 		SDL_RendererFlip mFlip;
 		FunctionPointer funcDeath;
+		fpMove funcMove;
 		//Currently used global sprite
 		//LTargetSprite mCurrentSprite;
 };

@@ -19,6 +19,7 @@
 #include "LTarget.h"
 #include "OpenBlank.h"
 #include "BulletHole.h"
+#include <SDL2/SDL.h>
 
 bool bounds_check (int x, int y, int w, int h)
 {
@@ -36,6 +37,12 @@ bool bounds_check (int x, int y, int w, int h)
 		return false;
 	else
 		return true;
+}
+
+SDL_Point move_right (SDL_Point p)
+{
+	p.x += 1;
+	return p;
 }
 
 void movement_all ()

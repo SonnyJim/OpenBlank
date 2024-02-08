@@ -3,6 +3,7 @@
 #include "LTexture.h"
 #include "OpenBlank.h"
 #include "Player.h"
+#include "Movement.h"
 #include "SDL.h"
 
 LTarget gTargets[ MAX_TARGETS ]; 
@@ -35,11 +36,20 @@ void LTarget::hit()
 
 }
 
-void LTarget::setPosition( int x, int y )
+void LTarget::setPosition( SDL_Point p)
 {
-	mPosition.x = x;
-	mPosition.y = y;
+	mPosition.x = p.x;
+	mPosition.y = p.y;
 }
+
+SDL_Point LTarget::getPosition()
+{
+	SDL_Point p;
+	p.x = mPosition.x;
+	p.y = mPosition.y;
+	return p;
+}
+
 
 void LTarget::setAngle(double degrees)
 {
@@ -79,8 +89,12 @@ LTargetType LTarget::getType ()
 
 void LTarget::movement()
 {
-	if (getType () == TARGET_NONE)
+	if (getType () == TARGET_NONE || getType () == TARGET_IMAGE)
 		return;
+	
+	SDL_Point r = callMoveFunc(getPosition());
+	setPosition(r);
+	/*
 	mPosition.x += 1 * SCALE_X;
 	if (bounds_check (mPosition.x, mPosition.y, mWidth, mHeight) == false)
 	{
@@ -88,6 +102,7 @@ void LTarget::movement()
 		mType = TARGET_NONE;
 		exit(1);
 	}
+	*/
 }
 
 //TODO add custom function pointer stuff
@@ -103,7 +118,7 @@ bool add_target (int x, int y, LTargetType type, int width, int height, int text
 		if (gTargets[i].getType() == TARGET_NONE)
 		{
 			fprintf (stdout, "Creating target #%i type %i\n", i, type);
-			gTargets[i].setPosition (x, y);
+			gTargets[i].setPosition (SDL_Point {x, y});
 			gTargets[i].setType (type);
 			fprintf (stdout, "Type is now %i\n", gTargets[i].getType());
 			gTargets[i].mHeight = height;
