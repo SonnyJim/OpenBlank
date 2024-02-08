@@ -18,7 +18,9 @@ bool detect_shot ()
 {
 	//fprintf (stdout, "Detecting shots\n");
 	int i;
-	for (i = 0; i < MAX_TARGETS; i++)
+	//Reverse order because we don't have Z depth, yet
+	//TODO Use z depth
+	for (i = MAX_TARGETS; i >= 0; i--)
 	{
 	//	fprintf(stdout, "Check target %i\n", i);
 		if (check_target(i) == true)

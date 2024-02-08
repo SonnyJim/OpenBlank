@@ -14,20 +14,24 @@ LTarget::LTarget()
 	mWidth = 40; //FIXME
 	mHeight = 40;
 	mType = TARGET_NONE;
-	setDeathFunc(NULL);
+	setDeathFunc(nullptr);
 	//mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
 }
 
 void LTarget::hit()
 {
 	//Target was hit, do some stuff
-	if (mType != TARGET_BUTTON)
+	//TODO this is skeleton code that will need to be replaced
+	if (mType != TARGET_BUTTON && mType != TARGET_IMAGE)
 	{
 		players[0].addHit (1);
 		fprintf (stdout, "HIT %i\n", players[0].getHits());
+		mType = TARGET_NONE;
+		free();
 	}
-	mType = TARGET_NONE;
-	callDeathFunc();
+
+	if (mType != TARGET_IMAGE)
+		callDeathFunc();
 
 }
 
@@ -86,56 +90,35 @@ void LTarget::movement()
 	}
 }
 
-bool LTarget::loadFromFile( std::string path )
+//TODO add custom function pointer stuff
+bool add_target (int x, int y, LTargetType type, int width, int height, int texture)
 {
-	//Get rid of preexisting texture
-	free();
-
-	//The final texture
-	SDL_Texture* newTexture = NULL;
-
-	//Load image at specified path
-	SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
-	if( loadedSurface == NULL )
+	int i;
+	//Find an empty target spot
+	for (i = 0; i < MAX_TARGETS; i++)
 	{
-		printf( "Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
-	}
-	else
-	{
-		//Color key image
-		SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0, 0xFF, 0xFF ) );
-
-		//Create texture from surface pixels
-        newTexture = SDL_CreateTextureFromSurface( gRenderer, loadedSurface );
-		if( newTexture == NULL )
+		fprintf (stdout, "#%i type %i\n", i, gTargets[i].getType());
+		//Fill it with the data
+		//TODO Add in defaults
+		if (gTargets[i].getType() == TARGET_NONE)
 		{
-			printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
+			fprintf (stdout, "Creating target #%i type %i\n", i, type);
+			gTargets[i].setPosition (x, y);
+			gTargets[i].setType (type);
+			fprintf (stdout, "Type is now %i\n", gTargets[i].getType());
+			gTargets[i].mHeight = height;
+			gTargets[i].mWidth = width;
+			gTargets[i].textureNumber = texture;
+			return true;
 		}
-		else
-		{
-			//Get image dimensions
-			mWidth = loadedSurface->w;
-			mHeight = loadedSurface->h;
-		}
-
-		//Get rid of old loaded surface
-		SDL_FreeSurface( loadedSurface );
 	}
-
-	//Return success
-	mTexture = newTexture;
-	return mTexture != NULL;
+	fprintf (stderr, "No target for you!");
+	return false;
 }
-
 
 void LTarget::free()
 {
 	//Free texture if it exists
-	if( mTexture != NULL )
-	{
-		SDL_DestroyTexture( mTexture );
-	}
-	mTexture = NULL;
 	mWidth = 0;
 	mHeight = 0;
 	mType = TARGET_NONE;
@@ -163,7 +146,7 @@ void LTarget::render()
 	}
 */
 	//Render to screen
-	SDL_RenderCopyEx( gRenderer, mTexture, NULL, &renderQuad, mAngle, &mCenter, mFlip );
+	SDL_RenderCopyEx( gRenderer, textures[textureNumber].getTexture(), NULL, &renderQuad, mAngle, &mCenter, mFlip );
 }
 
 

@@ -2,6 +2,7 @@
 #include "LTarget.h"
 #include "OpenBlank.h"
 #include "Player.h"
+#include "LTexture.h"
 #include "Game.h"
 
 Round rnd; //I get around
@@ -71,18 +72,17 @@ int Round::getTarget ()
 static void round1_start ()
 {
 	fprintf (stdout, "Roooound 1.....FIGHT\n");
+	/*
 	if (!gTargets[0].loadFromFile ("./data/png/RedTarget.png"))
 	{
 		fprintf (stderr, "Error loading texture RedTarget\n");
 		quit = true;
 	}
-	
 	if (!gTargets[1].loadFromFile ("./data/png/BlueTarget.png"))
 	{
 		fprintf (stderr, "Error loading texture BlueTarget\n");
 		quit = true;
 	}
-
 	gTargets[0].setPosition (0, 0);
 	gTargets[1].setPosition (0, 40);
 	gTargets[0].setType (TARGET_RED);
@@ -91,7 +91,13 @@ static void round1_start ()
 	gTargets[0].mWidth = 40 * SCALE_X;
 	gTargets[1].mHeight = 40;
 	gTargets[1].mWidth = 40 * SCALE_X;
+*/	
+	textures[0].loadFromFile (TEXTURE_REDTARGET_PATH);
+	textures[1].loadFromFile (TEXTURE_BLUETARGET_PATH);
 
+	add_target (0,0, TARGET_RED, 40 * SCALE_X, 40, 0);
+	fprintf (stdout, "Back in Round it's now become %i \n", gTargets[0].getType());
+	add_target (0,40, TARGET_BLUE, 40 * SCALE_X, 40, 1);
 	rnd.setTarget(2);
 	rnd.setRoundUpdate(round1_update);
 }

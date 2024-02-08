@@ -20,16 +20,24 @@ void button_start_hit ()
 void Title::start()
 {
 	game.setState (STATE_TITLESCREEN);
-	if ( !gTitlescreen.loadFromFile ("./data/png/titlescreen.png"))
+	if ( !textures[0].loadFromFile ("./data/png/button_start.png"))
+	{
+		fprintf (stderr, "Error loading texture! %s\n", SDL_GetError ());
+		quit = true;
+	}
+	
+	if ( !textures[1].loadFromFile ("./data/png/titlescreen.png"))
 	{
 		fprintf (stderr, "Error loading texture! %s\n", SDL_GetError ());
 		quit = true;
 	}
 
-	gTargets[0].loadFromFile ("./data/png/button_start.png");
-	gTargets[0].setPosition (82, 193);
-	gTargets[0].setType (TARGET_BUTTON);
-	gTargets[0].setDeathFunc (button_start_hit);
+	//gTargets[0].loadFromFile ("./data/png/button_start.png");
+	add_target (0,0, TARGET_IMAGE, textures[1].getWidth() * SCALE_X, textures[1].getHeight(), 1);
+	add_target (82,193, TARGET_BUTTON, textures[0].getWidth() * SCALE_X, textures[0].getHeight(), 0);
+	gTargets[0].setDeathFunc (NULL);
+	gTargets[1].setDeathFunc (button_start_hit);
+	
 	//Load textures and setup buttons to shoot
 	/*
 	if (!gTitlescreen.loadFromFile ("./data/png/RedTarget.png)"))
@@ -43,14 +51,19 @@ void Title::start()
 
 void Title::stop()
 {
-	gTitlescreen.free();
+	//gTitlescreen.free();
+	textures[0].free();
 	gTargets[0].free();
+	textures[1].free();
+	gTargets[1].free();
+	
 	game.setState (STATE_ROUND_START);
 	game.setRound (0);
 	rnd.start();
 }
 void Title::render()
 {
+	/*
 	SDL_Rect r;
 	r.x = 0;
 	r.y = 0;
@@ -58,4 +71,5 @@ void Title::render()
 	r.h = SCREEN_HEIGHT;
 
 	gTitlescreen.render (0,0,&r);
+*/
 }

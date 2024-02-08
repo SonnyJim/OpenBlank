@@ -105,6 +105,7 @@ bool sdl_init()
 
 void sdl_close()
 {
+	fprintf (stdout, "Shutting down SDL\n");
 	//Free loaded images
 	gRedTargetTexture.free();
 	gBlueTargetTexture.free();

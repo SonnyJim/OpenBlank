@@ -37,6 +37,7 @@ class LTexture
 		//Gets image dimensions
 		int getWidth();
 		int getHeight();
+		SDL_Texture* getTexture();
 
 	private:
 		//The actual hardware texture
@@ -47,6 +48,9 @@ class LTexture
 };
 
 #define MAX_TEXTURES 10
+
+#define TEXTURE_REDTARGET_PATH "./data/png/RedTarget.png"
+#define TEXTURE_BLUETARGET_PATH "./data/png/BlueTarget.png"
 
 extern LTexture textures[MAX_TEXTURES];
 extern LTexture gRedTargetTexture;
