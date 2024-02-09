@@ -16,6 +16,7 @@ LTarget::LTarget()
 	mHeight = 40;
 	mType = TARGET_NONE;
 	setDeathFunc(nullptr);
+	setMoveFunc(nullptr);
 	//mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
 }
 
@@ -87,13 +88,23 @@ LTargetType LTarget::getType ()
 	return mType;
 }
 
+double LTarget::getVal(int val)
+{
+	return mVals[val];
+}
+
+void LTarget::setVal(int val, double value)
+{
+	mVals[val] = value;
+}
+
 void LTarget::movement()
 {
 	if (getType () == TARGET_NONE || getType () == TARGET_IMAGE)
 		return;
 	
-	SDL_Point r = callMoveFunc(getPosition());
-	setPosition(r);
+	callMoveFunc (this);
+	//setPosition(r);
 	/*
 	mPosition.x += 1 * SCALE_X;
 	if (bounds_check (mPosition.x, mPosition.y, mWidth, mHeight) == false)

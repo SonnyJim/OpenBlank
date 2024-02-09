@@ -98,11 +98,11 @@ static void round1_start ()
 	textures[2].loadFromFile (TEXTURE_BLUETARGET_PATH);
 
 	add_target (0,0, TARGET_IMAGE, 640 * SCALE_X, 480, 0);
-	add_target (0,0, TARGET_RED, 40 * SCALE_X, 40, 1);
+	add_target (100,100, TARGET_RED, 40 * SCALE_X, 40, 1);
 	fprintf (stdout, "Back in Round it's now become %i \n", gTargets[0].getType());
 	add_target (0,40, TARGET_BLUE, 40 * SCALE_X, 40, 2);
 
-	gTargets[1].setMoveFunc (move_right);
+	gTargets[1].setMoveFunc (move_circle);
 	rnd.setTarget(2);
 	rnd.setRoundUpdate(round1_update);
 }

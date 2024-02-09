@@ -19,9 +19,11 @@ class LTarget
 		//Sets top left position
 		void setPosition(SDL_Point p);
 		SDL_Point getPosition();
+		//TODO Can probably nuke these 3
 		void setAngle(double degrees);
 		void setCenter (SDL_Point point);
 		void setFlip (SDL_RendererFlip type);
+
 		SDL_Rect getRect ();
 		//Handles mouse event
 		//void handleEvent( SDL_Event* e );
@@ -36,9 +38,11 @@ class LTarget
 		//void render( int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE );
 		void render();
 		void free();
+		double getVal (int val);
+		void setVal (int val, double value);
 		
 		typedef void (*FunctionPointer)();
-		typedef SDL_Point (*fpMove)(SDL_Point);
+		typedef void (*fpMove)(LTarget*);
 		void setDeathFunc(FunctionPointer ptr) //Function to run when target is destroyed
 		{
 			funcDeath = ptr;
@@ -55,12 +59,11 @@ class LTarget
 			funcMove = mPtr;
 		}
 
-		SDL_Point callMoveFunc(SDL_Point p) 
+		void callMoveFunc(LTarget* pTarget) 
 		{
 			if (funcMove != nullptr) 
-				return funcMove(p);
-			else
-				return p;
+				funcMove(pTarget);
+
 		}
 
 
@@ -69,11 +72,15 @@ class LTarget
 		LTargetType  mType;
 		SDL_Point mPosition;
 		SDL_Rect mClip;
+		//TODO Nuke these 3
 		double mAngle;
 		SDL_Point mCenter;
 		SDL_RendererFlip mFlip;
+#define MAX_VALS 2
+		double mVals[MAX_VALS];
 		FunctionPointer funcDeath;
 		fpMove funcMove;
+
 		//Currently used global sprite
 		//LTargetSprite mCurrentSprite;
 };
@@ -83,3 +90,6 @@ extern LTarget gTargets[ MAX_TARGETS ];
 
 extern bool bounds_check (int x, int y, int w, int h);
 extern bool add_target (int x, int y, LTargetType type, int height, int width, int texture);
+
+extern void move_right (LTarget* pTarget); //In Movement.cpp
+extern void move_circle(LTarget* pTarget);

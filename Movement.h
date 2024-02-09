@@ -19,4 +19,3 @@
 extern void movement_all ();
 extern bool bounds_check (int x, int y, int w, int h);
 
-extern SDL_Point move_right (SDL_Point p);

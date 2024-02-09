@@ -38,11 +38,49 @@ bool bounds_check (int x, int y, int w, int h)
 	else
 		return true;
 }
+#include <cmath> // for trigonometric functions like sin and cos
 
-SDL_Point move_right (SDL_Point p)
+// Define constants for the circular motion
+const double centerX = SCREEN_WIDTH / 2; // X-coordinate of the center of the circle
+const double centerY = SCREEN_HEIGHT / 2; // Y-coordinate of the center of the circle
+const double radius = 100;  // Radius of the circle
+const double speed = 0.05;  // Angular speed (radians per frame)
+
+enum valMove_t
 {
+	VAL_ANGLE,
+};
+
+// Update function (called once per frame)
+void move_circle(LTarget* pTarget)
+{
+	double angle = pTarget->getVal(VAL_ANGLE); // Initial angle
+	SDL_Point p = pTarget->getPosition();
+	
+	
+    // Calculate new position based on the current angle
+    p.x = centerX + radius * std::cos(angle);
+    p.y = centerY + radius * std::sin(angle);
+
+    // Set the position of the sprite
+    pTarget->setPosition(p);
+
+    // Increment the angle for the next frame
+	angle += speed;
+
+	// Ensure the angle stays within the range [0, 2*pi)
+	if (angle >= 2 * M_PI)
+	{
+		angle -= 2 * M_PI;
+	}
+	pTarget->setVal (VAL_ANGLE, angle);
+}
+
+void move_right (LTarget* pTarget)
+{
+	SDL_Point p = pTarget->getPosition ();
 	p.x += 1;
-	return p;
+	pTarget->setPosition (p);
 }
 
 void movement_all ()
