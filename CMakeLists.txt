@@ -41,6 +41,8 @@ add_executable(OpenBlank
     Detect.cpp
     Round.cpp
     Title.cpp
+    Rounds/Fountain.cpp
+    Background.cpp
 )
 
 # Specify libraries to link

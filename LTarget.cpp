@@ -141,14 +141,12 @@ void LTarget::movement()
 	*/
 }
 
-//TODO add custom function pointer stuff
 int add_target (int x, int y, LTargetType type, int width, int height, int texture)
 {
 	int i;
 	//Find an empty target spot
 	for (i = 0; i < MAX_TARGETS; i++)
 	{
-//		fprintf (stdout, "#%i type %i\n", i, gTargets[i].getType());
 		//Fill it with the data
 		//TODO Add in defaults
 		if (gTargets[i].getType() == TARGET_NONE)
