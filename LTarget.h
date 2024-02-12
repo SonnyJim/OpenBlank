@@ -40,7 +40,8 @@ class LTarget
 		void free();
 		double getVal (int val);
 		void setVal (int val, double value);
-		
+		void setSpawnTime ();
+		Uint32 getSpawnTime ();
 		typedef void (*FunctionPointer)();
 		typedef void (*fpMove)(LTarget*);
 		void setDeathFunc(FunctionPointer ptr) //Function to run when target is destroyed
@@ -66,7 +67,7 @@ class LTarget
 
 		}
 
-
+		
 	private:
 		//Top left position
 		LTargetType  mType;
@@ -80,7 +81,7 @@ class LTarget
 		double mVals[MAX_VALS];
 		FunctionPointer funcDeath;
 		fpMove funcMove;
-
+		Uint32 mSpawnTime;
 		//Currently used global sprite
 		//LTargetSprite mCurrentSprite;
 };

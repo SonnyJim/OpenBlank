@@ -152,12 +152,24 @@ int add_target (int x, int y, LTargetType type, int width, int height, int textu
 			gTargets[i].mHeight = height;
 			gTargets[i].mWidth = width;
 			gTargets[i].textureNumber = texture;
+			gTargets[i].setSpawnTime();
 			return i;
 		}
 	}
 	fprintf (stderr, "No target for you!\n");
 	return -1;
 }
+
+void LTarget::setSpawnTime ()
+{
+	mSpawnTime = SDL_GetTicks();
+}
+
+Uint32 LTarget::getSpawnTime ()
+{
+	return mSpawnTime;
+}
+
 
 void LTarget::free()
 {

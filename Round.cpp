@@ -26,7 +26,7 @@ Round::Round()
 
 void Round::start ()
 {
-	for (int i = 1; i < MAX_TARGETS; i++)
+	for (int i = 1; i < MAX_TARGETS; i++) //TODO Should be in LTarget.cpp probably
 	{
 		gTargets[i].setType (TARGET_NONE);
 	}
@@ -39,12 +39,15 @@ void Round::start ()
 		quit = true;
 		return;
 	}
+	mTickStart = SDL_GetTicks();
+	mActive = true;
 	(*round_p[r]) (); //Call the level setup routine
 	//rnd.callRoundStart();
 }
 
 void Round::end ()
 {
+	mActive = false;
 	int r = game.getRound();
 	fprintf (stdout, "Ending round #%i\n", r);
 	game.setRound(r + 1);
@@ -56,13 +59,32 @@ void Round::end ()
 
 void Round::update ()
 {
+	mDuration = SDL_GetTicks () - mTickStart;
+	if (mDuration > (mTimeout * 1000))
+		end();
 	if (rnd.callRoundUpdate() != true)
 		end();
 }
 
+int Round::getTimeout ()
+{
+	return mTimeout;
+}
+
+
+int Round::getDuration ()
+{
+	return mDuration;
+}
+
+void Round::setTimeout (int seconds)
+{
+	mTimeout = seconds;
+}
+
 bool Round::isActive ()
 {
-	return false;
+	return mActive;
 }
 void Round::setTarget (int value)
 {
@@ -73,6 +95,8 @@ int Round::getTarget ()
 {
 	return target;
 }
+
+static Uint32 round1_lastSpawn;
 
 static void round1_addTarget ()
 {
@@ -85,6 +109,23 @@ static void round1_addTarget ()
 	gTargets[t].setVal(VAL_DY, getRandom(13, 18));
 	gTargets[t].setVal(VAL_DX, getRandom(-10, 10));
 	fprintf (stdout, "Target gravity=%f dy=%f dx=%f\n", gTargets[t].getVal(VAL_GRAVITY), gTargets[t].getVal(VAL_DY), gTargets[t].getVal(VAL_DX));
+}
+
+static int round1_getSpawnDelay ()
+{
+	int duration = rnd.getDuration() / 1000;
+
+	if (duration < 5)
+		return 2000;
+	else if (duration < 10)
+		return 1000;
+	else if (duration < 20)
+		return 500;
+	else if (duration < 25)
+		return 200;
+	else
+		return 40;
+	
 }
 
 static void round1_start ()
@@ -102,7 +143,8 @@ static void round1_start ()
 	//gTargets[1].setVal(VAL_GRAVITY, -0.4);
 	//gTargets[1].setVal(VAL_DY, 20);
 	//gTargets[1].setVal(VAL_DX, 0);
-	rnd.setTarget(10);
+	rnd.setTarget(30);
+	rnd.setTimeout(30);
 	rnd.setRoundUpdate(round1_update);
 }
 
@@ -116,9 +158,10 @@ static bool round1_update ()
 			active_targets++;
 	}
 
-	if (active_targets < rnd.getTarget())
+	if (active_targets < rnd.getTarget() && round1_lastSpawn + round1_getSpawnDelay() < SDL_GetTicks ()) //Don't spawn another one
 	{
 		round1_addTarget();
+		round1_lastSpawn = SDL_GetTicks();
 	}
 
 	if (players[0].getHits() >= rnd.getTarget())

@@ -10,7 +10,10 @@ class Round
 		void update();
 		bool isActive();
 		void setTarget(int value);
-		int getTarget();
+		void setTimeout (int seconds);
+		int getTimeout ();
+		int getDuration ();
+		int getTarget(); //How many targets are needed to finish the round
 		typedef void (*FunctionPointer)();
 		typedef bool (*FunctionPointerB)();
 
@@ -39,11 +42,14 @@ class Round
 		}
 
 	private:
-		Uint32 duration;
+		Uint32 mTickStart;
+		int mTimeout; //How long in seconds the round should be
+		int mDuration; //How long we've been running for
 		FunctionPointer roundStart;
 		FunctionPointer roundEnd;
 		FunctionPointerB roundUpdate;
-		int target;
+		int target; //How many targets we need to hit to clear the round
+		bool mActive;
 };
 
 extern Round rnd;

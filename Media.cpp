@@ -20,14 +20,16 @@
 #include "LTexture.h"
 #include "LTarget.h"
 #include "Title.h"
+#include <SDL2/SDL_ttf.h>
 
 TTF_Font* fontTitle = NULL;
-#define FONT_TITLE_SIZE 60
+TTF_Font* fontHud = NULL;
 
 static bool font_load ()
 {
+	fprintf (stdout, "Loading fonts\n");
 	bool success = true;
-	
+//TODO Thios is lame	
 	if (TTF_Init() != 0)
 	{
 		fprintf(stderr, "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
@@ -37,6 +39,12 @@ static bool font_load ()
 	if (fontTitle == NULL)
 	{
 		fprintf(stderr, "Failed to load %s SDL_ttf Error: %s\n", FONT_TITLE_PATH, TTF_GetError() );
+		success = false;
+	}
+	fontHud = TTF_OpenFont ( FONT_HUD_PATH, FONT_HUD_SIZE);
+	if (fontHud == NULL)
+	{
+		fprintf(stderr, "Failed to load %s SDL_ttf Error: %s\n", FONT_HUD_PATH, TTF_GetError() );
 		success = false;
 	}
 	return success;
@@ -51,14 +59,21 @@ bool media_init()
 		fprintf (stderr, "Error loading texture! %s\n", SDL_GetError ());
 		success = false;
 	}
-	else if ( !gBlueTargetTexture.loadFromFile ("./data/png/BlueTarget.png"))
+	if ( !gBlueTargetTexture.loadFromFile ("./data/png/BlueTarget.png"))
 	{
 		fprintf (stderr, "Error loading texture! %s\n", SDL_GetError ());
 		success = false;
 	}
-	else if ( !gCrosshairTexture.loadFromFile ("./data/png/crosshairs.png"))
+	if ( !gHeartTexture.loadFromFile (TEXTURE_HEART_PATH))
+	{
+		fprintf (stderr, "Error loading texture! %s\n", SDL_GetError ());
 		success = false;
-	else if (font_load () == false)
+	}
+	
+	if ( !gCrosshairTexture.loadFromFile ("./data/png/crosshairs.png"))
+		success = false;
+	
+	if (font_load () == false)
 		success = false;
 	/*
 	else if ( !gTitlescreen.loadFromFile ("./data/png/menu_background.png"))

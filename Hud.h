@@ -5,4 +5,4 @@ class Hud
 		void draw ();
 	private:
 };
-
+extern Hud hud;

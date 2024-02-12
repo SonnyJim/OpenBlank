@@ -25,6 +25,7 @@
 #include "BulletHole.h"
 #include "Title.h"
 #include "Game.h"
+#include "Hud.h"
 
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
@@ -141,6 +142,7 @@ void sdl_render ()
 	{
 		gBulletHoles[i].render();
 	}
+	hud.draw();
 	render_crosshair();
 	//Update screen
 	SDL_RenderPresent( gRenderer );
