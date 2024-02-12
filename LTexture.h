@@ -50,11 +50,13 @@ class LTexture
 
 #define TEXTURE_REDTARGET_PATH "./data/png/RedTarget.png"
 #define TEXTURE_BLUETARGET_PATH "./data/png/BlueTarget.png"
+#define TEXTURE_BOMB_PATH "./data/png/Bomb.png"
 #define TEXTURE_HEART_PATH "./data/png/Heart.png"
 
 extern LTexture textures[MAX_TEXTURES]; //Array of textures dynamically loaded at round start
 extern LTexture gRedTargetTexture;
 extern LTexture gBlueTargetTexture;
+extern LTexture gBombTexture;
 extern LTexture gCrosshairTexture;
 extern LTexture gHeartTexture;
 extern LTexture gTitlescreen;

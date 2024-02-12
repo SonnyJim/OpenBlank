@@ -98,11 +98,22 @@ int Round::getTarget ()
 
 static Uint32 round1_lastSpawn;
 
+static LTargetType round1_getRandomTarget (int percent) //TODO This isn't percent
+{
+	int random = getRandom(0,percent);
+	if (random == 1)
+		return TARGET_BOMB;
+	else
+		return TARGET_RED;
+}
+
 static void round1_addTarget ()
 {
-	int t = add_target (640,400, TARGET_RED, 40 * SCALE_X, 40, 1);
+	int t = add_target (640,400, round1_getRandomTarget(10), 40 * SCALE_X, 40, 1);
 	if (t == -1)
 		return; //Didn't get a target
+	if (gTargets[t].getType() == TARGET_BOMB)
+		gTargets[t].textureNumber = 3;
 	fprintf (stdout, "Adding target %i\n", t);
 	gTargets[t].setMoveFunc (move_gravity);
 	gTargets[t].setVal(VAL_GRAVITY, -0.4);
@@ -135,6 +146,7 @@ static void round1_start ()
 	textures[0].loadFromFile ("./data/png/bg1.png");
 	textures[1].loadFromFile (TEXTURE_REDTARGET_PATH);
 	textures[2].loadFromFile (TEXTURE_BLUETARGET_PATH);
+	textures[3].loadFromFile (TEXTURE_BOMB_PATH);
 
 	add_target (0,0, TARGET_IMAGE, 640 * SCALE_X, 480, 0); //TODO Backgrounds please, not this shit
 	//add_target (640,400, TARGET_RED, 40 * SCALE_X, 40, 1);
@@ -148,7 +160,7 @@ static void round1_start ()
 	rnd.setRoundUpdate(round1_update);
 }
 
-static bool round1_update ()
+static bool round1_update () //TODO Convert to skeet shooting?
 {
 	int i;
 	int active_targets = 0;

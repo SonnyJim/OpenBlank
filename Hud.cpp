@@ -7,7 +7,6 @@
 #include <string>
 Hud hud;
 LTexture gHudTimer;
-//LTexture gHudLives;
 LTexture gHudTargets;
 LTexture gHudBullets;
 LTexture gHeartTexture;
@@ -20,7 +19,6 @@ void Hud::draw ()
 
 	//Draw tieer
 	int timer = (rnd.getTimeout() * 1000 )- rnd.getDuration();
-	//gHudTimer.loadFromRenderedText ("TEST", SDL_Color {255,0,0,255}, fontHud);
 	gHudTimer.loadFromRenderedText (std::to_string(timer / 1000), SDL_Color {0,0,0}, fontHud);
 	r.x = 0;
 	r.y = 0;
@@ -42,11 +40,8 @@ void Hud::draw ()
 	
 	r.w = gHeartTexture.getWidth() * SCALE_X;
 	r.h = gHeartTexture.getHeight();
-	fprintf (stdout, "w %i h %i\n", r.w, r.h);
 	for (int i=0; i<lives;i++)
 	{
-	fprintf (stdout, "lives: %i\n", i);	
-		//gHeartTexture.render (0 + (i * r.w), SCREEN_HEIGHT - 40, &r);
 		gHeartTexture.render (i * r.w, SCREEN_HEIGHT - r.h * 2, &r);
 	}
 }

@@ -70,31 +70,19 @@ bool media_init()
 		success = false;
 	}
 	
+	if ( !gBombTexture.loadFromFile (TEXTURE_BOMB_PATH))
+	{
+		fprintf (stderr, "Error loading texture! %s\n", SDL_GetError ());
+		success = false;
+	}
+	
+
+	
 	if ( !gCrosshairTexture.loadFromFile ("./data/png/crosshairs.png"))
 		success = false;
 	
 	if (font_load () == false)
 		success = false;
-	/*
-	else if ( !gTitlescreen.loadFromFile ("./data/png/menu_background.png"))
-	{
-		fprintf (stderr, "Error loading texture! %s\n", SDL_GetError ());
-		success = false;
-	}
-*/
-	/*
-	else
-	{
-		gTargets[0].setPosition (0, 0);
-		gTargets[1].setPosition (0, 40);
-		gTargets[0].setType (TARGET_RED);
-		gTargets[1].setType (TARGET_BLUE);
-		gTargets[0].mHeight = 40;
-		gTargets[0].mWidth = 40 * SCALE_X;
-		gTargets[1].mHeight = 40;
-		gTargets[1].mWidth = 40 * SCALE_X;
-	}
-	*/
 	if (!success)
 		fprintf (stderr, "Failed to load textures\n");
 	return success;

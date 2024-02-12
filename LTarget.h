@@ -8,6 +8,7 @@ enum LTargetType
 	TARGET_BLUE,
 	TARGET_BUTTON,
 	TARGET_IMAGE, //A plain image that ignores the death callback
+	TARGET_BOMB,
 };
 
 class LTarget

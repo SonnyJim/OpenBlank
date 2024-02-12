@@ -25,7 +25,14 @@ void LTarget::hit()
 {
 	//Target was hit, do some stuff
 	//TODO this is skeleton code that will need to be replaced
-	if (mType != TARGET_BUTTON && mType != TARGET_IMAGE)
+	if (mType == TARGET_BOMB)
+	{
+		int lives = players[0].getLives();
+		lives -= 1;
+		players[0].setLives(lives);
+		mType = TARGET_NONE;
+	}
+	else if (mType != TARGET_BUTTON && mType != TARGET_IMAGE)
 	{
 		players[0].addHit (1);
 		fprintf (stdout, "HIT %i\n", players[0].getHits());
