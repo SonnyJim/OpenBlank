@@ -76,7 +76,7 @@ class LTarget
 		double mAngle;
 		SDL_Point mCenter;
 		SDL_RendererFlip mFlip;
-#define MAX_VALS 2
+#define MAX_VALS 10
 		double mVals[MAX_VALS];
 		FunctionPointer funcDeath;
 		fpMove funcMove;
@@ -85,11 +85,12 @@ class LTarget
 		//LTargetSprite mCurrentSprite;
 };
 
-const int MAX_TARGETS = 4;
+const int MAX_TARGETS = 255;
 extern LTarget gTargets[ MAX_TARGETS ]; 
 
 extern bool bounds_check (int x, int y, int w, int h);
-extern bool add_target (int x, int y, LTargetType type, int height, int width, int texture);
+extern int add_target (int x, int y, LTargetType type, int height, int width, int texture);
 
 extern void move_right (LTarget* pTarget); //In Movement.cpp
 extern void move_circle(LTarget* pTarget);
+extern void move_gravity(LTarget* pTarget);

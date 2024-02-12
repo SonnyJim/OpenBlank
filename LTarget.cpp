@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Movement.h"
 #include "SDL.h"
+extern bool quit;
 
 LTarget gTargets[ MAX_TARGETS ]; 
 
@@ -90,14 +91,31 @@ LTargetType LTarget::getType ()
 
 double LTarget::getVal(int val)
 {
-	return mVals[val];
+	if (val > MAX_VALS)
+	{
+		fprintf (stderr, "Target getVal error, %i is more than %i\n", val, MAX_VALS);
+		quit = true;
+		return 0;
+	}
+	else
+		return mVals[val];
 }
 
 void LTarget::setVal(int val, double value)
 {
-	mVals[val] = value;
+	if (val > MAX_VALS)
+	{
+		fprintf (stderr, "Target setVal error, %i is more than %i\n", val, MAX_VALS);
+		quit = true;
+	}
+	else
+		mVals[val] = value;
 }
-
+/*
+void LTarget::setMoveType()
+{
+}
+*/
 void LTarget::movement()
 {
 	if (getType () == TARGET_NONE || getType () == TARGET_IMAGE)
@@ -117,13 +135,13 @@ void LTarget::movement()
 }
 
 //TODO add custom function pointer stuff
-bool add_target (int x, int y, LTargetType type, int width, int height, int texture)
+int add_target (int x, int y, LTargetType type, int width, int height, int texture)
 {
 	int i;
 	//Find an empty target spot
 	for (i = 0; i < MAX_TARGETS; i++)
 	{
-		fprintf (stdout, "#%i type %i\n", i, gTargets[i].getType());
+//		fprintf (stdout, "#%i type %i\n", i, gTargets[i].getType());
 		//Fill it with the data
 		//TODO Add in defaults
 		if (gTargets[i].getType() == TARGET_NONE)
@@ -131,15 +149,14 @@ bool add_target (int x, int y, LTargetType type, int width, int height, int text
 			fprintf (stdout, "Creating target #%i type %i\n", i, type);
 			gTargets[i].setPosition (SDL_Point {x, y});
 			gTargets[i].setType (type);
-			fprintf (stdout, "Type is now %i\n", gTargets[i].getType());
 			gTargets[i].mHeight = height;
 			gTargets[i].mWidth = width;
 			gTargets[i].textureNumber = texture;
-			return true;
+			return i;
 		}
 	}
-	fprintf (stderr, "No target for you!");
-	return false;
+	fprintf (stderr, "No target for you!\n");
+	return -1;
 }
 
 void LTarget::free()

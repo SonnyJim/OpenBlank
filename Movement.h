@@ -16,6 +16,15 @@
  * =====================================================================================
  */
 #include <SDL2/SDL.h>
+
+enum valMove_t
+{
+	VAL_ANGLE,
+	VAL_DY,
+	VAL_DX,
+	VAL_GRAVITY
+};
+
 extern void movement_all ();
 extern bool bounds_check (int x, int y, int w, int h);
-
+extern double getRandom(double min, double max);
