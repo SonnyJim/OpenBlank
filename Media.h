@@ -22,7 +22,10 @@ extern bool media_init ();
 
 #define FONT_TITLE_SIZE 60
 #define FONT_HUD_SIZE 60
+#define FONT_PHONE_SIZE 60
 #define FONT_TITLE_PATH "./data/ttf/Christmas Graffiti.ttf"
 #define FONT_HUD_PATH "./data/ttf/Star Cartoon.ttf"
+#define FONT_PHONE_PATH "./data/ttf/digital-7 (mono).ttf"
 extern TTF_Font* fontTitle;
 extern TTF_Font* fontHud;
+extern TTF_Font* fontPhone;

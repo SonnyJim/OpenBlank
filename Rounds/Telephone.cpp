@@ -45,7 +45,7 @@ static void generate_dialled ()
 		output.append("0");
 	}
 	*/
-	textures[12].loadFromRenderedText(output, SDL_Color {0,255,0}, fontPhone);
+	textures[12].loadFromRenderedText(output, SDL_Color {0,20,0}, fontPhone);
 	gTargets[11].mWidth = digits_entered * (gTargets[10].mWidth / numDigits);
 }
 
@@ -59,7 +59,7 @@ static void generate_number ()
 		targetNumber = "0" + targetNumber;
 	}
 	fprintf (stdout, "Generated %s\n", targetNumber.c_str());
-	textures[11].loadFromRenderedText(targetNumber, SDL_Color {0,150,0}, fontPhone);
+	textures[11].loadFromRenderedText(targetNumber, SDL_Color {60,80,60}, fontPhone);
 	digits_entered = 0;
 	targetDialled.clear();
 	generate_dialled();
@@ -156,6 +156,7 @@ void telephone_start ()
 	fprintf (stdout, "Dial some numbers\n");
 	load_sfx();
 	bg.clear();
+	bg.set ("./data/png/Telephone_bg.png");
 	//bg.set ("./data/png/bg1.png");
 	//Render the nmbser 0-9 on some textres
 	for (i=0; i <= 9; i++)
@@ -165,12 +166,13 @@ void telephone_start ()
 	textures[10].loadFromFile ("./data/png/TelephoneButton.png");
 	
 	//Render the button in the form of a keypad
+	int pos_x = 220;
+	int pos_y = 250;
 	int x_offset,y_offset;
 	int w = textures[10].getWidth() * SCALE_X;
 	int h = textures[10].getHeight();
 	x_offset = w;
 	y_offset = h;
-	int more_y = h * 2;
 	
 	for (i=1; i <= 9; i++)
 	{
@@ -184,12 +186,12 @@ void telephone_start ()
 			y_offset += h;
 			x_offset = 0 - (5 * w);
 		}
-		add_target (x_offset + (i*w), y_offset + more_y, TARGET_BUTTON, w, h, i);
+		add_target (x_offset + (i*w) +pos_x, y_offset + pos_y, TARGET_BUTTON, w, h, i);
 	}
 	//Add the zero button
 	y_offset += h;
 	x_offset = w * 3;
-	add_target ( x_offset, y_offset + more_y, TARGET_BUTTON, w, h, 0);
+	add_target ( x_offset + pos_x, y_offset + pos_y, TARGET_BUTTON, w, h, 0);
 
 	//Set the function to be called when the button is pressed
 	gTargets[0].setDeathFunc(one_pressed);	
@@ -210,7 +212,7 @@ void telephone_start ()
 	//Find where the first keypad button is and put the display above it
 	SDL_Point p = gTargets[0].getPosition();
 	int x = p.x + 10;
-	int y = p.y - h - 10;
+	int y = p.y - h - 100;
 	add_target ( x, y, TARGET_IMAGE, w, h, 11);
 	
 	generate_dialled();
@@ -225,15 +227,17 @@ void telephone_start ()
 bool telephone_update () //TODO Convert to skeet shooting?
 {
 	//Draw number background
+	/*
 	SDL_Point p = gTargets[10].getPosition();
 	SDL_Rect r;
 	
 	r.x = p.x;
-	r.y = p.y - 10;
+	r.y = p.y;
 	r.w = gTargets[10].mWidth;
-	r.h = gTargets[10].mHeight + 10;
+	r.h = gTargets[10].mHeight;
 	SDL_SetRenderDrawColor (gRenderer, 0,0,0,0);
 	SDL_RenderFillRect (gRenderer, &r);
+	*/
 	if (players[0].getHits() >= rnd.getTarget())
 	{
 		return false;

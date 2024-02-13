@@ -68,7 +68,8 @@ void Sound::freeRoundSounds()
 
 void Sound::quit ()
 {
-	freeRoundSounds();
+	//TODO Fix me, seems to try and free things it shouldn't
+	//freeRoundSounds();
 	fprintf (stdout, "Freeing other sounds\n");
 	for (int i = 0; i < MAX_SOUNDS; i++)
 		Mix_FreeChunk (sounds[i]);

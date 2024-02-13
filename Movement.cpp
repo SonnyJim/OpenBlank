@@ -108,7 +108,7 @@ void movement_all ()
 	int i;
 	for (i = 0; i < MAX_TARGETS; ++i)
 	{
-		if (gTargets[i].getType() != TARGET_NONE )
+		if (gTargets[i].getType() != TARGET_NONE && gTargets[i].getType() != TARGET_BUTTON)
 		{
 			gTargets[i].movement();
 			if (bounds_check (gTargets[i].getRect()) == false && i != 0)//TODO Hack for the background

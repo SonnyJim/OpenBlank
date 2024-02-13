@@ -46,7 +46,7 @@ class LTexture
 		int mHeight;
 };
 
-#define MAX_TEXTURES 10
+#define MAX_TEXTURES 20
 
 #define TEXTURE_REDTARGET_PATH "./data/png/RedTarget.png"
 #define TEXTURE_BLUETARGET_PATH "./data/png/BlueTarget.png"
@@ -64,3 +64,4 @@ extern LTexture gHudTimer;
 //extern LTexture gHudLives;
 extern LTexture gHudTargets;
 extern LTexture gHudBullets;
+extern LTexture bgTexture;
