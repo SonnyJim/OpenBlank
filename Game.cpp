@@ -41,6 +41,7 @@ extern void event_handler ();
 void Game::update()
 {
 	event_handler ();
+	sdl_clear ();
 	if (game.getState() == STATE_TITLESCREEN)
 	{
 		titlescreen.render ();

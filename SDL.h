@@ -25,3 +25,4 @@ extern SDL_Renderer* gRenderer;
 extern bool sdl_init ();
 extern void sdl_close ();
 extern void sdl_render ();
+extern void sdl_clear ();

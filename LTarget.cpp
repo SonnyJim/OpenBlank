@@ -165,6 +165,12 @@ int add_target (int x, int y, LTargetType type, int width, int height, int textu
 	return -1;
 }
 
+void clear_targets ()
+{
+	for (int i=0;i < MAX_TARGETS; i++)
+		gTargets[i].free();
+}
+
 void LTarget::setSpawnTime ()
 {
 	mSpawnTime = SDL_GetTicks();

@@ -6,14 +6,15 @@
 #include "Movement.h"
 #include "Game.h"
 #include "Background.h"
+#include "Sound.h"
 #include "Rounds/Rounds.h"
 
 extern bool quit;
 
-#define NUM_ROUNDS 1
+#define NUM_ROUNDS 2
 void (*round_p[NUM_ROUNDS]) () =
 {
-	fountain_start,
+	telephone_start, fountain_start,
 };
 
 Round rnd; //I get around
@@ -24,10 +25,8 @@ Round::Round()
 
 void Round::start ()
 {
-	for (int i = 1; i < MAX_TARGETS; i++) //TODO Should be in LTarget.cpp probably
-	{
-		gTargets[i].setType (TARGET_NONE);
-	}
+	clear_targets();
+	sound.freeRoundSounds();
 	players[0].roundStart();
 	int r = game.getRound();
 	fprintf (stdout, "Starting round #%i\n", r);

@@ -20,6 +20,7 @@
 
 //Mix_Chunk* gGunshot = NULL;
 Mix_Chunk* sounds[MAX_SOUNDS];
+Mix_Chunk* roundSounds[MAX_ROUNDSOUNDS];
 
 const char* soundpaths[] = 
 {
@@ -55,11 +56,41 @@ bool Sound::init ()
 		return true;
 }
 
+void Sound::freeRoundSounds()
+{
+	fprintf (stdout, "Freeing roundSounds\n");
+	for (int i = 0; i < MAX_ROUNDSOUNDS; i++)
+	{
+		if (roundSounds[i] != NULL)
+			Mix_FreeChunk (roundSounds[i]);
+	}
+}
+
 void Sound::quit ()
 {
+	freeRoundSounds();
+	fprintf (stdout, "Freeing other sounds\n");
 	for (int i = 0; i < MAX_SOUNDS; i++)
 		Mix_FreeChunk (sounds[i]);
 	Mix_Quit();
+}
+
+void Sound::loadRoundSFX (int sfx_num, const char* path)
+{
+	roundSounds[sfx_num] = Mix_LoadWAV(path);
+	if (roundSounds[sfx_num] == NULL)
+	{
+		fprintf (stderr, "Failed to load %s\nSDL_mixer error: %s\n", path, Mix_GetError());
+		return;
+	}
+	else
+		fprintf (stdout, "Loaded %s into slot #%i\n", path, sfx_num);
+}
+
+void Sound::playRoundSFX (int sfx)
+{
+	//TODO Check for null?
+	Mix_PlayChannel (-1, roundSounds[sfx], 0);
 }
 
 void Sound::playSFX (sfx_t sfx)

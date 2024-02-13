@@ -26,6 +26,7 @@
 #include "Title.h"
 #include "Game.h"
 #include "Hud.h"
+#include "Background.h"
 
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
@@ -124,14 +125,18 @@ void sdl_close()
 	SDL_Quit();
 }
 
-void sdl_render ()
+void sdl_clear ()
 {
-	//Clear screen
 	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 	SDL_RenderClear( gRenderer );
+	//Clear screen
+	bg.render();
+}
+
+void sdl_render ()
+{
 	if (game.getState () == STATE_TITLESCREEN)
 		titlescreen.render();
-
 	//Render buttons
 	for( int i = 0; i < MAX_TARGETS; ++i )
 	{

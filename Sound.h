@@ -17,6 +17,9 @@
  */
 #define SND_GUNSHOT_PATH "./data/sfx/cg1.wav"
 #define MAX_SOUNDS 1
+#include <string>
+
+#define MAX_ROUNDSOUNDS 16
 
 enum sfx_t
 {
@@ -31,6 +34,9 @@ class Sound
 		bool init();
 		void quit();
 		void playSFX (sfx_t sfx);
+		void playRoundSFX (int sfx_num);
+		void loadRoundSFX (int sfx_num, const char* path);
+		void freeRoundSounds ();
 	private:
 };
 //extern Mix_Chunk* gGunshot;

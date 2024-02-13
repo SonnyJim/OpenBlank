@@ -96,3 +96,4 @@ extern int add_target (int x, int y, LTargetType type, int height, int width, in
 extern void move_right (LTarget* pTarget); //In Movement.cpp
 extern void move_circle(LTarget* pTarget);
 extern void move_gravity(LTarget* pTarget);
+extern void clear_targets();
