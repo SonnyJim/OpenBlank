@@ -15,6 +15,8 @@
 
 #define MAX_LENGTH 6
 
+LTexture gSimonTexture;
+
 enum simonBtn
 {
 	SIMON_RED,
@@ -114,7 +116,10 @@ static void play_sequence ()
 		return;
 	int btn = simon.sequence[simon.playbackStep];
 	if (simon.playbackActive + 400 > SDL_GetTicks())
+	{
 		draw_simon_single (btn, simonColorsLit[btn]);
+		btnHitTimer[btn] = SDL_GetTicks();
+	}
 	if (simon.playing == true)
 	{
 		sound.playRoundSFX(simon.sequence[simon.playbackStep]);
@@ -194,7 +199,8 @@ void simon_start ()
 	fprintf (stdout, "Simon says\n");
 	load_sfx();
 	bg.clear();
-	bg.set ("./data/png/Simon_bg.png");
+	//bg.set ("./data/png/Simon_bg.png");
+	gSimonTexture.loadFromFile ("./data/png/Simon_bg.png");	
 	//Render the nmbser 0-9 on some textres
 	SDL_Rect r;
 	r.w = 160 * SCALE_X;
@@ -212,7 +218,7 @@ void simon_start ()
 	gTargets[1].setDeathFunc(green_pressed);	
 	gTargets[2].setDeathFunc(blue_pressed);	
 	gTargets[3].setDeathFunc(yellow_pressed);	
-	
+
 	simon.delay = 800; //Set how long to wait between each teaching blink	
 	new_sequence();
 	
@@ -244,12 +250,17 @@ static void draw_simon ()
 			draw_simon_single (i, simonColorsLit[i]);
 
 	};
+	r.x = 0;
+	r.y = 0;
+	r.w = SCREEN_WIDTH * SCALE_X;
+	r.h = SCREEN_HEIGHT;
+	SDL_RenderCopy (gRenderer, gSimonTexture.getTexture(), nullptr, &r);
 }
 
 bool simon_update ()
 {
-	draw_simon ();
 	play_sequence();
+	draw_simon ();
 	if (players[0].getHits() >= rnd.getTarget())
 	{
 		return false;
