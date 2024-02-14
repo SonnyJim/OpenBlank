@@ -13,7 +13,7 @@
 #include "../Sound.h"
 #include "../SDL.h"
 
-#define MAX_LENGTH 6
+#define MAX_LENGTH 10
 
 LTexture gSimonTexture;
 
@@ -29,7 +29,8 @@ enum simonBtn
 struct simon_t 
 {
 	int currentStep;
-	int delay; //Delayt 
+	int playbackDelay;//Delay between start of playback
+	int delay; //Delay between beeps
 	int currentLength;
 	Uint32 playbackActive;
 	bool playing;
@@ -79,6 +80,10 @@ static bool check_button (simonBtn btn)
 
 static void append_sequence ()
 {
+	players[0].addHit(1);
+	simon.delay -= 80;
+	if (simon.delay < 40)
+		simon.delay = 40;
 	simon.currentLength++;
 	if (simon.currentLength > MAX_LENGTH)
 		simon.currentLength = MAX_LENGTH;
@@ -95,6 +100,9 @@ static void append_sequence ()
 	}
 	fprintf (stdout, " len:%i\n", simon.currentLength);
 	
+	simon.playbackDelay = 500 - (simon.currentLength * 50);
+	if (simon.playbackDelay < 100)
+		simon.playbackDelay = 100;
 	simon.playbackActive = SDL_GetTicks();
 	simon.playing = true;
 	
@@ -114,10 +122,12 @@ static void play_sequence ()
 {
 	if (simon.playbackActive == 0)
 		return;
+	if (SDL_GetTicks () - simon.playbackActive < simon.playbackDelay)
+		return;
 	int btn = simon.sequence[simon.playbackStep];
-	if (simon.playbackActive + 400 > SDL_GetTicks())
+	if (simon.playbackActive + simon.playbackDelay < SDL_GetTicks())
 	{
-		draw_simon_single (btn, simonColorsLit[btn]);
+//		draw_simon_single (btn, simonColorsLit[btn]);
 		btnHitTimer[btn] = SDL_GetTicks();
 	}
 	if (simon.playing == true)
@@ -126,7 +136,7 @@ static void play_sequence ()
 		simon.playing = false;
 	}
 
-	if (simon.playbackActive + simon.delay < SDL_GetTicks())
+	if (simon.playbackActive + simon.delay + simon.playbackDelay < SDL_GetTicks())
 	{
 		simon.playbackStep++;
 		simon.playing = true;
@@ -219,10 +229,10 @@ void simon_start ()
 	gTargets[2].setDeathFunc(blue_pressed);	
 	gTargets[3].setDeathFunc(yellow_pressed);	
 
-	simon.delay = 800; //Set how long to wait between each teaching blink	
+	simon.delay = 400; //Set how long to wait between each teaching blink	
 	new_sequence();
 	
-	rnd.setTarget(5);
+	rnd.setTarget(MAX_LENGTH);
 	rnd.setTimeout(30);
 	rnd.setRoundUpdate(simon_update);
 	
@@ -236,10 +246,10 @@ static void draw_simon_single (int btn, SDL_Color color)
 	SDL_SetRenderDrawColor (gRenderer, color.r, color.g, color.b, SDL_ALPHA_OPAQUE);
 	SDL_RenderFillRect (gRenderer, &r);
 }
-const int btn_delay = 300;
-
 static void draw_simon ()
 {
+	int btn_delay = simon.delay;
+
 	SDL_Rect r;
 	
 	for (int i=0; i < 4;i++)
