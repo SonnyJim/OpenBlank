@@ -44,6 +44,7 @@ add_executable(OpenBlank
     Rounds/Fountain.cpp
     Rounds/Telephone.cpp
     Rounds/Simon.cpp
+    Rounds/Speller.cpp
     Background.cpp
 )
 

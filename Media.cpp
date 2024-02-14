@@ -25,6 +25,7 @@
 TTF_Font* fontTitle = NULL;
 TTF_Font* fontHud = NULL;
 TTF_Font* fontPhone = NULL;
+TTF_Font* fontSchool = NULL;
 
 static bool font_load ()
 {
@@ -54,6 +55,14 @@ static bool font_load ()
 		fprintf(stderr, "Failed to load %s SDL_ttf Error: %s\n", FONT_PHONE_PATH, TTF_GetError() );
 		success = false;
 	}
+	
+	fontSchool = TTF_OpenFont ( FONT_SCHOOL_PATH, FONT_SCHOOL_SIZE);
+	if (fontPhone == NULL)
+	{
+		fprintf(stderr, "Failed to load %s SDL_ttf Error: %s\n", FONT_SCHOOL_PATH, TTF_GetError() );
+		success = false;
+	}
+
 
 	return success;
 }
