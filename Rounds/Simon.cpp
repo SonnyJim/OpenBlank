@@ -77,14 +77,14 @@ static bool check_button (simonBtn btn)
 
 static void append_sequence ()
 {
-	int s = simon.currentLength;
-	
-	int r = rand() % 4;
-	fprintf (stdout,"RANDY %i\n", r);
-	simon.sequence[s] = r;
 	simon.currentLength++;
 	if (simon.currentLength > MAX_LENGTH)
 		simon.currentLength = MAX_LENGTH;
+
+	int s = simon.currentLength;
+	
+	int r = rand() % 4;
+	simon.sequence[s] = r;
 	
 	fprintf (stdout, "Simon sequence: ");
 	for (int i=0; i < simon.currentLength; i++)
@@ -113,7 +113,8 @@ static void play_sequence ()
 	if (simon.playbackActive == 0)
 		return;
 	int btn = simon.sequence[simon.playbackStep];
-	draw_simon_single (btn, simonColorsLit[btn]);
+	if (simon.playbackActive + 400 > SDL_GetTicks())
+		draw_simon_single (btn, simonColorsLit[btn]);
 	if (simon.playing == true)
 	{
 		sound.playRoundSFX(simon.sequence[simon.playbackStep]);

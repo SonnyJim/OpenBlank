@@ -37,6 +37,7 @@ void LTarget::hit()
 		players[0].addHit (1);
 		fprintf (stdout, "HIT %i\n", players[0].getHits());
 		mType = TARGET_NONE;
+		callDeathFunc();
 		free();
 	}
 

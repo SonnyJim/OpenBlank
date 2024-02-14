@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <cstdlib>
 #include "Rounds.h"
 #include "../LTarget.h"
 #include "../LTexture.h"
@@ -7,9 +8,26 @@
 #include "../OpenBlank.h"
 #include "../Round.h"
 #include "../Player.h"
-
+#include "../Sound.h"
 
 static Uint32 fountain_lastSpawn;
+
+const int numSfx = 3;
+static const char* FountainSndPaths[] = 
+{
+	"./data/sfx/Fountaini/194683__kingsrow__breakingvase03.wav",
+	"./data/sfx/Fountain/194684__kingsrow__breakingvase02.wav",
+	"./data/sfx/Fountain/194685__kingsrow__breakingvase01.wav",
+};
+
+static void load_sfx ()
+{
+	for (int i = 0; i <numSfx; i++)
+	{
+		sound.loadRoundSFX (i, FountainSndPaths[i]);
+	}
+}
+
 
 static LTargetType fountain_getRandomTarget (int percent) //TODO This isn't percent
 {
@@ -20,6 +38,11 @@ static LTargetType fountain_getRandomTarget (int percent) //TODO This isn't perc
 		return TARGET_RED;
 }
 
+static void FountainDeathFunc ()
+{
+	fprintf (stdout, "Pop\n");
+	sound.playRoundSFX (rand() % 3);
+}
 static void fountain_addTarget ()
 {
 	int t = add_target (640,400, fountain_getRandomTarget(10), 40 * SCALE_X, 40, 1);
@@ -29,6 +52,7 @@ static void fountain_addTarget ()
 		gTargets[t].textureNumber = 3;
 	fprintf (stdout, "Adding target %i\n", t);
 	gTargets[t].setMoveFunc (move_gravity);
+	gTargets[t].setDeathFunc (FountainDeathFunc);
 	gTargets[t].setVal(VAL_GRAVITY, -0.4);
 	gTargets[t].setVal(VAL_DY, getRandom(13, 18));
 	gTargets[t].setVal(VAL_DX, getRandom(-10, 10));
@@ -55,7 +79,7 @@ static int fountain_getSpawnDelay ()
 void fountain_start ()
 {
 	fprintf (stdout, "Roooound 1.....FIGHT\n");
-
+	load_sfx ();
 //	textures[0].loadFromFile ("./data/png/bg1.png");
 	bg.set ("./data/png/bg1.png");
 	textures[1].loadFromFile (TEXTURE_REDTARGET_PATH);

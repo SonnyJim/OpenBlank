@@ -17,6 +17,8 @@
  */
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <cstdlib>
+#include <ctime>
 #include "SDL.h"
 #include "OpenBlank.h"
 #include "Sound.h"
@@ -51,7 +53,8 @@ bool sdl_init()
 {
 	//Initialization flag
 	bool success = true;
-
+	
+	srand(time(nullptr)); //Seed RNG
 	//Initialize SDL
 	if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0 )
 	{
