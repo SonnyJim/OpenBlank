@@ -32,7 +32,7 @@ void LTarget::hit()
 		players[0].setLives(lives);
 		mType = TARGET_NONE;
 	}
-	else if (mType != TARGET_BUTTON && mType != TARGET_IMAGE)
+	else if (mType != TARGET_BUTTON && mType != TARGET_IMAGE && mType != TARGET_CHECKMARK) //TODO Probably shorter to specficy what I want, rather want I don't want
 	{
 		players[0].addHit (1);
 		fprintf (stdout, "HIT %i\n", players[0].getHits());
@@ -193,6 +193,7 @@ void LTarget::free()
 
 }
 
+#define CHECKMARK_DELAY 500
 //void LTarget::render( int x, int y, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip )
 void LTarget::render()
 {
@@ -203,17 +204,17 @@ void LTarget::render()
 	//Set rendering space and render to screen
 	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
 	
-	/*
-	//Set clip rendering dimensions
-	if( mClip != NULL )
+	if (mType == TARGET_CHECKMARK && getSpawnTime() + CHECKMARK_DELAY < SDL_GetTicks())
 	{
-		renderQuad.w = clip->w;
-		renderQuad.h = clip->h;
+		free();
+		return; //Don't try to render an deleted target
 	}
-*/
 	//Render to screen
-	SDL_RenderCopyEx( gRenderer, textures[textureNumber].getTexture(), NULL, &renderQuad, mAngle, &mCenter, mFlip );
+	if (textureNumber != TEXTURE_INVISIBLE)
+	{
+		if (mType == TARGET_CHECKMARK)
+			SDL_RenderCopyEx( gRenderer, gCheckmarkTexture.getTexture(), NULL, &renderQuad, mAngle, &mCenter, mFlip );
+		else
+			SDL_RenderCopyEx( gRenderer, textures[textureNumber].getTexture(), NULL, &renderQuad, mAngle, &mCenter, mFlip );
+	}
 }
-
-
-

@@ -7,6 +7,7 @@ LTexture gRedTargetTexture;
 LTexture gBlueTargetTexture;
 LTexture gBombTexture;
 LTexture gCrosshairTexture;
+LTexture gCheckmarkTexture;
 LTexture::LTexture()
 {
 	//Initialize

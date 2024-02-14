@@ -11,10 +11,10 @@
 
 extern bool quit;
 
-#define NUM_ROUNDS 2
+#define NUM_ROUNDS 3
 void (*round_p[NUM_ROUNDS]) () =
 {
-	telephone_start, fountain_start,
+	simon_start, fountain_start, telephone_start
 };
 
 Round rnd; //I get around
@@ -46,6 +46,7 @@ void Round::end ()
 {
 	mActive = false;
 	bg.clear ();
+	//TODO Free textures?
 	int r = game.getRound();
 	fprintf (stdout, "Ending round #%i\n", r);
 	game.setRound(r + 1);

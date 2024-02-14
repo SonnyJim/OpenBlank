@@ -62,7 +62,11 @@ void Sound::freeRoundSounds()
 	for (int i = 0; i < MAX_ROUNDSOUNDS; i++)
 	{
 		if (roundSounds[i] != NULL)
+		{
+			fprintf (stdout, "Freeing #%i\n", i);
 			Mix_FreeChunk (roundSounds[i]);
+			roundSounds[i] = NULL;
+		}
 	}
 }
 

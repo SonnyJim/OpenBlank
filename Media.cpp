@@ -89,6 +89,9 @@ bool media_init()
 	if ( !gCrosshairTexture.loadFromFile ("./data/png/crosshairs.png"))
 		success = false;
 	
+	if ( !gCheckmarkTexture.loadFromFile ("./data/png/Checkmark.png"))
+		success = false;
+
 	if (font_load () == false)
 		success = false;
 	if (!success)

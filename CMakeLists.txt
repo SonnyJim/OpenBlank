@@ -43,6 +43,7 @@ add_executable(OpenBlank
     Title.cpp
     Rounds/Fountain.cpp
     Rounds/Telephone.cpp
+    Rounds/Simon.cpp
     Background.cpp
 )
 

@@ -65,3 +65,4 @@ extern LTexture gHudTimer;
 extern LTexture gHudTargets;
 extern LTexture gHudBullets;
 extern LTexture bgTexture;
+extern LTexture gCheckmarkTexture;

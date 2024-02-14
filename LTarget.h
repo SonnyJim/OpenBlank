@@ -1,6 +1,8 @@
 #include <SDL2/SDL.h>
 #include <string>
 
+#define TEXTURE_INVISIBLE -1
+
 enum LTargetType
 {
 	TARGET_NONE,
@@ -8,7 +10,8 @@ enum LTargetType
 	TARGET_BLUE,
 	TARGET_BUTTON,
 	TARGET_IMAGE, //A plain image that ignores the death callback
-	TARGET_BOMB,
+	TARGET_BOMB, //A target if shot loses the player a life
+	TARGET_CHECKMARK //A target that is unshootable but only appears for a 1/2 second
 };
 
 class LTarget
