@@ -15,6 +15,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <algorithm>
+#include <sstream>
 
 // Function to shuffle an array using the Fisher-Yates algorithm
 static void shuffleSequence(int arr[], int size) {
@@ -249,6 +250,84 @@ static void assign_func (int num, int value)
 			break;
 	}
 }
+/*
+static void draw_outline (SDL_Texture* texture)
+{
+	SDL_Texture* temp;
+	SDL_Rect r;
+	r.w = texture->getWidth();
+	r.h = texture->getHeight();
+
+	SDL_SetRenderTarget (gRenderer, temp);
+	SDL_RenderCopy (gRenderer, texture, NULL, r);
+
+	SDL_SetRenderTarget (gRenderer, texture);
+	SDL_SetRenderDrawColor (0,0,0,0);
+	SDL_RenderClear(gRenderer);
+	
+	SDL_SetRenderDrawColor (getRandom(0, 255),getRandom(0, 255),getRandom(0,255),255);
+	SDL_RenderFillRect (gRenderer, r);
+	SDL_RenderCopy (gRenderer, temp, NULL, r);
+
+	SDL_SetRenderTarget (gRenderer, NULL);
+}
+*/
+static void draw_outline(SDL_Texture* texture)
+{
+    // Get the dimensions of the texture
+    int texWidth, texHeight;
+    SDL_QueryTexture(texture, NULL, NULL, &texWidth, &texHeight);
+
+    // Create a temporary texture to hold the original texture
+    SDL_Texture* temp = SDL_CreateTexture(gRenderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, texWidth, texHeight);
+    if (!temp) {
+        // Handle error
+        fprintf(stderr, "Failed to create temporary texture: %s\n", SDL_GetError());
+        return;
+    }
+
+    // Set the rendering target to the temporary texture
+    SDL_SetRenderTarget(gRenderer, temp);
+
+    // Copy the original texture to the temporary texture
+    SDL_RenderCopy(gRenderer, texture, NULL, NULL);
+
+    // Set the rendering target back to the original texture
+    SDL_SetRenderTarget(gRenderer, texture);
+
+    // Clear the original texture with a transparent color
+    SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 0);
+    SDL_RenderClear(gRenderer);
+
+    // Set the render draw color to random color for the outline
+    SDL_SetRenderDrawColor(gRenderer, 255,255,0,0);
+
+    // Draw the outline rect around the texture
+    SDL_Rect outlineRect = {0, 0, texWidth, texHeight};
+    SDL_RenderDrawRect(gRenderer, &outlineRect);
+
+    // Copy the contents of the temporary texture back to the original texture
+    SDL_RenderCopy(gRenderer, temp, NULL, NULL);
+
+    // Reset the rendering target to the default (screen)
+    SDL_SetRenderTarget(gRenderer, NULL);
+
+    // Destroy the temporary texture
+    SDL_DestroyTexture(temp);
+}
+
+std::string getFilename(int number)
+{
+    // Construct the filename pattern
+    std::string pattern = "./data/png/ShootNumbers/";
+    
+    // Convert the number to a string and append it to the pattern
+    std::stringstream ss;
+    ss << pattern << number << ".png";
+    
+    // Return the concatenated string
+    return ss.str();
+}
 
 void shootNumbers_start ()
 {
@@ -264,7 +343,9 @@ void shootNumbers_start ()
 		char text[3];
 		sprintf (text, "%02d", sequence[i]);
 		fprintf (stdout, "%i,%i,%s| ", i, sequence[i], text);
-		textures[i].loadFromRenderedText (text, SDL_Color {0,0,0}, fontMoby);
+		textures[i].loadFromFile(getFilename(sequence[i]));
+		//textures[i].loadFromRenderedText (text, SDL_Color {0,0,0,0}, fontMoby);
+		//draw_outline (textures[i].getTexture());
 		assign_func (i, sequence[i]);
 	}//TODO Render the numbers onto the btton bg
 	fprintf (stdout, "\n");
