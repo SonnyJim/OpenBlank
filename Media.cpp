@@ -26,6 +26,7 @@ TTF_Font* fontTitle = NULL;
 TTF_Font* fontHud = NULL;
 TTF_Font* fontPhone = NULL;
 TTF_Font* fontSchool = NULL;
+TTF_Font* fontMoby = NULL;
 
 static bool font_load ()
 {
@@ -62,6 +63,13 @@ static bool font_load ()
 		fprintf(stderr, "Failed to load %s SDL_ttf Error: %s\n", FONT_SCHOOL_PATH, TTF_GetError() );
 		success = false;
 	}
+	fontMoby = TTF_OpenFont ( FONT_MOBY_PATH, FONT_MOBY_SIZE);
+	if (fontPhone == NULL)
+	{
+		fprintf(stderr, "Failed to load %s SDL_ttf Error: %s\n", FONT_MOBY_PATH, TTF_GetError() );
+		success = false;
+	}
+
 
 
 	return success;

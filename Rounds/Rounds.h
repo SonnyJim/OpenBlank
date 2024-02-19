@@ -10,5 +10,8 @@ extern bool calculator_update ();
 extern void simon_start ();
 extern bool simon_update ();
 
+extern void shootNumbers_start ();
+extern bool shootNumbers_update ();
+
 extern void speller_start ();
 extern bool speller_update ();

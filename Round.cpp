@@ -11,10 +11,10 @@
 
 extern bool quit;
 
-#define NUM_ROUNDS 4
+#define NUM_ROUNDS 5
 void (*round_p[NUM_ROUNDS]) () =
 {
-	speller_start, simon_start, fountain_start, telephone_start
+	shootNumbers_start, speller_start, simon_start, fountain_start, telephone_start
 };
 
 Round rnd; //I get around
