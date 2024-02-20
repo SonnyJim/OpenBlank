@@ -15,7 +15,7 @@ static Uint32 fountain_lastSpawn;
 const int numSfx = 3;
 static const char* FountainSndPaths[] = 
 {
-	"./data/sfx/Fountaini/194683__kingsrow__breakingvase03.wav",
+	"./data/sfx/Fountain/194683__kingsrow__breakingvase03.wav",
 	"./data/sfx/Fountain/194684__kingsrow__breakingvase02.wav",
 	"./data/sfx/Fountain/194685__kingsrow__breakingvase01.wav",
 };
