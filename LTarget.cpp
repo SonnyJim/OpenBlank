@@ -37,12 +37,12 @@ void LTarget::hit()
 		players[0].addHit (1);
 		fprintf (stdout, "HIT %i\n", players[0].getHits());
 		mType = TARGET_NONE;
-		callDeathFunc();
+		callDeathFunc(this);
 		free();
 	}
 
 	if (mType != TARGET_IMAGE)
-		callDeathFunc();
+		callDeathFunc(this);
 
 }
 
@@ -63,8 +63,16 @@ SDL_Point LTarget::getPosition()
 
 void LTarget::setAngle(double degrees)
 {
+	if (degrees > 360)
+		degrees = degrees - 360;
 	mAngle = degrees;
 }
+
+double LTarget::getAngle()
+{
+	return mAngle;;
+}
+
 
 
 void LTarget::setCenter (SDL_Point point)

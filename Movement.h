@@ -19,6 +19,7 @@
 
 enum valMove_t
 {
+	VAL_ROTSPEED,
 	VAL_ANGLE,
 	VAL_DY,
 	VAL_DX,

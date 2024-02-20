@@ -90,81 +90,81 @@ static void button_pressed (int number)
 }
 
 
-static void one_pressed ()
+static void one_pressed (LTarget* pTarget)
 {
 	button_pressed (1);
 }
 
-static void two_pressed ()
+static void two_pressed (LTarget* pTarget)
 {
 	button_pressed (2);
 }
 
-static void three_pressed ()
+static void three_pressed (LTarget* pTarget)
 {
 	button_pressed (3);
 }
 
-static void four_pressed ()
+static void four_pressed (LTarget* pTarget)
 {
 	button_pressed (4);
 }
 
-static void five_pressed ()
+static void five_pressed (LTarget* pTarget)
 {
 	button_pressed (5);
 }
 
-static void six_pressed ()
+static void six_pressed (LTarget* pTarget)
 {
 	button_pressed (6);
 }
 
-static void seven_pressed ()
+static void seven_pressed (LTarget* pTarget)
 {
 	button_pressed (7);
 }
 
-static void eight_pressed ()
+static void eight_pressed (LTarget* pTarget)
 {
 	button_pressed (8);
 }
 
-static void nine_pressed ()
+static void nine_pressed (LTarget* pTarget)
 {
 	button_pressed (9);
 }
 
-static void ten_pressed ()
+static void ten_pressed (LTarget* pTarget)
 {
 	button_pressed(10);
 }
-static void eleven_pressed ()
+static void eleven_pressed (LTarget* pTarget)
 {
 	button_pressed(11);
 }
 
-static void twelve_pressed ()
+static void twelve_pressed (LTarget* pTarget)
 {
 	button_pressed(12);
 }
 
-static void thirteen_pressed ()
+static void thirteen_pressed (LTarget* pTarget)
 {
 	button_pressed(13);
 }
 
-static void fourteen_pressed ()
+static void fourteen_pressed (LTarget* pTarget)
 {
 	button_pressed(14);
 }
 
-static void fiveteen_pressed ()
+static void fiveteen_pressed (LTarget* pTarget)
 {
 	button_pressed(15);
 }
 
-static void sixteen_pressed ()
+static void sixteen_pressed (LTarget* pTarget)
 {
 	button_pressed(16);
 }

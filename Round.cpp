@@ -50,7 +50,6 @@ void Round::end ()
 	int r = game.getRound();
 	fprintf (stdout, "Ending round #%i\n", r);
 	game.setRound(r + 1);
-	fprintf (stdout, "Should be round #%i\n", r);
 	start();
 }
 

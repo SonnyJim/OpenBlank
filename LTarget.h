@@ -25,6 +25,7 @@ class LTarget
 		SDL_Point getPosition();
 		//TODO Can probably nuke these 3
 		void setAngle(double degrees);
+		double getAngle();
 		void setCenter (SDL_Point point);
 		void setFlip (SDL_RendererFlip type);
 
@@ -46,17 +47,17 @@ class LTarget
 		void setVal (int val, double value);
 		void setSpawnTime ();
 		Uint32 getSpawnTime ();
-		typedef void (*FunctionPointer)();
+		typedef void (*FunctionPointer)(LTarget*);
 		typedef void (*fpMove)(LTarget*);
 		void setDeathFunc(FunctionPointer ptr) //Function to run when target is destroyed
 		{
 			funcDeath = ptr;
 		}
 
-		void callDeathFunc() 
+		void callDeathFunc(LTarget* pTarget) 
 		{
 			if (funcDeath != nullptr) 
-				funcDeath();
+				funcDeath(pTarget);
 		}
 
 		void setMoveFunc(fpMove mPtr) //Function to move the target

@@ -141,23 +141,23 @@ static void shot_letter (int num)
 	}
 }
 
-static void shot_1 ()
+static void shot_1 (LTarget* pTarget)
 {
 	fprintf (stdout, "Shot 1\n");
 	shot_letter (0);
 }
 
-static void shot_2 ()
+static void shot_2 (LTarget* pTarget)
 {
 	fprintf (stdout, "Shot 2\n");
 	shot_letter (1);
 }
-static void shot_3 ()
+static void shot_3 (LTarget* pTarget)
 {
 	fprintf (stdout, "Shot 3\n");
 	shot_letter (2);
 }
-static void shot_4 ()
+static void shot_4 (LTarget* pTarget)
 {
 	fprintf (stdout, "Shot 4\n");
 	shot_letter (3);

@@ -12,7 +12,7 @@ Title titlescreen;
 LTexture gTitlescreen;
 extern bool quit;
 
-void button_start_hit ()
+static void button_start_hit (LTarget* pTarget)
 {
 	fprintf (stdout, "HIT BUTTON\n");
 	titlescreen.stop();

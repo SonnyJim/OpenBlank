@@ -38,7 +38,7 @@ static LTargetType fountain_getRandomTarget (int percent) //TODO This isn't perc
 		return TARGET_RED;
 }
 
-static void FountainDeathFunc ()
+static void FountainDeathFunc (LTarget* pTarget)
 {
 	fprintf (stdout, "Pop\n");
 	sound.playRoundSFX (rand() % 3);

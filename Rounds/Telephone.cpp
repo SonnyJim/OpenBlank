@@ -88,56 +88,52 @@ static void number_pressed (int number)
 	}
 }
 
-static void render_number ()
-{
-}
-
-static void zero_pressed ()
+static void zero_pressed (LTarget* pTarget)
 {
 	number_pressed (0);
 }
 
-static void one_pressed ()
+static void one_pressed (LTarget* pTarget)
 {
 	number_pressed (1);
 }
 
-static void two_pressed ()
+static void two_pressed (LTarget* pTarget)
 {
 	number_pressed (2);
 }
 
-static void three_pressed ()
+static void three_pressed (LTarget* pTarget)
 {
 	number_pressed (3);
 }
 
-static void four_pressed ()
+static void four_pressed (LTarget* pTarget)
 {
 	number_pressed (4);
 }
 
-static void five_pressed ()
+static void five_pressed (LTarget* pTarget)
 {
 	number_pressed (5);
 }
 
-static void six_pressed ()
+static void six_pressed (LTarget* pTarget)
 {
 	number_pressed (6);
 }
 
-static void seven_pressed ()
+static void seven_pressed (LTarget* pTarget)
 {
 	number_pressed (7);
 }
 
-static void eight_pressed ()
+static void eight_pressed (LTarget* pTarget)
 {
 	number_pressed (8);
 }
 
-static void nine_pressed ()
+static void nine_pressed (LTarget* pTarget)
 {
 	number_pressed (9);
 }
@@ -195,15 +191,15 @@ void telephone_start ()
 
 	//Set the function to be called when the button is pressed
 	gTargets[0].setDeathFunc(one_pressed);	
-	gTargets[1].setDeathFunc(two_pressed);	
-	gTargets[2].setDeathFunc(three_pressed);	
-	gTargets[3].setDeathFunc(four_pressed);	
-	gTargets[4].setDeathFunc(five_pressed);	
-	gTargets[5].setDeathFunc(six_pressed);	
-	gTargets[6].setDeathFunc(seven_pressed);	
-	gTargets[7].setDeathFunc(eight_pressed);	
-	gTargets[8].setDeathFunc(nine_pressed);	
-	gTargets[9].setDeathFunc(zero_pressed);	
+	gTargets[1].setDeathFunc(two_pressed );	
+	gTargets[2].setDeathFunc(three_pressed );	
+	gTargets[3].setDeathFunc(four_pressed );	
+	gTargets[4].setDeathFunc(five_pressed );	
+	gTargets[5].setDeathFunc(six_pressed );	
+	gTargets[6].setDeathFunc(seven_pressed );	
+	gTargets[7].setDeathFunc(eight_pressed );	
+	gTargets[8].setDeathFunc(nine_pressed );	
+	gTargets[9].setDeathFunc(zero_pressed );	
 
 	//Generate the target number texture
 	generate_number ();

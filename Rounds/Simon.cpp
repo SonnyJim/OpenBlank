@@ -175,22 +175,22 @@ static void btn_pressed (simonBtn btn)
 		sound.playRoundSFX(4);
 }
 
-static void yellow_pressed ()
+static void yellow_pressed (LTarget* pTarget)
 {
 	btn_pressed (SIMON_YELLOW);
 }
 
-static void blue_pressed ()
+static void blue_pressed (LTarget* pTarget)
 {
 	btn_pressed (SIMON_BLUE);
 }
 
-static void red_pressed ()
+static void red_pressed (LTarget* pTarget)
 {
 	btn_pressed (SIMON_RED);
 }
 
-static void green_pressed ()
+static void green_pressed (LTarget* pTarget)
 {
 	btn_pressed (SIMON_GREEN);
 }
