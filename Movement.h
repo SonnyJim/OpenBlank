@@ -23,7 +23,8 @@ enum valMove_t
 	VAL_ANGLE,
 	VAL_DY,
 	VAL_DX,
-	VAL_GRAVITY
+	VAL_GRAVITY,
+	VAL_SIZE
 };
 
 extern void movement_all ();

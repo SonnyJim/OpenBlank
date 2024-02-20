@@ -15,3 +15,6 @@ extern bool shootNumbers_update ();
 
 extern void speller_start ();
 extern bool speller_update ();
+
+extern void asteroids_start ();
+extern bool asteroids_update ();

@@ -34,10 +34,10 @@ void LTarget::hit()
 	}
 	else if (mType != TARGET_BUTTON && mType != TARGET_IMAGE && mType != TARGET_CHECKMARK) //TODO Probably shorter to specficy what I want, rather want I don't want
 	{
+		callDeathFunc(this);
 		players[0].addHit (1);
 		fprintf (stdout, "HIT %i\n", players[0].getHits());
 		mType = TARGET_NONE;
-		callDeathFunc(this);
 		free();
 	}
 
@@ -199,6 +199,7 @@ void LTarget::free()
 	mType = TARGET_NONE;
 	mAngle = 0;
 	setDeathFunc (NULL);
+	setMoveFunc (NULL);
 
 }
 

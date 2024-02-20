@@ -380,7 +380,8 @@ void shootNumbers_start ()
 	}
 
 	rnd.setTarget(sequenceLength);
-	rnd.setTimeout(30);
+	rnd.setTimeout(15);
+	//TODO If you miss a shot reudce the timer?
 	rnd.setRoundUpdate(shootNumbers_update);
 	for (int i =0; i < sequenceLength; i++)
 	{

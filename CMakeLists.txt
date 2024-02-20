@@ -46,6 +46,7 @@ add_executable(OpenBlank
     Rounds/Simon.cpp
     Rounds/Speller.cpp
     Rounds/ShootNumbers.cpp
+    Rounds/Asteroids.cpp
     Background.cpp
 )
 

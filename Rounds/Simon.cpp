@@ -165,7 +165,8 @@ static void btn_pressed (simonBtn btn)
 		btnHitTimer[btn] = SDL_GetTicks();
 		if (simon.currentStep > simon.currentLength)
 		{
-			add_target (((SCREEN_WIDTH * SCALE_X) / 2) - gCheckmarkTexture.getWidth(), (SCREEN_HEIGHT /2) -gCheckmarkTexture.getHeight(), TARGET_CHECKMARK, gCheckmarkTexture.getWidth() * 2, gCheckmarkTexture.getHeight()* 2, 0);
+			int t = add_target (((SCREEN_WIDTH * SCALE_X) / 2) - gCheckmarkTexture.getWidth(), (SCREEN_HEIGHT /2) -gCheckmarkTexture.getHeight(), TARGET_CHECKMARK, gCheckmarkTexture.getWidth() * 2, gCheckmarkTexture.getHeight()* 2, 0);
+			gTargets[t].setMoveFunc(NULL);
 			simon.currentStep = 0;
 			append_sequence();
 		}
