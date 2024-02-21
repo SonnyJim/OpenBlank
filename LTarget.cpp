@@ -134,7 +134,7 @@ void LTarget::setMoveType()
 */
 void LTarget::movement()
 {
-	if (getType () == TARGET_NONE || getType () == TARGET_IMAGE)
+	if (getType () == TARGET_NONE)
 		return;
 	
 	callMoveFunc (this);

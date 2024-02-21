@@ -46,7 +46,6 @@ static void generate_sequence ()
 	sequenceStep = 1;
 }
 
-
 static void button_pressed (int number)
 {
 	fprintf (stdout, "%i pressed, looking for %i\n", number, sequenceStep);
@@ -70,25 +69,7 @@ static void button_pressed (int number)
 			}
 		}
 	}
-	
-/*	
-	if (targetNumber[digits_entered] == numberString[0])
-	{
-		targetDialled.append(numberString);
-		digits_entered++;
-		generate_dialled();
-		fprintf (stdout, "Dialled %s\n", targetDialled.c_str());
-		sound.playRoundSFX (number);
-	}
-	if (digits_entered >= targetNumber.size())
-	{
-		players[0].addHit(1);
-		generate_number();
-		sound.playRoundSFX(10);
-	}
-*/
 }
-
 
 static void one_pressed (LTarget* pTarget)
 {

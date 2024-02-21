@@ -18,3 +18,9 @@ extern bool speller_update ();
 
 extern void asteroids_start ();
 extern bool asteroids_update ();
+
+extern void quickdraw_start ();
+extern bool quickdraw_update ();
+
+extern void burger_start ();
+extern bool burger_update ();

@@ -31,6 +31,14 @@ double getRandom(double min, double max) {
     return dis(gen);
 }
 
+int getRandomInt(int min, int max) {
+    // Seed the random number generator
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dis(min, max);
+    return dis(gen);
+}
+
 
 bool bounds_check (SDL_Rect r)
 {

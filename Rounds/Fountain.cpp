@@ -31,7 +31,7 @@ static void load_sfx ()
 
 static LTargetType fountain_getRandomTarget (int percent) //TODO This isn't percent
 {
-	int random = getRandom(0,percent);
+	int random = getRandomInt(0,percent);
 	if (random == 1)
 		return TARGET_BOMB;
 	else

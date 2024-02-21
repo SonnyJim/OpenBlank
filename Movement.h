@@ -30,3 +30,4 @@ enum valMove_t
 extern void movement_all ();
 extern bool bounds_check (int x, int y, int w, int h);
 extern double getRandom(double min, double max);
+extern int getRandomInt(int  min, int max);
