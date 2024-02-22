@@ -72,7 +72,7 @@ bool sdl_init()
 		{
 			printf( "Warning: Linear texture filtering not enabled!" );
 		}
-
+		SDL_RenderSetScale (gRenderer, SCALE_X, 1);
 		//Create window
 		//gWindow = SDL_CreateWindow( "Open Blank", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (SCREEN_WIDTH * SCALE_X), SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 		gWindow = SDL_CreateWindow( "Open Blank", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (SCREEN_WIDTH * SCALE_X), SCREEN_HEIGHT, SDL_WINDOW_FULLSCREEN );
@@ -137,8 +137,12 @@ void sdl_clear ()
 	bg.render();
 }
 
+#define TARGET_FPS 30
 void sdl_render ()
 {
+	Uint32 frameStart = SDL_GetTicks();
+	int frameTime;
+
 	if (game.getState () == STATE_TITLESCREEN)
 		titlescreen.render();
 	//Render buttons
@@ -155,5 +159,11 @@ void sdl_render ()
 	render_crosshair();
 	//Update screen
 	SDL_RenderPresent( gRenderer );
-
+	frameTime = SDL_GetTicks() - frameStart;
+	if (frameTime < (1000 / TARGET_FPS))
+	{
+		SDL_Delay((1000 / TARGET_FPS) - frameTime);
+	}
+	else
+		fprintf (stdout, "System too slow? frameTime %i\n", frameTime);
 }
