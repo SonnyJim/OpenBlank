@@ -45,7 +45,7 @@ static void FountainDeathFunc (LTarget* pTarget)
 }
 static void fountain_addTarget ()
 {
-	int t = add_target (640,400, fountain_getRandomTarget(10), 40 * SCALE_X, 40, 1);
+	int t = add_target (310 * SCALE_X,354, fountain_getRandomTarget(10), 65 * SCALE_X, 65, 1);
 	if (t == -1)
 		return; //Didn't get a target
 	if (gTargets[t].getType() == TARGET_BOMB)
@@ -80,18 +80,10 @@ void fountain_start ()
 {
 	fprintf (stdout, "Roooound 1.....FIGHT\n");
 	load_sfx ();
-//	textures[0].loadFromFile ("./data/png/bg1.png");
-	bg.set ("./data/png/bg1.png");
+	bg.set ("./data/png/Fountain_bg.png");
 	textures[1].loadFromFile (TEXTURE_REDTARGET_PATH);
 	textures[2].loadFromFile (TEXTURE_BLUETARGET_PATH);
 	textures[3].loadFromFile (TEXTURE_BOMB_PATH);
-//	add_target (0,0, TARGET_IMAGE, 640 * SCALE_X, 480, 0); //TODO Backgrounds please, not this shit
-	//add_target (640,400, TARGET_RED, 40 * SCALE_X, 40, 1);
-	//fountain_addTarget ();
-	//add_target (0,40, TARGET_BLUE, 40 * SCALE_X, 40, 2);
-	//gTargets[1].setVal(VAL_GRAVITY, -0.4);
-	//gTargets[1].setVal(VAL_DY, 20);
-	//gTargets[1].setVal(VAL_DX, 0);
 	rnd.setTarget(30);
 	rnd.setTimeout(30);
 	rnd.setRoundUpdate(fountain_update);

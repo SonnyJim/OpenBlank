@@ -46,6 +46,7 @@ void Round::start ()
 void Round::end ()
 {
 	mActive = false;
+	sound.stopSFX(-1);
 	bg.clear ();
 	//TODO Free textures?
 	int r = game.getRound();

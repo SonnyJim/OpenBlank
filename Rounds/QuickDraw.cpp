@@ -68,7 +68,7 @@ void quickdraw_start ()
 	int w = textures[0].getWidth() * SCALE_X;
 	cowboy_add ((SCREEN_WIDTH * SCALE_X /2) - w, 50);	
 			
-	rnd.setTarget(10);
+	rnd.setTarget(1);
 	rnd.setTimeout(30);
 	rnd.setRoundUpdate(quickdraw_update);
 }

@@ -100,7 +100,12 @@ void Sound::playRoundSFX (int sfx)
 	Mix_PlayChannel (-1, roundSounds[sfx], 0);
 }
 
-void Sound::playSFX (sfx_t sfx)
+int Sound::playSFX (sfx_t sfx)
 {
-	Mix_PlayChannel (-1, sounds[sfx], 0);
+	return Mix_PlayChannel (-1, sounds[sfx], 0);
+}
+
+void Sound::stopSFX (int channel)
+{
+	Mix_HaltChannel (channel);
 }

@@ -181,7 +181,7 @@ static void generate_new_answer ()
 	while (letters == answer)
 		letters = randomizeString (answer);
 	fprintf (stdout, "Answer is now %s, Letters is %s\n", answer.c_str(), letters.c_str());
-	const int w = FONT_SCHOOL_SIZE;
+	const int w = FONT_SCHOOL_SIZE * 2;
 	int x_offset = ((SCREEN_WIDTH * SCALE_X) / 2) - w * 2;
 	int y_offset = SCREEN_HEIGHT - (w * 2);
 	int t[4];	
@@ -189,7 +189,7 @@ static void generate_new_answer ()
 	{
 		fprintf (stdout, "Creating button %i with letter %s\n", i, std::string(1, letters[i]).c_str());
 		textures[i].loadFromRenderedText (std::string(1, letters[i]), SDL_Color {0,0,0}, fontSchool);
-		t[i] = add_target (x_offset + (i*w), y_offset, TARGET_BUTTON, w, w, i);
+		t[i] = add_target (x_offset + (i*w)+20, y_offset, TARGET_BUTTON, w, w, i);
 	//	fprintf (stdout, "x=%i y=%i w=%i\n", x_offset + (i*w), y_offset, w);
 	}
 	gTargets[t[0]].setDeathFunc (shot_1);

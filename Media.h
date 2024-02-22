@@ -21,7 +21,7 @@
 extern bool media_init ();
 
 #define FONT_TITLE_SIZE 60
-#define FONT_HUD_SIZE 60
+#define FONT_HUD_SIZE 50
 #define FONT_PHONE_SIZE 60
 #define FONT_SCHOOL_SIZE 80
 #define FONT_MOBY_SIZE 80

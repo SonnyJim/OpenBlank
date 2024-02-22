@@ -45,16 +45,19 @@ void Hud::draw ()
 	int bullets = players[0].getBullets();	
 	int targets = players[0].getHits();
 	int goal = rnd.getTarget();
-	std::string txtOutput = std::to_string(targets) + "/" + std::to_string(goal);
-	gHudTargets.loadFromRenderedText (txtOutput, SDL_Color {0,0,0}, fontHud);
-	r.w = gHudTargets.getWidth() * SCALE_X;
-	r.h = gHudTargets.getHeight();
-	gHudTargets.render (0, SCREEN_HEIGHT - (r.h * 2), &r);
 	
 	r.w = gHeartTexture.getWidth() * SCALE_X;
 	r.h = gHeartTexture.getHeight();
 	for (int i=0; i<lives;i++)
 	{
-		gHeartTexture.render (i * r.w, SCREEN_HEIGHT - r.h * 2, &r);
+		gHeartTexture.render (i * r.w, SCREEN_HEIGHT - r.h, &r);
 	}
-}
+	int txt_offset = SCREEN_HEIGHT - r.h;
+
+	std::string txtOutput = std::to_string(targets) + "/" + std::to_string(goal);
+	gHudTargets.loadFromRenderedText (txtOutput, SDL_Color {0,0,0}, fontHud);
+	r.w = gHudTargets.getWidth() * SCALE_X;
+	r.h = gHudTargets.getHeight();
+	gHudTargets.render (0, txt_offset - r.h, &r);
+	
+	}
