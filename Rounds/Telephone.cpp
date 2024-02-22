@@ -39,7 +39,10 @@ static void generate_dialled ()
 	std::string output;
 	int i;	
 	if (digits_entered == 0)
+	{
+		textures[12].loadFromRenderedText("", SDL_Color {0,20,0}, fontPhone);
 		return;
+	}
 	output = targetDialled.substr (0, digits_entered);
 	textures[12].loadFromRenderedText(output, SDL_Color {0,20,0}, fontPhone);
 	gTargets[11].mWidth = digits_entered * (gTargets[10].mWidth / numDigits);
@@ -47,7 +50,7 @@ static void generate_dialled ()
 
 static void generate_number ()
 {
-	int number = getRandom(0,999999);
+	int number = getRandomInt(0,999999);
 	targetNumber = std::to_string(number);
 	//Pad leading zeros
 	while (targetNumber.length() < numDigits)
