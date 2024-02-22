@@ -11,7 +11,8 @@ enum LTargetType
 	TARGET_BUTTON,
 	TARGET_IMAGE, //A plain image that ignores the death callback
 	TARGET_BOMB, //A target if shot loses the player a life
-	TARGET_CHECKMARK //A target that is unshootable but only appears for a 1/2 second
+	TARGET_CHECKMARK, //A target that is unshootable but only appears for a 1/2 second
+	TARGET_REDCROSS, //A target that is unshootable but only appears for a 1/2 second
 };
 
 class LTarget

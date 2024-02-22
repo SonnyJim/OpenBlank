@@ -19,6 +19,7 @@ static const int sizes[] = {320,160,80,60};
 static void asteroid_split (LTarget* pTarget)
 {
 	double size = pTarget->getVal(VAL_SIZE);
+	sound.playRoundSFX(getRandomInt(0,2));
 	SDL_Point p = pTarget->getPosition();
 	fprintf (stdout, "Target hit size %f\n", size);
 	size = size /2;
@@ -76,11 +77,17 @@ static void asteroid_add (int x, int y, int size)
 
 }
 
+static void load_sfx ()
+{
+	sound.loadRoundSFX (0, "./data/sfx/Asteroids/atari_boom.wav");
+	sound.loadRoundSFX (1, "./data/sfx/Asteroids/atari_boom5.wav");
+	sound.loadRoundSFX (2, "./data/sfx/Asteroids/atari_boom6.wav");
+}
 void asteroids_start ()
 {
 	int i;
 	fprintf (stdout, "Asteroids start\n");
-	//load_sfx();
+	load_sfx();
 	bg.clear();
 	bg.set ("./data/png/Asteroids/bg.png");
 	//Render the nmbser 0-9 on some textres
@@ -91,7 +98,7 @@ void asteroids_start ()
 	fprintf (stdout, "\n");
 	asteroid_add ((SCREEN_WIDTH * SCALE_X /2) - (sizes[0]/2), (SCREEN_HEIGHT /2) - (sizes[0]/2), sizes[0]);	
 			
-	rnd.setTarget(10);
+	rnd.setTarget(15);
 	rnd.setTimeout(30);
 	rnd.setRoundUpdate(shootNumbers_update);
 }

@@ -24,7 +24,8 @@ Mix_Chunk* roundSounds[MAX_ROUNDSOUNDS];
 
 const char* soundpaths[] = 
 {
-	"./data/sfx/cg1.wav",
+	"./data/sfx/cg1.wav", //Gunshot
+	"./data/sfx/572936__bloodpixelhero__error.wav",
 };
 
 

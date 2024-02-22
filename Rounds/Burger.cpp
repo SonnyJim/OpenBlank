@@ -10,6 +10,7 @@
 #include "../Media.h"
 #include "../Sound.h"
 #include "../SDL.h"
+#include "../Hud.h"
 
 enum
 {
@@ -95,8 +96,10 @@ static void add_ingredient (int ing)
 	if (ing != recipe[ingredients_used])
 	{
 		fprintf (stdout, "Wrong ingredient, wanted %i, got %i\n", recipe[ingredients_used], ing);
+		hud.addCross(players[0].getPosition());
 		return;
 	}
+	sound.playRoundSFX (1);
 	burger[ingredients_used] = ing;
 	ingredients_used++;
 	if (ingredients_used == ingredients_needed)
@@ -132,6 +135,7 @@ void burger_start ()
 	int i;
 	fprintf (stdout, "Quick draw start\n");
 	sound.loadRoundSFX (0, "./data/sfx/221515__alaskarobotics__service-bell-ring.wav");
+	sound.loadRoundSFX (1, "./data/sfx/543386__thedragonsspark__nom-noise.wav");
 	bg.clear();
 	bg.set ("./data/png/Burger/Burger_bg.png");
 	//Render the nmbser 0-9 on some textres

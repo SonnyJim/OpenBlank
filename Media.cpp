@@ -109,6 +109,9 @@ bool media_init()
 	if ( !gCheckmarkTexture.loadFromFile ("./data/png/Checkmark.png"))
 		success = false;
 
+	if ( !gRedCrossTexture.loadFromFile ("./data/png/RedCross.png"))
+		success = false;
+
 	if (font_load () == false)
 		success = false;
 	if (!success)

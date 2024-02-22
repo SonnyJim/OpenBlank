@@ -3,13 +3,26 @@
 #include "Media.h"
 #include "OpenBlank.h"
 #include "LTexture.h"
+#include "LTarget.h"
 #include "Player.h"
+#include "Sound.h"
 #include <string>
 Hud hud;
 LTexture gHudTimer;
 LTexture gHudTargets;
 LTexture gHudBullets;
 LTexture gHeartTexture;
+
+void Hud::addCheckmark(int x, int y)
+{
+	add_target (x - gCheckmarkTexture.getWidth(), y - gCheckmarkTexture.getHeight(), TARGET_CHECKMARK, gCheckmarkTexture.getWidth() * 2, gCheckmarkTexture.getHeight()* 2, TEX_CHECKMARK);
+}
+
+void Hud::addCross(SDL_Point p)
+{
+	sound.playSFX (SFX_ERROR);
+	add_target (p.x - gRedCrossTexture.getWidth(), p.y - gRedCrossTexture.getHeight(), TARGET_REDCROSS, gRedCrossTexture.getWidth() * 2, gRedCrossTexture.getHeight()* 2, TEX_REDCROSS);
+}
 
 void Hud::draw ()
 {

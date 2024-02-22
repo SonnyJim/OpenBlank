@@ -16,7 +16,8 @@
  * =====================================================================================
  */
 #define SND_GUNSHOT_PATH "./data/sfx/cg1.wav"
-#define MAX_SOUNDS 1
+#define MAX_SOUNDS 2
+
 #include <string>
 
 #define MAX_ROUNDSOUNDS 16
@@ -24,6 +25,7 @@
 enum sfx_t
 {
 	SFX_GUNSHOT,
+	SFX_ERROR,
 };
 
 extern const char* soundpaths[];

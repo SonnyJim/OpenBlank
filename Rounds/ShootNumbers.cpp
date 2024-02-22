@@ -2,6 +2,7 @@
 #include <string>
 #include "Rounds.h"
 #include "../LTarget.h"
+#include "../Hud.h"
 #include "../LTexture.h"
 #include "../Background.h"
 #include "../Movement.h"
@@ -51,6 +52,7 @@ static void button_pressed (int number)
 	fprintf (stdout, "%i pressed, looking for %i\n", number, sequenceStep);
 	if (number == sequenceStep)
 	{
+		sound.playRoundSFX(number - 1);
 		sequenceStep++;
 		if (sequenceStep > sequenceLength)
 		{
@@ -69,6 +71,8 @@ static void button_pressed (int number)
 			}
 		}
 	}
+	else
+		hud.addCross(players[0].getPosition());
 }
 
 static void one_pressed (LTarget* pTarget)
@@ -150,11 +154,31 @@ static void sixteen_pressed (LTarget* pTarget)
 	button_pressed(16);
 }
 
+const char* sfxpaths[] = 
+{
+	"./data/sfx/ShootNumbers/01Label.wav",
+	"./data/sfx/ShootNumbers/02Label.wav",
+	"./data/sfx/ShootNumbers/03Label.wav",
+	"./data/sfx/ShootNumbers/04Label.wav",
+	"./data/sfx/ShootNumbers/05Label.wav",
+	"./data/sfx/ShootNumbers/06Label.wav",
+	"./data/sfx/ShootNumbers/07Label.wav",
+	"./data/sfx/ShootNumbers/08Label.wav",
+	"./data/sfx/ShootNumbers/09Label.wav",
+	"./data/sfx/ShootNumbers/10Label.wav",
+	"./data/sfx/ShootNumbers/11Label.wav",
+	"./data/sfx/ShootNumbers/12Label.wav",
+	"./data/sfx/ShootNumbers/13Label.wav",
+	"./data/sfx/ShootNumbers/14Label.wav",
+	"./data/sfx/ShootNumbers/15Label.wav",
+	"./data/sfx/Asteroids/atari_boom6.wav",
+};
+
 static void load_sfx ()
 {
-	for (int i = 0; i <11; i++)
+	for (int i = 0; i <16; i++)
 	{
-		//sound.loadRoundSFX (i, dtmfpaths[i]);
+		sound.loadRoundSFX (i, sfxpaths[i]);
 	}
 }
 
@@ -231,28 +255,7 @@ static void assign_func (int num, int value)
 			break;
 	}
 }
-/*
-static void draw_outline (SDL_Texture* texture)
-{
-	SDL_Texture* temp;
-	SDL_Rect r;
-	r.w = texture->getWidth();
-	r.h = texture->getHeight();
 
-	SDL_SetRenderTarget (gRenderer, temp);
-	SDL_RenderCopy (gRenderer, texture, NULL, r);
-
-	SDL_SetRenderTarget (gRenderer, texture);
-	SDL_SetRenderDrawColor (0,0,0,0);
-	SDL_RenderClear(gRenderer);
-	
-	SDL_SetRenderDrawColor (getRandom(0, 255),getRandom(0, 255),getRandom(0,255),255);
-	SDL_RenderFillRect (gRenderer, r);
-	SDL_RenderCopy (gRenderer, temp, NULL, r);
-
-	SDL_SetRenderTarget (gRenderer, NULL);
-}
-*/
 static void draw_outline(SDL_Texture* texture)
 {
     // Get the dimensions of the texture
@@ -371,20 +374,8 @@ void shootNumbers_start ()
 		fprintf	(stdout, "\n");
 }
 
-bool shootNumbers_update () //TODO Convert to skeet shooting?
+bool shootNumbers_update ()
 {
-	//Draw number background
-	/*
-	SDL_Point p = gTargets[10].getPosition();
-	SDL_Rect r;
-	
-	r.x = p.x;
-	r.y = p.y;
-	r.w = gTargets[10].mWidth;
-	r.h = gTargets[10].mHeight;
-	SDL_SetRenderDrawColor (gRenderer, 0,0,0,0);
-	SDL_RenderFillRect (gRenderer, &r);
-	*/
 	if (players[0].getHits() >= rnd.getTarget())
 	{
 		return false;
