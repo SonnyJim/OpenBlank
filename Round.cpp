@@ -57,7 +57,7 @@ void Round::end ()
 void Round::update ()
 {
 	mDuration = SDL_GetTicks () - mTickStart;
-	if (mDuration - (mTimeout * 1000) < 5000 && !hurryUpActive)
+	if ((mTimeout * 1000) - mDuration < 5000 && !hurryUpActive)
 	{
 		hurryUpActive = true;
 		sound.playSFX(SFX_TICKING);
