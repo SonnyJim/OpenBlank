@@ -92,6 +92,9 @@ static void generate_bottles()
 	s.x = 417;
 	s.y = 80;
 	generate_bottleline (s, 200, 2);
+	s.x = 98;
+	s.y = 200;
+	generate_bottleline (s, 160, 2);
 }
 
 void saloon_start ()
@@ -105,7 +108,7 @@ void saloon_start ()
 	generate_bottles();
 
 	rnd.setTarget(40);
-	rnd.setTimeout(10);
+	rnd.setTimeout(15);
 	rnd.setRoundUpdate(saloon_update);
 }
 
