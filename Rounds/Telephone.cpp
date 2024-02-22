@@ -162,10 +162,10 @@ void telephone_start ()
 	textures[10].loadFromFile ("./data/png/TelephoneButton.png");
 	
 	//Render the button in the form of a keypad
-	int pos_x = 220;
-	int pos_y = 250;
+	int pos_x = 110;
+	int pos_y = 245;
 	int x_offset,y_offset;
-	int w = textures[10].getWidth() * SCALE_X;
+	int w = textures[10].getWidth() ;
 	int h = textures[10].getHeight();
 	x_offset = w;
 	y_offset = h;
@@ -203,11 +203,11 @@ void telephone_start ()
 
 	//Generate the target number texture
 	generate_number ();
-	w = textures[11].getWidth() * SCALE_X + 30;
+	w = textures[11].getWidth()  + 20;
 	h = textures[11].getHeight();
 	//Find where the first keypad button is and put the display above it
 	SDL_Point p = gTargets[0].getPosition();
-	int x = p.x + 10;
+	int x = p.x ;
 	int y = p.y - h - 100;
 	add_target ( x, y, TARGET_IMAGE, w, h, 11);
 	
@@ -222,18 +222,6 @@ void telephone_start ()
 
 bool telephone_update () //TODO Convert to skeet shooting?
 {
-	//Draw number background
-	/*
-	SDL_Point p = gTargets[10].getPosition();
-	SDL_Rect r;
-	
-	r.x = p.x;
-	r.y = p.y;
-	r.w = gTargets[10].mWidth;
-	r.h = gTargets[10].mHeight;
-	SDL_SetRenderDrawColor (gRenderer, 0,0,0,0);
-	SDL_RenderFillRect (gRenderer, &r);
-	*/
 	if (players[0].getHits() >= rnd.getTarget())
 	{
 		return false;

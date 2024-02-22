@@ -43,9 +43,11 @@ static void FountainDeathFunc (LTarget* pTarget)
 	fprintf (stdout, "Pop\n");
 	sound.playRoundSFX (rand() % 3);
 }
+static const int target_size = 55;
+
 static void fountain_addTarget ()
 {
-	int t = add_target (310 * SCALE_X,354, fountain_getRandomTarget(10), 65 * SCALE_X, 65, 1);
+	int t = add_target (310 ,354, fountain_getRandomTarget(10), target_size, target_size, 1);
 	if (t == -1)
 		return; //Didn't get a target
 	if (gTargets[t].getType() == TARGET_BOMB)

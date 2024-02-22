@@ -32,8 +32,8 @@ LTexture textureRecipe;
 static void draw_recipe ()
 {
 	SDL_Rect r, t;
-	r.x = 290 * SCALE_X;
-	r.y = 23;
+	r.x = 260;
+	r.y = 40;
 	r.w = 120;
 	r.h = 166;
 
@@ -63,7 +63,7 @@ static void draw_burger ()
 	SDL_Rect r;
 
 	//Draw bottom bun
-	r.x = 36 * SCALE_X;
+	r.x = 36;
 	r.y = 264;
 	r.w = textures[ING_BOTTOM].getWidth();
 	r.h = textures[ING_BOTTOM].getHeight();
@@ -105,7 +105,7 @@ static void add_ingredient (int ing)
 	if (ingredients_used == ingredients_needed)
 	{
 		sound.playRoundSFX (0);
-		add_target (((SCREEN_WIDTH * SCALE_X) / 2) - gCheckmarkTexture.getWidth(), (SCREEN_HEIGHT /2) -gCheckmarkTexture.getHeight(), TARGET_CHECKMARK, gCheckmarkTexture.getWidth() * 2, gCheckmarkTexture.getHeight()* 2, 0);
+		add_target (((SCREEN_WIDTH) / 2) - gCheckmarkTexture.getWidth(), (SCREEN_HEIGHT /2) -gCheckmarkTexture.getHeight(), TARGET_CHECKMARK, gCheckmarkTexture.getWidth() * 2, gCheckmarkTexture.getHeight()* 2, 0);
 		players[0].addHit(1);
 		ingredients_needed++;
 		generate_recipe();
@@ -145,14 +145,14 @@ void burger_start ()
 	textures[ING_TOMATO].loadFromFile("./data/png/Burger/Tomato.png");
 	textures[ING_TOP].loadFromFile("./data/png/Burger/Bap_top.png");
 
-	int t = add_target (7* SCALE_X, 389, TARGET_IMAGE, textures[ING_LETTUCE].getWidth() * SCALE_X, textures[ING_LETTUCE].getHeight(), ING_LETTUCE);
-	t = add_target (13* SCALE_X, 319, TARGET_BUTTON, 184 * SCALE_X, 145, TEXTURE_INVISIBLE);
+	int t = add_target (7, 389, TARGET_IMAGE, textures[ING_LETTUCE].getWidth(), textures[ING_LETTUCE].getHeight(), ING_LETTUCE);
+	t = add_target (13, 319, TARGET_BUTTON, 184, 145, TEXTURE_INVISIBLE);
 	gTargets[t].setDeathFunc(add_lettuce);
-	t = add_target (220 * SCALE_X, 389, TARGET_IMAGE, textures[ING_PATTY].getWidth() * SCALE_X, textures[ING_PATTY].getHeight(), ING_PATTY);
-	t = add_target (229* SCALE_X, 320, TARGET_BUTTON, 184 * SCALE_X, 145, TEXTURE_INVISIBLE);
+	t = add_target (220 , 389, TARGET_IMAGE, textures[ING_PATTY].getWidth() , textures[ING_PATTY].getHeight(), ING_PATTY);
+	t = add_target (229, 320, TARGET_BUTTON, 184 , 145, TEXTURE_INVISIBLE);
 	gTargets[t].setDeathFunc(add_patty);
-	t = add_target (435 *SCALE_X, 389, TARGET_IMAGE, textures[ING_TOMATO].getWidth() * SCALE_X, textures[ING_TOMATO].getHeight(), ING_TOMATO);
-	t = add_target (442* SCALE_X, 320, TARGET_BUTTON, 184 * SCALE_X, 145, TEXTURE_INVISIBLE);
+	t = add_target (435 , 389, TARGET_IMAGE, textures[ING_TOMATO].getWidth() , textures[ING_TOMATO].getHeight(), ING_TOMATO);
+	t = add_target (442, 320, TARGET_BUTTON, 184 , 145, TEXTURE_INVISIBLE);
 	gTargets[t].setDeathFunc(add_tomato);
 	
 	ingredients_needed = 2;

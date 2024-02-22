@@ -43,7 +43,7 @@ static void cowboy_move (LTarget* pTarget)
 static void cowboy_add (int x, int y)
 {
 	fprintf (stdout, "Adding Cowboy %i,%i\n", x, y);
-	int w = textures[0].getWidth() * SCALE_X;
+	int w = textures[0].getWidth() ;
 	int h = textures[0].getHeight();
 
 	int t = add_target (x, y, TARGET_IMAGE, w, h, 0);
@@ -65,8 +65,8 @@ void quickdraw_start ()
 	textures[0].loadFromFile("./data/png/QuickDraw/Cowboy.png");
 	textures[1].loadFromFile("./data/png/QuickDraw/Cowboy_Gun.png");
 
-	int w = textures[0].getWidth() * SCALE_X;
-	cowboy_add ((SCREEN_WIDTH * SCALE_X /2) - w, 50);	
+	int w = textures[0].getWidth() ;
+	cowboy_add ((SCREEN_WIDTH  /2) - w, 50);	
 			
 	rnd.setTarget(1);
 	rnd.setTimeout(30);

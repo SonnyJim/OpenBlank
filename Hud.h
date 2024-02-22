@@ -8,3 +8,4 @@ class Hud
 	private:
 };
 extern Hud hud;
+extern void render_crosshair ();

@@ -12,7 +12,7 @@ void Background::render()
 {
 	if (bgTexture.getTexture() == NULL)
 		return;
-	SDL_Rect renderQuad = { 0, 0, SCREEN_WIDTH * SCALE_X, SCREEN_HEIGHT};
+	SDL_Rect renderQuad = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
 	
 	//Render to screen
 	SDL_RenderCopyEx( gRenderer, bgTexture.getTexture(), NULL, &renderQuad, 0,0, SDL_FLIP_NONE);

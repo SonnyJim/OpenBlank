@@ -15,6 +15,7 @@
  *
  * =====================================================================================
  */
+#include "OpenBlank.h"
 #include "Player.h"
 #include "BulletHole.h"
 #include "Sound.h"
@@ -62,6 +63,7 @@ void Player::shoot ()
 	sound.playSFX (SFX_GUNSHOT);
 	SDL_Point pos;
 	SDL_GetMouseState (&pos.x, &pos.y);
+	pos.x = pos.x / SCALE_X;
 	setPosition (pos);
 	detect_shot ();
 	bullet_add ();

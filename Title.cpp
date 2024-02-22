@@ -28,7 +28,7 @@ void Title::start()
 	}
 	
 	bg.set ("./data/png/titlescreen.png");
-	add_target (82,193, TARGET_BUTTON, textures[0].getWidth() * SCALE_X, textures[0].getHeight(), 0);
+	add_target (82,193, TARGET_BUTTON, textures[0].getWidth(), textures[0].getHeight(), 0);
 	gTargets[0].setDeathFunc (button_start_hit);
 	
 }

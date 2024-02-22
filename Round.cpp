@@ -14,7 +14,7 @@ extern bool quit;
 #define NUM_ROUNDS 9
 void (*round_p[NUM_ROUNDS]) () =
 {
-	saloon_start, burger_start, asteroids_start, shootNumbers_start, speller_start, simon_start, fountain_start, telephone_start, quickdraw_start
+	 telephone_start, simon_start, fountain_start, quickdraw_start, shootNumbers_start, asteroids_start, saloon_start, burger_start, speller_start
 };
 
 Round rnd; //I get around

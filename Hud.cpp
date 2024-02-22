@@ -13,6 +13,21 @@ LTexture gHudTargets;
 LTexture gHudBullets;
 LTexture gHeartTexture;
 
+void render_crosshair ()
+{
+	int x, y;
+	SDL_Rect t;
+	t.x = 0;
+	t.y = 0;
+	t.w = 40; //FIXME do dynamically
+	t.h = 40;
+	SDL_GetMouseState( &x, &y );
+	x = x / SCALE_X;
+	gCrosshairTexture.render (x - (t.w/2), y - (t.h/2), &t);
+}
+
+
+
 void Hud::addCheckmark(int x, int y)
 {
 	add_target (x - gCheckmarkTexture.getWidth(), y - gCheckmarkTexture.getHeight(), TARGET_CHECKMARK, gCheckmarkTexture.getWidth() * 2, gCheckmarkTexture.getHeight()* 2, TEX_CHECKMARK);
@@ -35,10 +50,10 @@ void Hud::draw ()
 	gHudTimer.loadFromRenderedText (std::to_string(timer / 1000), SDL_Color {0,0,0}, fontHud);
 	r.x = 0;
 	r.y = 0;
-	r.w = gHudTimer.getWidth() * SCALE_X;
+	r.w = gHudTimer.getWidth();
 	r.h = gHudTimer.getHeight();
 
-	gHudTimer.render (((SCREEN_WIDTH * SCALE_X) / 2 ) - (r.w / 2), 0, &r);
+	gHudTimer.render (((SCREEN_WIDTH) / 2 ) - (r.w / 2), 0, &r);
 
 	//Render targets left
 	int lives = players[0].getLives();	
@@ -46,7 +61,7 @@ void Hud::draw ()
 	int targets = players[0].getHits();
 	int goal = rnd.getTarget();
 	
-	r.w = gHeartTexture.getWidth() * SCALE_X;
+	r.w = gHeartTexture.getWidth();
 	r.h = gHeartTexture.getHeight();
 	for (int i=0; i<lives;i++)
 	{
@@ -56,7 +71,7 @@ void Hud::draw ()
 
 	std::string txtOutput = std::to_string(targets) + "/" + std::to_string(goal);
 	gHudTargets.loadFromRenderedText (txtOutput, SDL_Color {0,0,0}, fontHud);
-	r.w = gHudTargets.getWidth() * SCALE_X;
+	r.w = gHudTargets.getWidth();
 	r.h = gHudTargets.getHeight();
 	gHudTargets.render (0, txt_offset - r.h, &r);
 	

@@ -60,15 +60,15 @@ static void generate_bottleline (SDL_Point s, int end, int size)
 	int w,h;
 	int x_offset = 0;
 	int t, texture; //Target
-	while (x_offset < end)
+	while (s.x + x_offset < end )
 	{
 		texture = getRandom (0, MAX_BOTTLE_TEXTURES);
 		w = textures[texture].getWidth() / size;
 		h = textures[texture].getHeight() / size;
 		
-		t = add_target ((s.x * SCALE_X + x_offset), s.y - h, TARGET_RED, w * SCALE_X, h, texture);
+		t = add_target ((s.x + x_offset), s.y - h, TARGET_RED, w, h, texture);
 		gTargets[t].setDeathFunc(bottle_deathFunc);
-		x_offset += w * SCALE_X;
+		x_offset += w;
 		x_offset += getRandomInt (-5,1);
 	}
 }
@@ -79,22 +79,22 @@ static void generate_bottles()
 	SDL_Point s; //Starting point
 	s.x = 35;
 	s.y = 266;
-	generate_bottleline (s, SCREEN_WIDTH * SCALE_X, 1);
+	generate_bottleline (s, SCREEN_WIDTH, 1);
 	s.x = 238;
 	s.y = 192;
-	generate_bottleline (s, 600, 2);
+	generate_bottleline (s, 550, 2);
 	s.x = 334;
 	s.y = 161;
-	generate_bottleline (s, 400, 2);
+	generate_bottleline (s, 543, 2);
 	s.x = 335;
 	s.y = 122;
-	generate_bottleline (s, 400, 2);
+	generate_bottleline (s, 543, 2);
 	s.x = 417;
 	s.y = 80;
-	generate_bottleline (s, 200, 2);
+	generate_bottleline (s, 550, 2);
 	s.x = 98;
 	s.y = 200;
-	generate_bottleline (s, 160, 2);
+	generate_bottleline (s, 197, 2);
 }
 
 void saloon_start ()

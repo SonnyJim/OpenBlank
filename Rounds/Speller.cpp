@@ -120,7 +120,7 @@ static void generate_new_answer ();
 static void word_correct ()
 {
 	players[0].addHit(1);
-	add_target (((SCREEN_WIDTH * SCALE_X) / 2) - gCheckmarkTexture.getWidth(), (SCREEN_HEIGHT /2) -gCheckmarkTexture.getHeight(), TARGET_CHECKMARK, gCheckmarkTexture.getWidth() * 2, gCheckmarkTexture.getHeight()* 2, 0);
+	add_target (((SCREEN_WIDTH ) / 2) - gCheckmarkTexture.getWidth(), (SCREEN_HEIGHT /2) -gCheckmarkTexture.getHeight(), TARGET_CHECKMARK, gCheckmarkTexture.getWidth() * 2, gCheckmarkTexture.getHeight()* 2, 0);
 	sound.playRoundSFX (0);
 }
 
@@ -181,9 +181,9 @@ static void generate_new_answer ()
 	while (letters == answer)
 		letters = randomizeString (answer);
 	fprintf (stdout, "Answer is now %s, Letters is %s\n", answer.c_str(), letters.c_str());
-	const int w = FONT_SCHOOL_SIZE * 2;
-	int x_offset = ((SCREEN_WIDTH * SCALE_X) / 2) - w * 2;
-	int y_offset = SCREEN_HEIGHT - (w * 2);
+	const int w = FONT_SCHOOL_SIZE;
+	int x_offset = (SCREEN_WIDTH  / 2) - (w * 2);
+	int y_offset = 220;
 	int t[4];	
 	for (int i=0; i < 4; i++)
 	{
@@ -219,9 +219,9 @@ static void render_guess ()
 		return;
 	guessTexture.loadFromRenderedText (guess, SDL_Color {255,255,255}, fontSchool);	
 	SDL_Rect r;
-	r.x = ((SCREEN_WIDTH *SCALE_X) / 2) - ( 100);
+	r.x = ((SCREEN_WIDTH ) / 2) - ( 100);
 	r.y = 80;
-	r.w = guessTexture.getWidth() * SCALE_X;
+	r.w = guessTexture.getWidth() ;
 	r.h = guessTexture.getHeight();
 	SDL_RenderCopy (gRenderer, guessTexture.getTexture(), nullptr, &r);
 }

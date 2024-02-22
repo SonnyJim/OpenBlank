@@ -335,10 +335,10 @@ void shootNumbers_start ()
 	fprintf (stdout, "\n");
 	
 	//Render the button in the form of a keypad
-	int pos_x = ((SCREEN_WIDTH / SCALE_X) /2 ) + 120;
+	int pos_x = ((SCREEN_WIDTH) /2 ) - ( 3 * 60);
 	int pos_y = 0;
 	int x_offset,y_offset;
-	int w = 60 * SCALE_X;
+	int w = 60 ;
 	int h = 60;
 	x_offset = w;
 	y_offset = h;

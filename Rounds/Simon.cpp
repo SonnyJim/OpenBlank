@@ -165,7 +165,7 @@ static void btn_pressed (simonBtn btn)
 		btnHitTimer[btn] = SDL_GetTicks();
 		if (simon.currentStep > simon.currentLength)
 		{
-			int t = add_target (((SCREEN_WIDTH * SCALE_X) / 2) - gCheckmarkTexture.getWidth(), (SCREEN_HEIGHT /2) -gCheckmarkTexture.getHeight(), TARGET_CHECKMARK, gCheckmarkTexture.getWidth() * 2, gCheckmarkTexture.getHeight()* 2, 0);
+			int t = add_target (((SCREEN_WIDTH ) / 2) - gCheckmarkTexture.getWidth(), (SCREEN_HEIGHT /2) -gCheckmarkTexture.getHeight(), TARGET_CHECKMARK, gCheckmarkTexture.getWidth() * 2, gCheckmarkTexture.getHeight()* 2, 0);
 			gTargets[t].setMoveFunc(NULL);
 			simon.currentStep = 0;
 			append_sequence();
@@ -214,9 +214,9 @@ void simon_start ()
 	gSimonTexture.loadFromFile ("./data/png/Simon_bg.png");	
 	//Render the nmbser 0-9 on some textres
 	SDL_Rect r;
-	r.w = 160 * SCALE_X;
+	r.w = 160 ;
 	r.h = 160;
-	r.x = (SCREEN_WIDTH * SCALE_X) / 2 - r.w;
+	r.x = (SCREEN_WIDTH ) / 2 - r.w;
 	r.y = SCREEN_HEIGHT / 2 - r.h;
 
 	add_target (r.x, r.y, TARGET_BUTTON, r.w, r.h, -1);
@@ -263,7 +263,7 @@ static void draw_simon ()
 	};
 	r.x = 0;
 	r.y = 0;
-	r.w = SCREEN_WIDTH * SCALE_X;
+	r.w = SCREEN_WIDTH ;
 	r.h = SCREEN_HEIGHT;
 	SDL_RenderCopy (gRenderer, gSimonTexture.getTexture(), nullptr, &r);
 }

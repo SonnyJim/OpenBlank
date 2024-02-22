@@ -39,7 +39,7 @@ static void asteroid_move (LTarget* pTarget)
 	angle = pTarget->getAngle();
 	SDL_Point p = pTarget->getPosition();
 	//Bounds check
-	if (p.x + dx + size >= (SCREEN_WIDTH * SCALE_X) || p.x + dx <= 0)
+	if (p.x + dx + size >= (SCREEN_WIDTH ) || p.x + dx <= 0)
 	{
 		dx = -dx;
 	}
@@ -63,7 +63,7 @@ static void asteroid_move (LTarget* pTarget)
 static void asteroid_add (int x, int y, int size)
 {
 	fprintf (stdout, "Adding asteroid %i,%i size: %i\n", x, y, size);
-	int t = add_target (x, y, TARGET_RED, size * SCALE_X, size, getRandom(0,2));
+	int t = add_target (x, y, TARGET_RED, size , size, getRandom(0,2));
 	gTargets[t].setMoveFunc (asteroid_move);
 	gTargets[t].setDeathFunc (asteroid_split);
 	gTargets[t].setVal (VAL_SIZE, size);
@@ -96,7 +96,7 @@ void asteroids_start ()
 	textures[2].loadFromFile("./data/png/Asteroids/3.png");
 
 	fprintf (stdout, "\n");
-	asteroid_add ((SCREEN_WIDTH * SCALE_X /2) - (sizes[0]/2), (SCREEN_HEIGHT /2) - (sizes[0]/2), sizes[0]);	
+	asteroid_add ((SCREEN_WIDTH  /2) - (sizes[0]/2), (SCREEN_HEIGHT /2) - (sizes[0]/2), sizes[0]);	
 			
 	rnd.setTarget(15);
 	rnd.setTimeout(30);

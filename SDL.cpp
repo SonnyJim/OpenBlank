@@ -36,19 +36,6 @@ SDL_Window* gWindow = NULL;
 //The window renderer
 SDL_Renderer* gRenderer = NULL;
 
-static void render_crosshair ()
-{
-	int x, y;
-	SDL_Rect t;
-	t.x = 0;
-	t.y = 0;
-	t.w = 40 * SCALE_X; //FIXME do dynamically
-	t.h = 40;
-	SDL_GetMouseState( &x, &y );
-	gCrosshairTexture.render (x - (t.w/2), y - (t.h/2), &t);
-}
-
-
 bool sdl_init()
 {
 	//Initialization flag
@@ -72,7 +59,6 @@ bool sdl_init()
 		{
 			printf( "Warning: Linear texture filtering not enabled!" );
 		}
-		SDL_RenderSetScale (gRenderer, SCALE_X, 1);
 		//Create window
 		//gWindow = SDL_CreateWindow( "Open Blank", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (SCREEN_WIDTH * SCALE_X), SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 		gWindow = SDL_CreateWindow( "Open Blank", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (SCREEN_WIDTH * SCALE_X), SCREEN_HEIGHT, SDL_WINDOW_FULLSCREEN );
@@ -142,6 +128,7 @@ void sdl_render ()
 {
 	Uint32 frameStart = SDL_GetTicks();
 	int frameTime;
+	SDL_RenderSetScale (gRenderer, SCALE_X, 1);
 
 	if (game.getState () == STATE_TITLESCREEN)
 		titlescreen.render();
