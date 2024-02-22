@@ -50,6 +50,7 @@ class Round
 		FunctionPointerB roundUpdate;
 		int target; //How many targets we need to hit to clear the round
 		bool mActive;
+		bool hurryUpActive;
 };
 
 extern Round rnd;

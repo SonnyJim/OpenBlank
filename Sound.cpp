@@ -26,6 +26,7 @@ const char* soundpaths[] =
 {
 	"./data/sfx/cg1.wav", //Gunshot
 	"./data/sfx/572936__bloodpixelhero__error.wav",
+	"./data/sfx/490322__knufds__clock_01.wav",
 };
 
 

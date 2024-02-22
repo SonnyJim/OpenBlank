@@ -38,6 +38,7 @@ void Round::start ()
 	}
 	mTickStart = SDL_GetTicks();
 	mActive = true;
+	hurryUpActive = false;
 	(*round_p[r]) (); //Call the level setup routine
 	//rnd.callRoundStart();
 }
@@ -56,6 +57,11 @@ void Round::end ()
 void Round::update ()
 {
 	mDuration = SDL_GetTicks () - mTickStart;
+	if (mDuration - (mTimeout * 1000) < 5000 && !hurryUpActive)
+	{
+		hurryUpActive = true;
+		sound.playSFX(SFX_TICKING);
+	}
 	if (mDuration > (mTimeout * 1000))
 		end();
 	if (rnd.callRoundUpdate() != true)
