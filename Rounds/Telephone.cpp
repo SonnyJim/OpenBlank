@@ -157,14 +157,13 @@ void telephone_start ()
 	{
 		textures[i].loadFromRenderedText (std::to_string(i), SDL_Color {0,0,0}, fontHud);
 	}//TODO Render the numbers onto the btton bg
-	textures[10].loadFromFile ("./data/png/TelephoneButton.png");
 	
 	//Render the button in the form of a keypad
-	int pos_x = 110;
-	int pos_y = 245;
+	int pos_x = 100;
+	int pos_y = 218;
 	int x_offset,y_offset;
-	int w = textures[10].getWidth() ;
-	int h = textures[10].getHeight();
+	int w = textures[0].getWidth() * 2;
+	int h = textures[0].getHeight();
 	x_offset = w;
 	y_offset = h;
 	
