@@ -38,13 +38,9 @@ static void generate_dialled ()
 {
 	std::string output;
 	int i;	
+	if (digits_entered == 0)
+		return;
 	output = targetDialled.substr (0, digits_entered);
-	/*
-	while (output.length() < 6)
-	{
-		output.append("0");
-	}
-	*/
 	textures[12].loadFromRenderedText(output, SDL_Color {0,20,0}, fontPhone);
 	gTargets[11].mWidth = digits_entered * (gTargets[10].mWidth / numDigits);
 }
@@ -153,8 +149,7 @@ void telephone_start ()
 	load_sfx();
 	bg.clear();
 	bg.set ("./data/png/Telephone_bg.png");
-	//bg.set ("./data/png/bg1.png");
-	//Render the nmbser 0-9 on some textres
+	//Render the nmbser 0-9 on some textures
 	for (i=0; i <= 9; i++)
 	{
 		textures[i].loadFromRenderedText (std::to_string(i), SDL_Color {0,0,0}, fontHud);
