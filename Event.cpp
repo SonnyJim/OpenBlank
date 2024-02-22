@@ -9,7 +9,8 @@ void event_handler ()
 	while( SDL_PollEvent( &e ) != 0 )
 	{
 		//User requests quit
-		if( e.type == SDL_QUIT )
+		if( e.type == SDL_QUIT ||
+				(e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE))
 		{
 			quit = true;
 		}

@@ -74,7 +74,8 @@ bool sdl_init()
 		}
 
 		//Create window
-		gWindow = SDL_CreateWindow( "Open Blank", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (SCREEN_WIDTH * SCALE_X), SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+		//gWindow = SDL_CreateWindow( "Open Blank", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (SCREEN_WIDTH * SCALE_X), SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+		gWindow = SDL_CreateWindow( "Open Blank", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (SCREEN_WIDTH * SCALE_X), SCREEN_HEIGHT, SDL_WINDOW_FULLSCREEN );
 		if( gWindow == NULL )
 		{
 			printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
