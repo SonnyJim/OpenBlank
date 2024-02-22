@@ -24,3 +24,6 @@ extern bool quickdraw_update ();
 
 extern void burger_start ();
 extern bool burger_update ();
+
+extern void saloon_start ();
+extern bool saloon_update ();

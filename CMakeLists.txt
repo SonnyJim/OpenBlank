@@ -49,6 +49,7 @@ add_executable(OpenBlank
     Rounds/Asteroids.cpp
     Rounds/QuickDraw.cpp
     Rounds/Burger.cpp
+    Rounds/Saloon.cpp
     Background.cpp
 )
 
