@@ -27,6 +27,7 @@ TTF_Font* fontHud = NULL;
 TTF_Font* fontPhone = NULL;
 TTF_Font* fontSchool = NULL;
 TTF_Font* fontMoby = NULL;
+TTF_Font* fontMobySmall = NULL;
 
 static bool font_load ()
 {
@@ -58,17 +59,24 @@ static bool font_load ()
 	}
 	
 	fontSchool = TTF_OpenFont ( FONT_SCHOOL_PATH, FONT_SCHOOL_SIZE);
-	if (fontPhone == NULL)
+	if (fontSchool == NULL)
 	{
 		fprintf(stderr, "Failed to load %s SDL_ttf Error: %s\n", FONT_SCHOOL_PATH, TTF_GetError() );
 		success = false;
 	}
 	fontMoby = TTF_OpenFont ( FONT_MOBY_PATH, FONT_MOBY_SIZE);
-	if (fontPhone == NULL)
+	if (fontMoby == NULL)
 	{
 		fprintf(stderr, "Failed to load %s SDL_ttf Error: %s\n", FONT_MOBY_PATH, TTF_GetError() );
 		success = false;
 	}
+	fontMobySmall = TTF_OpenFont ( FONT_MOBY_PATH, FONT_MOBY_SMALL_SIZE);
+	if (fontMobySmall == NULL)
+	{
+		fprintf(stderr, "Failed to load %s SDL_ttf Error: %s\n", FONT_MOBY_PATH, TTF_GetError() );
+		success = false;
+	}
+
 
 
 

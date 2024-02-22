@@ -27,3 +27,6 @@ extern bool burger_update ();
 
 extern void saloon_start ();
 extern bool saloon_update ();
+
+extern void doctor_start ();
+extern bool doctor_update ();

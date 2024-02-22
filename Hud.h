@@ -3,7 +3,7 @@ class Hud
 {
 	public:
 		void draw ();
-		void addCheckmark(int x, int y);
+		void addCheckmark(SDL_Point p);
 		void addCross(SDL_Point p);
 	private:
 };

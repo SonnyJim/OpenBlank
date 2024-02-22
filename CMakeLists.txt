@@ -50,6 +50,7 @@ add_executable(OpenBlank
     Rounds/QuickDraw.cpp
     Rounds/Burger.cpp
     Rounds/Saloon.cpp
+    Rounds/Doctor.cpp
     Background.cpp
 )
 

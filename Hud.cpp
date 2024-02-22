@@ -28,9 +28,9 @@ void render_crosshair ()
 
 
 
-void Hud::addCheckmark(int x, int y)
+void Hud::addCheckmark(SDL_Point p)
 {
-	add_target (x - gCheckmarkTexture.getWidth(), y - gCheckmarkTexture.getHeight(), TARGET_CHECKMARK, gCheckmarkTexture.getWidth() * 2, gCheckmarkTexture.getHeight()* 2, TEX_CHECKMARK);
+	add_target (p.x - gCheckmarkTexture.getWidth(), p.y - gCheckmarkTexture.getHeight(), TARGET_CHECKMARK, gCheckmarkTexture.getWidth() * 2, gCheckmarkTexture.getHeight()* 2, TEX_CHECKMARK);
 }
 
 void Hud::addCross(SDL_Point p)
