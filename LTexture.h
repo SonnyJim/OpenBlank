@@ -17,7 +17,7 @@ class LTexture
 		
 		//Creates image from font string
 		bool loadFromRenderedText( std::string textureText, SDL_Color textColor , TTF_Font* gFont);
-		
+
 		//Deallocates texture
 		void free();
 

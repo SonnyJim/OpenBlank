@@ -37,7 +37,6 @@ void LTarget::hit()
 		callDeathFunc(this);
 		players[0].addHit (1);
 		fprintf (stdout, "HIT %i\n", players[0].getHits());
-		mType = TARGET_NONE;
 		free();
 	}
 
@@ -193,6 +192,7 @@ Uint32 LTarget::getSpawnTime ()
 
 void LTarget::free()
 {
+	//fprintf (stdout, "Freeing target\n");
 	//Free texture if it exists
 	mWidth = 0;
 	mHeight = 0;

@@ -10,7 +10,7 @@ LTexture bgTexture;
 
 void Background::render()
 {
-	if (bgTexture.getTexture() == NULL)
+	if (!active)
 		return;
 	SDL_Rect renderQuad = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
 	
@@ -20,10 +20,12 @@ void Background::render()
 
 void Background::clear()
 {
+	active = false;
 	bgTexture.free();
 }
 void Background::set(std::string path)
 {
 	//TODO error checking
-	bgTexture.loadFromFile(path);
+	if (bgTexture.loadFromFile(path))
+		active = true;
 }

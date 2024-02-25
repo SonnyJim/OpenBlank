@@ -30,3 +30,6 @@ extern bool saloon_update ();
 
 extern void doctor_start ();
 extern bool doctor_update ();
+
+extern void wherestuxy_start ();
+extern bool wherestuxy_update ();

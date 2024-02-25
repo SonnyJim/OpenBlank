@@ -40,7 +40,7 @@ static void generate_dialled ()
 	int i;	
 	if (digits_entered == 0)
 	{
-		textures[12].loadFromRenderedText("", SDL_Color {0,20,0}, fontPhone);
+		textures[12].loadFromRenderedText(" ", SDL_Color {0,20,0}, fontPhone);
 		return;
 	}
 	output = targetDialled.substr (0, digits_entered);

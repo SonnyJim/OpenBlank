@@ -12,6 +12,7 @@
 #include "../Media.h"
 #include "../Sound.h"
 #include "../SDL.h"
+#include "../Hud.h"
 
 #define MAX_LENGTH 10
 
@@ -90,8 +91,7 @@ static void append_sequence ()
 
 	int s = simon.currentLength;
 	
-	int r = rand() % 4;
-	simon.sequence[s] = r;
+	simon.sequence[s] = getRandomInt(0, 3);;
 	
 	fprintf (stdout, "Simon sequence: ");
 	for (int i=0; i < simon.currentLength; i++)
@@ -165,8 +165,7 @@ static void btn_pressed (simonBtn btn)
 		btnHitTimer[btn] = SDL_GetTicks();
 		if (simon.currentStep > simon.currentLength)
 		{
-			int t = add_target (((SCREEN_WIDTH ) / 2) - gCheckmarkTexture.getWidth(), (SCREEN_HEIGHT /2) -gCheckmarkTexture.getHeight(), TARGET_CHECKMARK, gCheckmarkTexture.getWidth() * 2, gCheckmarkTexture.getHeight()* 2, 0);
-			gTargets[t].setMoveFunc(NULL);
+			hud.addCheckmark(SDL_Point {SCREEN_WIDTH /2, SCREEN_HEIGHT /2 });
 			simon.currentStep = 0;
 			append_sequence();
 		}
@@ -219,10 +218,10 @@ void simon_start ()
 	r.x = (SCREEN_WIDTH ) / 2 - r.w;
 	r.y = SCREEN_HEIGHT / 2 - r.h;
 
-	add_target (r.x, r.y, TARGET_BUTTON, r.w, r.h, -1);
-	add_target (r.x, r.y + r.h, TARGET_BUTTON, r.w, r.h, -1);
-	add_target (r.x + r.w, r.y, TARGET_BUTTON, r.w, r.h, -1);
-	add_target (r.x + r.w, r.y + r.h, TARGET_BUTTON, r.w, r.h, -1);
+	add_target (r.x, r.y, TARGET_BUTTON, r.w, r.h, TEXTURE_INVISIBLE);
+	add_target (r.x, r.y + r.h, TARGET_BUTTON, r.w, r.h, TEXTURE_INVISIBLE);
+	add_target (r.x + r.w, r.y, TARGET_BUTTON, r.w, r.h, TEXTURE_INVISIBLE);
+	add_target (r.x + r.w, r.y + r.h, TARGET_BUTTON, r.w, r.h, TEXTURE_INVISIBLE);
 
 	//Set the function to be called when the button is pressed
 	gTargets[0].setDeathFunc(red_pressed);	

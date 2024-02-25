@@ -2,6 +2,7 @@
 #include "OpenBlank.h"
 #include "SDL.h"
 
+extern int quit;
 LTexture textures[MAX_TEXTURES];
 LTexture gRedTargetTexture;
 LTexture gBlueTargetTexture;
@@ -157,6 +158,11 @@ int LTexture::getHeight()
 
 SDL_Texture* LTexture::getTexture()
 {
+	if (mTexture == NULL)
+	{
+		fprintf (stderr, "Error trying to get NULL texture\n");//TODO Fix this shit
+		//quit = true; 
+	}
 	return mTexture;
 }
 

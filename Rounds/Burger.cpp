@@ -33,11 +33,11 @@ static void draw_recipe ()
 {
 	SDL_Rect r, t;
 	r.x = 260;
-	r.y = 40;
+	r.y = 0;
 	r.w = 120;
 	r.h = 166;
 
-	SDL_SetRenderTarget (gRenderer, textureRecipe.getTexture());
+	SDL_SetRenderTarget (gRenderer, textureRecipe.getTexture()); //TODO This is referencing a NULL texture?
 	t.w = r.w;	
 	t.h = textures[ING_BOTTOM].getHeight() / 2;
 	t.x = r.x;
@@ -46,11 +46,13 @@ static void draw_recipe ()
 
 	for (int i=0;i < ingredients_needed;i++)
 	{
-		t.y -= textures[recipe[i]].getHeight() /2;
+		t.h = textures[recipe[i]].getHeight() / 2;
+		t.y -= t.h;
 		SDL_RenderCopy (gRenderer, textures[recipe[i]].getTexture(), NULL, &t);
 	}
 
 	t.h = textures[ING_TOP].getHeight() / 2;
+	//t.y -= textures[recipe[ingredients_needed]].getHeight();
 	t.y -= t.h;
 	SDL_RenderCopy (gRenderer, textures[ING_TOP].getTexture(), NULL, &t);
 
@@ -66,7 +68,7 @@ static void draw_burger ()
 	r.x = 36;
 	r.y = 264;
 	r.w = textures[ING_BOTTOM].getWidth();
-	r.h = textures[ING_BOTTOM].getHeight();
+	r.h = textures[ING_BOTTOM].getHeight() / 2;
 	SDL_RenderCopy (gRenderer, textures[ING_BOTTOM].getTexture(), NULL, &r);
 	
 	if (ingredients_used == 0)
