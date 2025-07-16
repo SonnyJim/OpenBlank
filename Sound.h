@@ -39,7 +39,7 @@ class Sound
 		int playSFX (sfx_t sfx);
 		void stopSFX (int channel);
 		void playRoundSFX (int sfx_num);
-		void loadRoundSFX (int sfx_num, const char* path);
+		bool loadRoundSFX (int sfx_num, const char* path);
 		void freeRoundSounds ();
 	private:
 };

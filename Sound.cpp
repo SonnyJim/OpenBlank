@@ -22,6 +22,8 @@
 Mix_Chunk* sounds[MAX_SOUNDS];
 Mix_Chunk* roundSounds[MAX_ROUNDSOUNDS];
 
+extern bool quit;
+
 const char* soundpaths[] = 
 {
 	"./data/sfx/cg1.wav", //Gunshot
@@ -82,16 +84,18 @@ void Sound::quit ()
 	Mix_Quit();
 }
 
-void Sound::loadRoundSFX (int sfx_num, const char* path)
+bool Sound::loadRoundSFX (int sfx_num, const char* path)
 {
 	roundSounds[sfx_num] = Mix_LoadWAV(path);
 	if (roundSounds[sfx_num] == NULL)
 	{
 		fprintf (stderr, "Failed to load %s\nSDL_mixer error: %s\n", path, Mix_GetError());
-		return;
+		::quit = true; //Use global namespace
+		return false;
 	}
 	else
 		fprintf (stdout, "Loaded %s into slot #%i\n", path, sfx_num);
+	return true;
 }
 
 void Sound::playRoundSFX (int sfx)
