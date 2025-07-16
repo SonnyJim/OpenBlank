@@ -1,0 +1,41 @@
+
+Text display
+How do we keep track of overlapping targets? Probably via targets having a Z depth
+Framework for keeping score
+
+Effects
+=====
+Better bullet holes
+Explosions - Segment texture into quarters and spin them off
+
+HUD
+===
+Round timer, score, lives and number of bullets left
+
+Rounds
+======
+
+Copy Simon sequence - DONE
+Shoot the numbers in order - DONE
+Asteroids that break down into smaller asteroids - DONE
+Calculator/Phone dialler/Play the piano (All very similar code) - PARTIAL
+Spell a word using the letters - DONE (need better dictionary)
+Cooking mama - Make the food by shooting the ingredients - DONE
+
+Shoot the car into bits
+Shoot Only blue
+Shoot same
+Hi/Lo gamble
+Odd one out
+Follow the pea
+Mini flappy bird
+Bullet Barber - Shave the beard/hair by shooting
+Cowboy quick draw
+Keep the tin can in the air by shooting it / Breakout?
+Whack-a-mole
+Hack the planet - Shoot in the IP addresses
+Tapper
+Make the puzzle - Shoot piece to rotate, then shoot the slot it fits into
+Keep spinning those plates - Rapidily shoot targets to keep them from spinning
+Countdown numbers game
+Rhythm based game?
