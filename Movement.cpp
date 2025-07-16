@@ -122,6 +122,7 @@ void movement_all ()
 			if (bounds_check (gTargets[i].getRect()) == false && i != 0)//TODO Hack for the background
 			{
 				fprintf (stdout, "Killing offscreen target\n");
+				gTargets[i].dead();
 				gTargets[i].setType (TARGET_NONE);
 			}
 		}

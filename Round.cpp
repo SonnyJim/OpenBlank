@@ -11,14 +11,15 @@
 
 extern bool quit;
 
-#define NUM_ROUNDS 11
+#define NUM_ROUNDS 12
 void (*round_p[NUM_ROUNDS]) () =
 {
+	bride_start,
+	 doctor_start, 
+	 wherestuxy_start, 
 	 burger_start, 
 	 telephone_start, 
 	 simon_start, 
-	 wherestuxy_start, 
-	 doctor_start, 
 	 fountain_start, 
 	 quickdraw_start, 
 	 shootNumbers_start, 

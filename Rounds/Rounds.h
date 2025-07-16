@@ -33,3 +33,6 @@ extern bool doctor_update ();
 
 extern void wherestuxy_start ();
 extern bool wherestuxy_update ();
+
+extern void bride_start ();
+extern bool bride_update ();

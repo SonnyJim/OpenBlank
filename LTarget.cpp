@@ -21,6 +21,11 @@ LTarget::LTarget()
 	//mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
 }
 
+void LTarget::dead()
+{
+	callDeathFunc(this);
+}
+
 void LTarget::hit()
 {
 	//Target was hit, do some stuff

@@ -29,7 +29,7 @@ class LTarget
 		double getAngle();
 		void setCenter (SDL_Point point);
 		void setFlip (SDL_RendererFlip type);
-
+		void dead ();
 		SDL_Rect getRect ();
 		//Handles mouse event
 		//void handleEvent( SDL_Event* e );

@@ -52,6 +52,7 @@ add_executable(OpenBlank
     Rounds/Saloon.cpp
     Rounds/Doctor.cpp
     Rounds/WheresTuxy.cpp
+    Rounds/Bride.cpp
     Background.cpp
 )
 

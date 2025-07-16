@@ -24,8 +24,8 @@ static void draw_sample ()
 	SDL_Rect r;
 	r.w = textures[sample].getWidth() / 2;
 	r.h = textures[sample].getHeight() / 2;
-	r.x = 0;
-	r.y = 0;
+	r.x = (SCREEN_WIDTH /2) - r.w;
+	r.y = 30;
 	SDL_RenderCopy (gRenderer, textures[sample].getTexture(), NULL, &r);
 }
 
@@ -65,18 +65,19 @@ static void generate_targets()
 	SDL_Rect r;
 	int scale = 1;
 	int t, i, tex;
-	int random = getRandomInt (0,2);
+	const int num_tuxs = 6;
+	int random = getRandomInt (0,num_tuxs);
 	sample = getRandomInt(0,MAX_TUXS);
 	
 	
-	r.w = textures[sample].getWidth();
-	r.h = textures[sample].getHeight();
+	r.w = textures[sample].getWidth()/2;
+	r.h = textures[sample].getHeight()/2;
 	r.x = r.w / 2;
 	
 	r.y = SCREEN_HEIGHT - r.h - 100;
 	scale = 1;
 	fprintf (stdout, "Random = %i, sample = %i\n", random, sample);
-	for (i=0; i <=2;i++)
+	for (i=0; i <= num_tuxs;i++)
 	{
 		gTargets[i].setType(TARGET_NONE);
 		tex = get_random_tux();
