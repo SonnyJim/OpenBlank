@@ -162,16 +162,20 @@ void sdl_render()
 
 	int winW, winH;
 	SDL_GetRendererOutputSize(gRenderer, &winW, &winH);
-
 	float scaleX = (float)winW / INTERNAL_WIDTH;
 	float scaleY = (float)winH / INTERNAL_HEIGHT;
 	float scale = fmin(scaleX, scaleY);
+
 
 	int destW = INTERNAL_WIDTH * scale;
 	int destH = INTERNAL_HEIGHT * scale;
 	int offsetX = (winW - destW) / 2;
 	int offsetY = (winH - destH) / 2;
-
+	if (winW / winH > 1.8) //We have a weird aspect ratio, TODO dirty hack for my aracde cab superresolution
+	{	
+		destW += destW;
+		offsetX = (winW - destW) / 2;
+	}
 	SDL_Rect destRect = { offsetX, offsetY, destW, destH };
 
 	SDL_RenderClear(gRenderer); // clear black background
