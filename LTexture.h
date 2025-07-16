@@ -12,6 +12,9 @@ class LTexture
 		//Deallocates memory
 		~LTexture();
 
+		//Creates a blank texture for use
+		bool createBlank(int width, int height);
+
 		//Loads image at specified path
 		bool loadFromFile( std::string path );
 		
