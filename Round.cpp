@@ -14,10 +14,10 @@ extern bool quit;
 #define NUM_ROUNDS 12
 void (*round_p[NUM_ROUNDS]) () =
 {
+	 burger_start, 
 	bride_start,
 	 doctor_start, 
 	 wherestuxy_start, 
-	 burger_start, 
 	 telephone_start, 
 	 simon_start, 
 	 fountain_start, 
@@ -29,7 +29,7 @@ void (*round_p[NUM_ROUNDS]) () =
 };
 
 Round rnd; //I get around
-Round::Round()
+Round::Round() //OOooh oh I get around
 {
 	rnd.setRoundStart(round_p[0]);
 }

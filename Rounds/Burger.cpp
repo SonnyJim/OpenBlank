@@ -37,7 +37,7 @@ static void draw_recipe ()
 	r.w = 120;
 	r.h = 166;
 
-	SDL_SetRenderTarget (gRenderer, textureRecipe.getTexture()); //TODO This is referencing a NULL texture?
+	//SDL_SetRenderTarget (gRenderer, textureRecipe.getTexture()); //TODO This is referencing a NULL texture?
 	t.w = r.w;	
 	t.h = textures[ING_BOTTOM].getHeight() / 2;
 	t.x = r.x;
@@ -56,8 +56,8 @@ static void draw_recipe ()
 	t.y -= t.h;
 	SDL_RenderCopy (gRenderer, textures[ING_TOP].getTexture(), NULL, &t);
 
-	SDL_SetRenderTarget (gRenderer, NULL);
-	SDL_RenderCopy (gRenderer, textureRecipe.getTexture(), NULL, &r);
+	//SDL_SetRenderTarget (gRenderer, NULL);
+	//SDL_RenderCopy (gRenderer, textureRecipe.getTexture(), NULL, &r);
 }
 
 static void draw_burger ()
@@ -135,18 +135,20 @@ static void add_tomato (LTarget* pTarget)
 void burger_start ()
 {
 	int i;
-	fprintf (stdout, "Quick draw start\n");
+	fprintf (stdout, "Burger start\n");
 	sound.loadRoundSFX (0, "./data/sfx/221515__alaskarobotics__service-bell-ring.wav");
 	sound.loadRoundSFX (1, "./data/sfx/543386__thedragonsspark__nom-noise.wav");
 	bg.clear();
 	bg.set ("./data/png/Burger/Burger_bg.png");
-	//Render the nmbser 0-9 on some textres
 	textures[ING_BOTTOM].loadFromFile("./data/png/Burger/Bap_bottom.png");
 	textures[ING_PATTY].loadFromFile("./data/png/Burger/Patty.png");
 	textures[ING_LETTUCE].loadFromFile("./data/png/Burger/Lettuce.png");
 	textures[ING_TOMATO].loadFromFile("./data/png/Burger/Tomato.png");
 	textures[ING_TOP].loadFromFile("./data/png/Burger/Bap_top.png");
-
+	if (!textureRecipe.createBlank(120, 166))
+	{
+    		fprintf(stderr, "Failed to create textureRecipe render target!\n");
+	}
 	int t = add_target (7, 389, TARGET_IMAGE, textures[ING_LETTUCE].getWidth(), textures[ING_LETTUCE].getHeight(), ING_LETTUCE);
 	t = add_target (13, 319, TARGET_BUTTON, 184, 145, TEXTURE_INVISIBLE);
 	gTargets[t].setDeathFunc(add_lettuce);
