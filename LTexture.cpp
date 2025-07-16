@@ -128,13 +128,13 @@ bool LTexture::loadFromRenderedText(std::string textureText, SDL_Color textColor
 void LTexture::free()
 {
 	//Free texture if it exists
-	if( mTexture != NULL )
+	if( mTexture != nullptr )
 	{
 		SDL_DestroyTexture( mTexture );
-		mTexture = NULL;
-		mWidth = 0;
-		mHeight = 0;
+		mTexture = nullptr;
 	}
+	mWidth = 0;
+	mHeight = 0;
 }
 
 void LTexture::setColor( Uint8 red, Uint8 green, Uint8 blue )
