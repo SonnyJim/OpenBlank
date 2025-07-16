@@ -10,6 +10,7 @@ LTexture gBombTexture;
 LTexture gCrosshairTexture;
 LTexture gCheckmarkTexture;
 LTexture gRedCrossTexture;
+
 LTexture::LTexture()
 {
 	//Initialize
@@ -22,6 +23,30 @@ LTexture::~LTexture()
 {
 	//Deallocate
 	free();
+}
+
+bool LTexture::createBlank(int width, int height)
+{
+    // Free any existing texture
+    free();
+
+    mTexture = SDL_CreateTexture(
+        gRenderer,
+        SDL_PIXELFORMAT_RGBA8888,
+        SDL_TEXTUREACCESS_TARGET,
+        width,
+        height
+    );
+
+    if (mTexture == NULL)
+    {
+        printf("Failed to create blank texture! SDL Error: %s\n", SDL_GetError());
+        return false;
+    }
+
+    mWidth = width;
+    mHeight = height;
+    return true;
 }
 
 bool LTexture::loadFromFile( std::string path )
@@ -161,7 +186,7 @@ SDL_Texture* LTexture::getTexture()
 	if (mTexture == NULL)
 	{
 		fprintf (stderr, "Error trying to get NULL texture\n");//TODO Fix this shit
-		//quit = true; 
+		::quit = true; 
 	}
 	return mTexture;
 }
